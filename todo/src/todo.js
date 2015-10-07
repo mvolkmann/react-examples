@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 let lastId = 0;
 
@@ -14,21 +15,15 @@ function createTodo(text, done = false) {
 // React this.props is similar to using Angular directive isolate scope
 // "@" properties to get values from HTML attributes of custom directives.
 
-class Todo extends React.Component {
-  render() {
-    const todo = this.props.todo;
-    return (
-      <li>
-        {/*TODO: Why doesn't the checked state start correctly? */}
-        <input type="checkbox"
-          checked={todo.done}
-          onChange={this.props.toggleTodoDone}/>
-        <span className="done-{todo.done}">{todo.text}</span>
-        <button onClick={this.props.deleteTodo}>Delete</button>
-      </li>
-    );
-  }
-}
+const Todo = props => (
+  <li>
+    <input type="checkbox"
+      checked={props.todo.done}
+      onChange={props.toggleTodoDone}/>
+    <span className="done-{props.todo.done}"> {props.todo.text}</span>
+    <button onClick={props.deleteTodo}>Delete</button>
+  </li>
+);
 
 class TodoList extends React.Component {
   constructor(props) {
@@ -43,9 +38,11 @@ class TodoList extends React.Component {
 
   addTodo(event) {
     event.preventDefault(); // prevents form submission
-    const newTodo = createTodo(this.state.todoText);
+    const todoText = this.refs.textInput.value;
+    const newTodo = createTodo(todoText);
     this.state.todos.push(newTodo);
     this.setState({todos: this.state.todos});
+    this.refs.textInput.value = '';
   }
 
   archiveCompleted() {
@@ -66,13 +63,6 @@ class TodoList extends React.Component {
     return count;
   }
 
-  setTodoText(event) {
-    this.setState({
-      todos: this.state.todos,
-      todoText: event.target.value
-    });
-  }
-
   toggleTodoDone(todo) {
     todo.done = !todo.done;
     this.setState(Object.assign(this.state,
@@ -91,9 +81,10 @@ class TodoList extends React.Component {
         </div>
         <br/>
         <form>
-          <input type="text" size="30"
-            value={this.state.todoText} onChange={this.setTodoText}
+          <input ref="textInput" type="text" size="30"
+            value={this.state.todoText}
             placeholder="enter new todo here"/>
+          {/*TODO: Disable this button if no text has be entered. */}
           <button onClick={this.addTodo.bind(this)}>
             Add
           </button>
@@ -112,4 +103,4 @@ class TodoList extends React.Component {
   }
 }
 
-React.render(<TodoList/>, document.body);
+ReactDOM.render(<TodoList/>, document.getElementById('container'));
