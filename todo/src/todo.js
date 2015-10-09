@@ -40,9 +40,10 @@ class TodoList extends React.Component {
     event.preventDefault(); // prevents form submission
     const todoText = this.refs.textInput.value;
     const newTodo = createTodo(todoText);
-    this.state.todos.push(newTodo);
-    this.setState({todos: this.state.todos});
-    this.refs.textInput.value = '';
+    this.setState({
+      todoText: '',
+      todos: this.state.todos.concat(newTodo)
+    });
   }
 
   archiveCompleted() {
@@ -64,9 +65,8 @@ class TodoList extends React.Component {
   }
 
   toggleTodoDone(todo) {
-    todo.done = !todo.done;
-    this.setState(Object.assign(this.state,
-      {todos: this.state.todos}));
+    todo.done = !todo.done; //TODO: directly modifying state?
+    this.setState({todos: this.state.todos});
   }
 
   render() {
