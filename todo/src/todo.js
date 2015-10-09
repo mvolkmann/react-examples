@@ -19,7 +19,7 @@ const Todo = props => (
   <li>
     <input type="checkbox"
       checked={props.todo.done}
-      onChange={props.toggleTodoDone}/>
+      onChange={props.toggleDone}/>
     <span className="done-{props.todo.done}"> {props.todo.text}</span>
     <button onClick={props.deleteTodo}>Delete</button>
   </li>
@@ -28,12 +28,18 @@ const Todo = props => (
 class TodoList extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       todos: [
         createTodo('learn React', true),
         createTodo('build a React app')
       ]
     };
+
+    // Create bound versions of methods used in event handlers
+    // to avoid creating new functions on each render.
+    this.boundAddTodo = this.addTodo.bind(this);
+    this.boundArchiveCompleted = this.archiveCompleted.bind(this);
   }
 
   addTodo(event) {
@@ -66,7 +72,7 @@ class TodoList extends React.Component {
     return count;
   }
 
-  toggleTodoDone(todo) {
+  toggleDone(todo) {
     todo.done = !todo.done; //TODO: directly modifying state?
     this.setState({todos: this.state.todos});
   }
@@ -77,7 +83,7 @@ class TodoList extends React.Component {
         <h2>To Do List</h2>
         <div>
           {this.getUncompletedCount()} of {this.state.todos.length} remaining
-          <button onClick={this.archiveCompleted.bind(this)}>
+          <button onClick={this.boundArchiveCompleted}>
             Archive Completed
           </button>
         </div>
@@ -86,7 +92,7 @@ class TodoList extends React.Component {
           <input ref="textInput" type="text" size="30"
             placeholder="enter new todo here"/>
           {/*TODO: Disable this button if no text has be entered. */}
-          <button onClick={this.addTodo.bind(this)}>
+          <button onClick={this.boundAddTodo}>
             Add
           </button>
         </form>
@@ -95,7 +101,7 @@ class TodoList extends React.Component {
             this.state.todos.map(todo =>
               <Todo key={todo.id} todo={todo}
                 deleteTodo={this.deleteTodo.bind(this, todo.id)}
-                toggleTodoDone={this.toggleTodoDone.bind(this, todo)}/>
+                toggleDone={this.toggleDone.bind(this, todo)}/>
             )
           }
         </ul>
