@@ -73,8 +73,10 @@ class TodoList extends React.Component {
   }
 
   toggleDone(todo) {
-    todo.done = !todo.done; //TODO: directly modifying state?
-    this.setState({todos: this.state.todos});
+    const id = todo.id;
+    const newTodos = this.state.todos.map(t =>
+      t.id === id ? {id: todo.id, text: todo.text, done: !todo.done} : t);
+    this.setState({todos: newTodos});
   }
 
   render() {
