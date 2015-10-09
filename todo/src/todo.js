@@ -38,10 +38,12 @@ class TodoList extends React.Component {
 
   addTodo(event) {
     event.preventDefault(); // prevents form submission
-    const todoText = this.refs.textInput.value;
+    const input = this.refs.textInput;
+    const todoText = input.value;
     const newTodo = createTodo(todoText);
+    input.value = '';
     this.setState({
-      todoText: '',
+      //todoText: '',
       todos: this.state.todos.concat(newTodo)
     });
   }
@@ -82,7 +84,6 @@ class TodoList extends React.Component {
         <br/>
         <form>
           <input ref="textInput" type="text" size="30"
-            value={this.state.todoText}
             placeholder="enter new todo here"/>
           {/*TODO: Disable this button if no text has be entered. */}
           <button onClick={this.addTodo.bind(this)}>
