@@ -19,9 +19,9 @@ const Todo = props => (
   <li>
     <input type="checkbox"
       checked={props.todo.done}
-      onChange={props.toggleDone}/>
-    <span className="done-{props.todo.done}"> {props.todo.text}</span>
-    <button onClick={props.deleteTodo}>Delete</button>
+      onChange={props.toggleDone.bind(null, props.todo)}/>
+    <span className={'done-' + props.todo.done}> {props.todo.text}</span>
+    <button onClick={props.deleteTodo.bind(null, props.todo.id)}>Delete</button>
   </li>
 );
 
@@ -40,6 +40,8 @@ class TodoList extends React.Component {
     // to avoid creating new functions on each render.
     this.boundAddTodo = this.addTodo.bind(this);
     this.boundArchiveCompleted = this.archiveCompleted.bind(this);
+    this.boundDeleteTodo = this.deleteTodo.bind(this);
+    this.boundToggleDone = this.toggleDone.bind(this);
   }
 
   addTodo(event) {
@@ -69,6 +71,7 @@ class TodoList extends React.Component {
     return count;
   }
 
+  //TODO: Something like this should be provided by React.Component!
   onChange(name, event) {
     this.setState({[name]: event.target.value});
   }
@@ -83,6 +86,11 @@ class TodoList extends React.Component {
   }
 
   render() {
+    const lis = this.state.todos.map(todo =>
+      <Todo key={todo.id} todo={todo}
+        deleteTodo={this.boundDeleteTodo}
+        toggleDone={this.boundToggleDone}/>);
+
     return (
       <div>
         <h2>To Do List</h2>
@@ -94,24 +102,15 @@ class TodoList extends React.Component {
         </div>
         <br/>
         <form>
-          <input type="text" size="30"
+          <input type="text" size="30" autoFocus
             placeholder="enter new todo here"
             value={this.state.todoText}
             onChange={this.onChange.bind(this, 'todoText')}/>
-          {/*TODO: Disable this button if no text has be entered. */}
-          <button onClick={this.boundAddTodo}>
+          <button disabled={!this.state.todoText} onClick={this.boundAddTodo}>
             Add
           </button>
         </form>
-        <ul className="unstyled">
-          {
-            this.state.todos.map(todo =>
-              <Todo key={todo.id} todo={todo}
-                deleteTodo={this.deleteTodo.bind(this, todo.id)}
-                toggleDone={this.toggleDone.bind(this, todo)}/>
-            )
-          }
-        </ul>
+        <ul className="unstyled">{lis}</ul>
       </div>
     );
   }
