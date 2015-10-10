@@ -2,18 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 let lastId = 0;
-
 function createTodo(text, done = false) {
   return {id: ++lastId, text, done};
 }
-
-// See info on LinkedStateMixin at
-// http://blog.iansinnott.com/...
-// managing-state-and-controlled-form-fields-with-react/
-
-// React this.state is similar to Angular $scope.
-// React this.props is similar to using Angular directive isolate scope
-// "@" properties to get values from HTML attributes of custom directives.
 
 const Todo = props => (
   <li>
