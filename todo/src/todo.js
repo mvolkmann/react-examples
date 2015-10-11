@@ -81,7 +81,9 @@ class TodoList extends React.Component {
         <h2>To Do List</h2>
         <div>
           {this.getUncompletedCount()} of {this.state.todos.length} remaining
-          <button onClick={this.boundArchiveCompleted}>Archive Completed</button>
+          <button onClick={this.boundArchiveCompleted}>
+            Archive Completed
+          </button>
         </div>
         <br/>
         <form>
