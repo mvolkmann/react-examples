@@ -17,8 +17,8 @@ const Todo = props => (
 );
 
 class TodoList extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       todos: [
@@ -35,8 +35,7 @@ class TodoList extends React.Component {
     this.boundToggleDone = this.toggleDone.bind(this);
   }
 
-  addTodo(event) {
-    event.preventDefault(); // prevents form submission
+  addTodo() {
     const newTodo = createTodo(this.state.todoText);
     this.setState({
       todoText: '',
@@ -45,21 +44,16 @@ class TodoList extends React.Component {
   }
 
   archiveCompleted() {
-    this.setState({
-      todos: this.state.todos.filter(t => !t.done)
-    });
+    this.setState({todos: this.state.todos.filter(t => !t.done)});
   }
 
   deleteTodo(todoId) {
-    this.setState({
-      todos: this.state.todos.filter(t => t.id !== todoId)
-    });
+    this.setState({todos: this.state.todos.filter(t => t.id !== todoId)});
   }
 
   getUncompletedCount() {
-    const count = this.state.todos.reduce(
+    return this.state.todos.reduce(
       (count, todo) => todo.done ? count : count + 1, 0);
-    return count;
   }
 
   //TODO: Something like this should be provided by React.Component!
@@ -87,9 +81,7 @@ class TodoList extends React.Component {
         <h2>To Do List</h2>
         <div>
           {this.getUncompletedCount()} of {this.state.todos.length} remaining
-          <button onClick={this.boundArchiveCompleted}>
-            Archive Completed
-          </button>
+          <button onClick={this.boundArchiveCompleted}>Archive Completed</button>
         </div>
         <br/>
         <form>
