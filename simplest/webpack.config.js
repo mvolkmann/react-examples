@@ -9,7 +9,13 @@ module.exports = {
   },
   module: {
     loaders: [
-      {test: jsPath, loader: 'babel-loader'},
+      {
+        test: jsPath,
+        loader: 'babel',
+        query: {
+          presets: ['es2015', 'react']
+        }
+      },
       {test: jsPath, loader: 'eslint-loader'}
     ]
   }

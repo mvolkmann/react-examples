@@ -1,3 +1,6 @@
-import React from 'react';
+import React from 'react'; //eslint-disable-line
+import ReactDOM from 'react-dom';
 
-React.render(<h1>Hello, World!</h1>, document.body);
+ReactDOM.render(
+  <h1>Hello, World!</h1>,
+  document.getElementById('content'));
