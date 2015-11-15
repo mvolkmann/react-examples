@@ -171,7 +171,7 @@
     "padded-blocks": 0,
     "prefer-arrow-callback": 2,
     "prefer-const": 2,
-    "prefer-reflect": [1, {"exceptions": ["apply", "call", "delete"]}],
+    "prefer-reflect": [1, {"exceptions": ["apply", "call", "delete", "getOwnPropertyNames"]}],
     "prefer-spread": 2,
     "prefer-template": 0,
     "quote-props": [2, "as-needed"],

@@ -1,5 +1,7 @@
 import Greeting from './greeting';
-import React from 'react';
+import React from 'react'; //eslint-disable-line
+import ReactDOM from 'react-dom';
 
-React.render(<Greeting greet="Hola"/>, document.body);
-//React.render(<Greeting/>, document.body);
+ReactDOM.render(
+  <Greeting greet="Hola"/>,
+  document.getElementById('content'));

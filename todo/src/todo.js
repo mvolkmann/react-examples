@@ -1,18 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {bindMethods, pa, pam} from './bind';
 
 let lastId = 0;
 function createTodo(text, done = false) {
   return {id: ++lastId, text, done};
 }
 
-const Todo = props => (
+// props is passed to this function and destructured.
+const Todo = ({todo, onToggleDone, onDeleteTodo}) => (
   <li>
     <input type="checkbox"
-      checked={props.todo.done}
-      onChange={props.toggleDone.bind(null, props.todo)}/>
-    <span className={'done-' + props.todo.done}> {props.todo.text}</span>
-    <button onClick={props.deleteTodo.bind(null, props.todo.id)}>Delete</button>
+      checked={todo.done}
+      onChange={pa(onToggleDone, todo)}/>
+    <span className={'done-' + todo.done}> {todo.text}</span>
+    <button onClick={pa(onDeleteTodo, todo.id)}>Delete</button>
   </li>
 );
 
@@ -29,13 +31,17 @@ class TodoList extends React.Component {
 
     // Create bound versions of methods used in event handlers
     // to avoid creating new functions on each render.
-    this.boundAddTodo = this.addTodo.bind(this);
-    this.boundArchiveCompleted = this.archiveCompleted.bind(this);
-    this.boundDeleteTodo = this.deleteTodo.bind(this);
-    this.boundToggleDone = this.toggleDone.bind(this);
+    bindMethods(/^on/, this);
+    this.onChangeFn = pam(this, this.onChange, 'todoText');
   }
 
-  addTodo() {
+  getUncompletedCount() {
+    return this.state.todos.reduce(
+      (count, todo) => todo.done ? count : count + 1,
+      0);
+  }
+
+  onAddTodo() {
     const newTodo = createTodo(this.state.todoText);
     this.setState({
       todoText: '',
@@ -43,17 +49,10 @@ class TodoList extends React.Component {
     });
   }
 
-  archiveCompleted() {
-    this.setState({todos: this.state.todos.filter(t => !t.done)});
-  }
-
-  deleteTodo(todoId) {
-    this.setState({todos: this.state.todos.filter(t => t.id !== todoId)});
-  }
-
-  getUncompletedCount() {
-    return this.state.todos.reduce(
-      (count, todo) => todo.done ? count : count + 1, 0);
+  onArchiveCompleted() {
+    this.setState({
+      todos: this.state.todos.filter(t => !t.done)
+    });
   }
 
   //TODO: Something like this should be provided by React.Component!
@@ -61,7 +60,13 @@ class TodoList extends React.Component {
     this.setState({[name]: event.target.value});
   }
 
-  toggleDone(todo) {
+  onDeleteTodo(todoId) {
+    this.setState({
+      todos: this.state.todos.filter(t => t.id !== todoId)
+    });
+  }
+
+  onToggleDone(todo) {
     const id = todo.id;
     const todos = this.state.todos.map(t =>
       t.id === id ?
@@ -71,17 +76,17 @@ class TodoList extends React.Component {
   }
 
   render() {
-    const lis = this.state.todos.map(todo =>
+    const todos = this.state.todos.map(todo =>
       <Todo key={todo.id} todo={todo}
-        deleteTodo={this.boundDeleteTodo}
-        toggleDone={this.boundToggleDone}/>);
+        onDeleteTodo={this.onDeleteTodoFn}
+        onToggleDone={this.onToggleDoneFn}/>);
 
     return (
       <div>
         <h2>To Do List</h2>
         <div>
           {this.getUncompletedCount()} of {this.state.todos.length} remaining
-          <button onClick={this.boundArchiveCompleted}>
+          <button onClick={this.onArchiveCompletedFn}>
             Archive Completed
           </button>
         </div>
@@ -90,12 +95,12 @@ class TodoList extends React.Component {
           <input type="text" size="30" autoFocus
             placeholder="enter new todo here"
             value={this.state.todoText}
-            onChange={this.onChange.bind(this, 'todoText')}/>
-          <button disabled={!this.state.todoText} onClick={this.boundAddTodo}>
+            onChange={this.onChangeFn}/>
+          <button disabled={!this.state.todoText} onClick={this.onAddTodoFn}>
             Add
           </button>
         </form>
-        <ul className="unstyled">{lis}</ul>
+        <ul className="unstyled">{todos}</ul>
       </div>
     );
   }

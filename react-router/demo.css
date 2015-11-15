@@ -1,0 +1,8 @@
+body {
+  background-color: linen;
+}
+
+a {
+  border: solid gray 1px;
+  border-radius: 5px;
+}

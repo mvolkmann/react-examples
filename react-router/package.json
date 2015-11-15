@@ -1,7 +1,7 @@
 {
-  "name": "react-todo",
+  "name": "react-router-demo",
   "version": "1.0.0",
-  "description": "Todo app in React",
+  "description": "demo of react-router",
   "main": "index.html",
   "scripts": {
     "start": "webpack-dev-server --content-base . --inline",
@@ -14,11 +14,13 @@
     "babel-loader": "^6.0.1",
     "babel-preset-es2015": "^6.1.2",
     "babel-preset-react": "^6.1.2",
-    "eslint": "^1.6.0",
-    "eslint-loader": "^1.0.0",
-    "eslint-plugin-react": "^3.5.1",
-    "webpack": "^1.12.2",
-    "webpack-dev-server": "^1.12.0"
+    "eslint": "^1.9.0",
+    "eslint-loader": "^1.1.1",
+    "eslint-plugin-react": "^3.7.1",
+    "history": "^1.13.0",
+    "react-router": "^1.0.0-rc4",
+    "webpack": "^1.12.3",
+    "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
     "react": "^0.14.2",

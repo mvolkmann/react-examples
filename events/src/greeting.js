@@ -3,7 +3,6 @@ import React from 'react';
 class Greeting extends React.Component {
   constructor(props) {
     super(props);
-    this.displayName = 'Greeting'; // appears in console messages
     this.state = {name: 'World'}; // initial state
   }
 

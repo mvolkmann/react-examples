@@ -1,7 +1,6 @@
-import React from 'react';
+import React from 'react'; //eslint-disable-line
 
-// Extending React.Component is not required.
-// When is it needed?
+/*
 class Greeting extends React.Component {
   render() {
     return <h1>Hello, {this.props.name}!</h1>;
@@ -9,3 +8,6 @@ class Greeting extends React.Component {
 }
 
 export default Greeting;
+*/
+export default props =>
+  <h1>Hello, {props.name}!</h1>;
