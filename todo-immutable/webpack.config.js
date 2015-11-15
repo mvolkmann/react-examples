@@ -2,7 +2,7 @@ const path = require('path');
 const jsPath = path.join(__dirname, 'src');
 
 module.exports = {
-  entry: './src/todo.js',
+  entry: './src/todo-list.js',
   output: {
     path: __dirname,
     filename: 'build/bundle.js'
