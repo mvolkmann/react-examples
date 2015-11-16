@@ -12,4 +12,11 @@ const Todo = ({todo, onToggleDone, onDeleteTodo}) => (
   </li>
 );
 
+const PropTypes = React.PropTypes;
+Todo.propTypes = {
+  todo: PropTypes.object.isRequired,
+  onToggleDone: PropTypes.func.isRequired,
+  onDeleteTodo: PropTypes.func.isRequired
+};
+
 export default Todo;
