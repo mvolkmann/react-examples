@@ -54,7 +54,7 @@
     "indent": [2, 2, {"SwitchCase": 1}],
     "init-declarations": 0,
     "key-spacing": [2, {"beforeColon": false, "afterColon": true}],
-    "linebreak-style": [2, "unix"],
+    "linebreak-style": [0, "unix"],
     "lines-around-comment": 0,
     "max-depth": [1, 5],
     "max-len": [1, 80, 4],
