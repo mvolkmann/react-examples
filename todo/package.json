@@ -2,10 +2,8 @@
   "name": "react-todo",
   "version": "1.0.0",
   "description": "Todo app in React",
-  "main": "index.html",
   "scripts": {
-    "start": "webpack-dev-server --content-base . --inline",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server --content-base . --inline"
   },
   "author": "R. Mark Volkmann",
   "license": "MIT",

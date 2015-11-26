@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {bindMethods, pam} from './bind';
 import Todo from './todo';
 
 let lastId = 0;
@@ -17,6 +18,11 @@ class TodoList extends React.Component {
         createTodo('build a React app')
       ]
     };
+
+    // Create bound versions of methods used in event handlers
+    // to avoid creating new functions on each render.
+    bindMethods(/^on/, this);
+    this.onChangeFn = pam(this, this.onChange, 'todoText');
   }
 
   getUncompletedCount() {
@@ -61,15 +67,15 @@ class TodoList extends React.Component {
   render() {
     const todos = this.state.todos.map(todo =>
       <Todo key={todo.id} todo={todo}
-        onDeleteTodo={todoId => this.onDeleteTodo(todoId)}
-        onToggleDone={todo => this.onToggleDone(todo)}/>);
+        onDeleteTodo={this.onDeleteTodoFn}
+        onToggleDone={this.onToggleDoneFn}/>);
 
     return (
       <div>
         <h2>To Do List</h2>
         <div>
           {this.getUncompletedCount()} of {this.state.todos.length} remaining
-          <button onClick={() => this.onArchiveCompleted()}>
+          <button onClick={this.onArchiveCompletedFn}>
             Archive Completed
           </button>
         </div>
@@ -78,9 +84,8 @@ class TodoList extends React.Component {
           <input type="text" size="30" autoFocus
             placeholder="enter new todo here"
             value={this.state.todoText}
-            onChange={e => this.onChange('todoText', e)}/>
-          <button disabled={!this.state.todoText}
-            onClick={() => this.onAddTodo()}>
+            onChange={this.onChangeFn}/>
+          <button disabled={!this.state.todoText} onClick={this.onAddTodoFn}>
             Add
           </button>
         </form>

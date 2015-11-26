@@ -1,0 +1,17 @@
+{
+  "name": "ng2-todo",
+  "version": "1.0.0",
+  "description": "Todo app in Angular",
+  "scripts": {
+    "tsc": "tsc -p src",
+    "start": "live-server --port=8081 --open=src"
+  },
+  "dependencies": {
+    "angular2": "2.0.0-alpha.46",
+    "systemjs": "0.19.2"
+  },
+  "devDependencies": {
+    "live-server": "^0.8.1",
+    "typescript": "^1.6.2"
+  }
+}
