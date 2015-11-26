@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom';
 import Todo from './todo';
 
 let lastId = 0;
-function createTodo(text, done = false) {
-  return {id: ++lastId, text, done};
-}
 
 class TodoList extends React.Component {
   constructor() {
@@ -13,10 +10,14 @@ class TodoList extends React.Component {
 
     this.state = {
       todos: [
-        createTodo('learn React', true),
-        createTodo('build a React app')
+        TodoList.createTodo('learn React', true),
+        TodoList.createTodo('build a React app')
       ]
     };
+  }
+
+  static createTodo(text, done = false) {
+    return {id: ++lastId, text, done};
   }
 
   getUncompletedCount() {
@@ -26,7 +27,7 @@ class TodoList extends React.Component {
   }
 
   onAddTodo() {
-    const newTodo = createTodo(this.state.todoText);
+    const newTodo = TodoList.createTodo(this.state.todoText);
     this.setState({
       todoText: '',
       todos: this.state.todos.concat(newTodo)

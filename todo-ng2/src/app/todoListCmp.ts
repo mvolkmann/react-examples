@@ -49,7 +49,8 @@ export class TodoListCmp {
 
   get uncompletedCount():number {
     return this.state.todos.reduce(
-      (count:number, todo:ITodo) => todo.done ? count : count + 1, 0);
+      (count:number, todo:ITodo) => todo.done ? count : count + 1,
+      0);
   }
 
   onAddTodo():void {
@@ -75,6 +76,7 @@ export class TodoListCmp {
     const id:number = todo.id;
     this.state.todos = this.state.todos.map(
       (t:ITodo) => t.id === id ?
-        {id, text: todo.text, done: !todo.done} : t);
+        {id, text: todo.text, done: !todo.done} :
+        t);
   }
 }
