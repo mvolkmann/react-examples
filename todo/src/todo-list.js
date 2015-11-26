@@ -20,7 +20,7 @@ class TodoList extends React.Component {
     return {id: ++lastId, text, done};
   }
 
-  getUncompletedCount() {
+  get uncompletedCount() {
     return this.state.todos.reduce(
       (count, todo) => todo.done ? count : count + 1,
       0);
@@ -69,7 +69,7 @@ class TodoList extends React.Component {
       <div>
         <h2>To Do List</h2>
         <div>
-          {this.getUncompletedCount()} of {this.state.todos.length} remaining
+          {this.uncompletedCount} of {this.state.todos.length} remaining
           <button onClick={() => this.onArchiveCompleted()}>
             Archive Completed
           </button>
