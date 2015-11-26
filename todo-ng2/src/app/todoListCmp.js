@@ -39,8 +39,8 @@ var TodoListCmp = (function () {
     TodoListCmp.prototype.onArchiveCompleted = function () {
         this.state.todos = this.state.todos.filter(function (t) { return !t.done; });
     };
-    TodoListCmp.prototype.onChange = function (event) {
-        this.state.todoText = event.target.value;
+    TodoListCmp.prototype.onChange = function (name, event) {
+        this.state[name] = event.target.value;
     };
     TodoListCmp.prototype.onDeleteTodo = function (todoId) {
         this.state.todos = this.state.todos.filter(function (t) { return t.id !== todoId; });
@@ -48,13 +48,14 @@ var TodoListCmp = (function () {
     TodoListCmp.prototype.onToggleDone = function (todo) {
         var id = todo.id;
         this.state.todos = this.state.todos.map(function (t) { return t.id === id ?
-            { id: id, text: todo.text, done: !todo.done } : t; });
+            { id: id, text: todo.text, done: !todo.done } :
+            t; });
     };
     TodoListCmp.lastId = 0;
     TodoListCmp = __decorate([
         angular2_1.Component({
             selector: 'todo-list',
-            template: "<div>\n    <h2>To Do List</h2>\n    <div>\n      {{uncompletedCount}} of {{state.todos.length}} remaining\n      <button (click)=\"onArchiveCompleted()\">Archive Completed</button>\n    </div>\n    <br/>\n    <form>\n      <input type=\"text\" size=\"30\" autoFocus\n        placeholder=\"enter new todo here\"\n        [ng-model]=\"state.todoText\"\n        (input)=\"onChange($event)\"/>\n      <button [disabled]=\"!state.todoText\" (click)=\"onAddTodo()\">Add</button>\n    </form>\n    <ul class=\"unstyled\">\n      <todo *ng-for=\"#todo of state.todos\" [todo]=\"todo\"\n        (on-delete-todo)=\"onDeleteTodo($event)\"\n        (on-toggle-done)=\"onToggleDone($event)\"></todo>\n    </ul>\n  </div>",
+            template: "<div>\n    <h2>To Do List</h2>\n    <div>\n      {{uncompletedCount}} of {{state.todos.length}} remaining\n      <button (click)=\"onArchiveCompleted()\">Archive Completed</button>\n    </div>\n    <br/>\n    <form>\n      <input type=\"text\" size=\"30\" autoFocus\n        placeholder=\"enter new todo here\"\n        [ng-model]=\"state.todoText\"\n        (input)=\"onChange('todoText', $event)\"/>\n      <button [disabled]=\"!state.todoText\" (click)=\"onAddTodo()\">Add</button>\n    </form>\n    <ul class=\"unstyled\">\n      <todo *ng-for=\"#todo of state.todos\" [todo]=\"todo\"\n        (on-delete-todo)=\"onDeleteTodo($event)\"\n        (on-toggle-done)=\"onToggleDone($event)\"></todo>\n    </ul>\n  </div>",
             directives: [angular2_1.FORM_DIRECTIVES, todoCmp_1.TodoCmp]
         }), 
         __metadata('design:paramtypes', [])

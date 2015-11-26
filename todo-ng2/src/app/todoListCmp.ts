@@ -19,7 +19,7 @@ interface IState {
       <input type="text" size="30" autoFocus
         placeholder="enter new todo here"
         [ng-model]="state.todoText"
-        (input)="onChange($event)"/>
+        (input)="onChange('todoText', $event)"/>
       <button [disabled]="!state.todoText" (click)="onAddTodo()">Add</button>
     </form>
     <ul class="unstyled">
@@ -63,8 +63,8 @@ export class TodoListCmp {
     this.state.todos = this.state.todos.filter((t:ITodo) => !t.done);
   }
 
-  onChange(event:Event):void {
-    this.state.todoText = (<HTMLInputElement>event.target).value;
+  onChange(name:string, event:Event):void {
+    this.state[name] = (<HTMLInputElement>event.target).value;
   }
 
   onDeleteTodo(todoId:number):void {
