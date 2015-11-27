@@ -9,14 +9,13 @@ export interface ITodo {
 @Component({
   selector: 'todo',
   template: `
-  <li>
-    <input type="checkbox"
-      [checked]="todo.done"
-      (change)="toggleDone()"/>
-    <span [ng-class]="'done-' + todo.done">{{todo.text}}</span>
-    <button (click)="deleteTodo()">Delete</button>
-  </li>
-  `,
+    <li>
+      <input type="checkbox"
+        [checked]="todo.done"
+        (change)="toggleDone()"/>
+      <span [ng-class]="'done-' + todo.done">{{todo.text}}</span>
+      <button (click)="deleteTodo()">Delete</button>
+    </li>`,
   directives: [FORM_DIRECTIVES]
 })
 export class TodoCmp {
