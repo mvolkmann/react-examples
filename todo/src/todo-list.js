@@ -62,8 +62,8 @@ class TodoList extends React.Component {
   render() {
     const todos = this.state.todos.map(todo =>
       <Todo key={todo.id} todo={todo}
-        onDeleteTodo={todoId => this.onDeleteTodo(todoId)}
-        onToggleDone={todo => this.onToggleDone(todo)}/>);
+        onDeleteTodo={this.onDeleteTodo.bind(this, todo.id)}
+        onToggleDone={this.onToggleDone.bind(this, todo)}/>);
 
     return (
       <div>

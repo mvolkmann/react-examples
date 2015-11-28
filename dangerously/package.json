@@ -1,0 +1,26 @@
+{
+  "name": "react-dangerously-demo",
+  "version": "1.0.0",
+  "description": "This demonstrates dangerouslySetInnerHTML in React.",
+  "main": "index.html",
+  "scripts": {
+    "start": "webpack-dev-server --content-base . --inline"
+  },
+  "author": "R. Mark Volkmann",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.1.2",
+    "babel-loader": "^6.0.1",
+    "babel-preset-es2015": "^6.1.2",
+    "babel-preset-react": "^6.1.2",
+    "eslint": "^1.6.0",
+    "eslint-loader": "^1.0.0",
+    "eslint-plugin-react": "^3.5.1",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.0"
+  },
+  "dependencies": {
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2"
+  }
+}

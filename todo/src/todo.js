@@ -5,9 +5,9 @@ const Todo = ({todo, onToggleDone, onDeleteTodo}) =>
   <li>
     <input type="checkbox"
       checked={todo.done}
-      onChange={() => onToggleDone(todo)}/>
+      onChange={onToggleDone}/>
     <span className={'done-' + todo.done}> {todo.text}</span>
-    <button onClick={() => onDeleteTodo(todo.id)}>Delete</button>
+    <button onClick={onDeleteTodo}>Delete</button>
   </li>;
 
 const PropTypes = React.PropTypes;
