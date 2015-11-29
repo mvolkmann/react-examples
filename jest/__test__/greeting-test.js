@@ -1,3 +1,5 @@
+console.log('greeting-test.js: entered');
+
 /* global describe, expect, it, jest */
 jest.dontMock('../src/greeting');
 
@@ -13,6 +15,7 @@ describe('greeting', () => {
       <Greeting/>
     );
     const node = ReactDOM.findDOMNode(dom);
+    // Trying to get a test to fail on purpose.
     expect(node.textContent).toEqual('wrong');
   });
 });

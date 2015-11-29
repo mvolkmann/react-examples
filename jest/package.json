@@ -1,7 +1,7 @@
 {
-  "name": "react-events",
+  "name": "jest-demo",
   "version": "1.0.0",
-  "description": "This demonstrates using React events.",
+  "description": "This demonstrates using jest to test React components.",
   "main": "index.html",
   "scripts": {
     "start": "webpack-dev-server --content-base . --inline",
@@ -18,7 +18,9 @@
     "eslint": "^1.6.0",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^3.5.1",
+    "jest-cli": "^0.8.0",
     "jest-webpack-alias": "^2.0.0",
+    "react-addons-test-utils": "^0.14.3",
     "webpack": "^1.12.2",
     "webpack-dev-server": "^1.12.0"
   },
@@ -27,10 +29,12 @@
     "react-dom": "^0.14.2"
   },
   "jest": {
-    "scriptPreprocessor: "node_modules/babel-jest",
-    "node_modules/react",
-    "node_modules/react-dom",
-    "node_modules/react-addons-test-utils",
-    "node_modules/fbj
+    "scriptPreprocessor": "jest/preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "node_modules/react",
+      "node_modules/react-dom",
+      "node_modules/react-addons-test-utils",
+      "node_modules/fbjs"
+    ]
   }
 }
