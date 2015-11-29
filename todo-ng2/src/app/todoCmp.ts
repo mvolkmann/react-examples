@@ -1,9 +1,9 @@
 import {Component, FORM_DIRECTIVES, Input, Output, EventEmitter} from 'angular2/angular2';
 
 export interface ITodo {
-  id:number;
-  text:string;
-  done:boolean;
+  id: number;
+  text: string;
+  done: boolean;
 }
 
 @Component({
@@ -19,15 +19,15 @@ export interface ITodo {
   directives: [FORM_DIRECTIVES]
 })
 export class TodoCmp {
-  @Input() todo:ITodo;
-  @Output() onDeleteTodo:EventEmitter<number> = new EventEmitter<number>();
-  @Output() onToggleDone:EventEmitter<ITodo> = new EventEmitter<ITodo>();
+  @Input() todo: ITodo;
+  @Output() onDeleteTodo: EventEmitter<number> = new EventEmitter<number>();
+  @Output() onToggleDone: EventEmitter<ITodo> = new EventEmitter<ITodo>();
 
-  toggleDone():void {
+  toggleDone(): void {
     this.onToggleDone.next(this.todo);
   }
 
-  deleteTodo():void {
+  deleteTodo(): void {
     this.onDeleteTodo.next(this.todo.id);
   }
 }
