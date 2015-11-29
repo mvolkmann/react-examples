@@ -4,6 +4,7 @@
   "description": "This demonstrates using jest to test React components.",
   "main": "index.html",
   "scripts": {
+    "jest-help": "jest --help",
     "start": "webpack-dev-server --content-base . --inline",
     "test": "jest"
   },
@@ -25,8 +26,8 @@
     "webpack-dev-server": "^1.12.0"
   },
   "dependencies": {
-    "react": "^0.14.2",
-    "react-dom": "^0.14.2"
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
   },
   "jest": {
     "scriptPreprocessor": "jest/preprocessor.js",

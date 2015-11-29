@@ -36,7 +36,7 @@ var TodoCmp = (function () {
     TodoCmp = __decorate([
         angular2_1.Component({
             selector: 'todo',
-            template: "\n  <li>\n    <input type=\"checkbox\"\n      [checked]=\"todo.done\"\n      (change)=\"toggleDone()\"/>\n    <span [ng-class]=\"'done-' + todo.done\">{{todo.text}}</span>\n    <button (click)=\"deleteTodo()\">Delete</button>\n  </li>\n  ",
+            template: "\n    <li>\n      <input type=\"checkbox\"\n        [checked]=\"todo.done\"\n        (change)=\"toggleDone()\"/>\n      <span [ng-class]=\"'done-' + todo.done\">{{todo.text}}</span>\n      <button (click)=\"deleteTodo()\">Delete</button>\n    </li>",
             directives: [angular2_1.FORM_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])

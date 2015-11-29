@@ -5,7 +5,7 @@ jest.dontMock('../src/greeting');
 
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
-import TestUtils from 'react.addons-test-utils';
+import TestUtils from 'react-addons-test-utils';
 
 const Greeting = require('../src/greeting');
 

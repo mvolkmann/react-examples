@@ -12,5 +12,9 @@ module.exports = {
       {test: jsPath, loader: 'babel-loader'},
       {test: jsPath, loader: 'eslint-loader'}
     ]
+  },
+  resolve: {
+    alias: {},
+    root: '.'
   }
 };
