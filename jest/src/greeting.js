@@ -17,7 +17,6 @@ class Greeting extends React.Component {
           <label>Name: </label>
           <input type="text" value={this.state.name}
             onChange={e => this.setName(e)}/>
-            {/*onChange={this.setName.bind(this)}/>*/}
         </div>
         <div>
           {this.props.greet}, {this.state.name}!
@@ -27,12 +26,14 @@ class Greeting extends React.Component {
   }
 }
 
+/*
 Greeting.propTypes = {
   greet: React.PropTypes.string.isRequired
   // Numbers pass because they can be coerced to a string.
   // Missing a required prop isn't an error
   // if a default value is specified
 };
+*/
 
 Greeting.defaultProps = {
   greet: 'Hello'
