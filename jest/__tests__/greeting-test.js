@@ -1,6 +1,6 @@
 /* global describe, expect, it */
 
-// All ES6 imports get hoisted above this line,
+// All ES6 imports get hoisted to the top,
 // so they get mocked before the line below runs!
 //jest.dontMock('../src/greeting');
 // This line was moved to dont-mock.js so it can be imported first.
@@ -16,12 +16,22 @@ import TestUtils from 'react-addons-test-utils';
 import Greeting from '../src/greeting';
 
 describe('greeting', () => {
-  it('greets', () => {
+
+  it('greets with default', () => {
     const dom = TestUtils.renderIntoDocument(
       <Greeting/>
     );
     const form = ReactDOM.findDOMNode(dom);
     const lastDiv = form.lastChild;
     expect(lastDiv.textContent).toBe('Hello, World!');
+  });
+
+  it('greets with prop', () => {
+    const dom = TestUtils.renderIntoDocument(
+      <Greeting greet="Hola"/>
+    );
+    const form = ReactDOM.findDOMNode(dom);
+    const lastDiv = form.lastChild;
+    expect(lastDiv.textContent).toBe('Hola, World!');
   });
 });
