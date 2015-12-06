@@ -17,21 +17,31 @@ import Greeting from '../src/greeting';
 
 describe('greeting', () => {
 
-  it('greets with default', () => {
-    const dom = TestUtils.renderIntoDocument(
+  it('greets with defaults', () => {
+    const component = TestUtils.renderIntoDocument(
       <Greeting/>
     );
-    const form = ReactDOM.findDOMNode(dom);
+    const form = ReactDOM.findDOMNode(component);
     const lastDiv = form.lastChild;
     expect(lastDiv.textContent).toBe('Hello, World!');
   });
 
   it('greets with prop', () => {
-    const dom = TestUtils.renderIntoDocument(
+    const component = TestUtils.renderIntoDocument(
       <Greeting greet="Hola"/>
     );
-    const form = ReactDOM.findDOMNode(dom);
+    const form = ReactDOM.findDOMNode(component);
     const lastDiv = form.lastChild;
     expect(lastDiv.textContent).toBe('Hola, World!');
+  });
+
+  it('greets with state', () => {
+    const component = TestUtils.renderIntoDocument(
+      <Greeting/>
+    );
+    component.setState({name: 'Mark'});
+    const form = ReactDOM.findDOMNode(component);
+    const lastDiv = form.lastChild;
+    expect(lastDiv.textContent).toBe('Hello, Mark!');
   });
 });
