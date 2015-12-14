@@ -63,4 +63,5 @@ var TodoListCmp = (function () {
     return TodoListCmp;
 })();
 exports.TodoListCmp = TodoListCmp;
+angular2_1.bootstrap(TodoListCmp);
 //# sourceMappingURL=todoListCmp.js.map

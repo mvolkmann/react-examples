@@ -1,4 +1,4 @@
-import {Component, FORM_DIRECTIVES} from 'angular2/angular2';
+import {bootstrap, Component, FORM_DIRECTIVES} from 'angular2/angular2';
 import {TodoCmp, ITodo} from "./todoCmp";
 
 interface IState {
@@ -80,3 +80,5 @@ export class TodoListCmp {
         t);
   }
 }
+
+bootstrap(TodoListCmp);
