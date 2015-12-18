@@ -1,7 +1,7 @@
 import React from 'react'; //eslint-disable-line
 
 // props is passed to this function and destructured.
-const Todo = ({todo, onToggleDone, onDeleteTodo}) =>
+const Todo = ({onDeleteTodo, onToggleDone, todo}) =>
   <li>
     <input type="checkbox"
       checked={todo.done}
@@ -13,8 +13,8 @@ const Todo = ({todo, onToggleDone, onDeleteTodo}) =>
 const PropTypes = React.PropTypes;
 Todo.propTypes = {
   todo: PropTypes.object.isRequired,
-  onToggleDone: PropTypes.func.isRequired,
-  onDeleteTodo: PropTypes.func.isRequired
+  onDeleteTodo: PropTypes.func.isRequired,
+  onToggleDone: PropTypes.func.isRequired
 };
 
 export default Todo;

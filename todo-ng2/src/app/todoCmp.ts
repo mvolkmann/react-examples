@@ -1,5 +1,6 @@
-import {Component, FORM_DIRECTIVES, Input, Output, EventEmitter} from 'angular2/angular2';
+import {Component, Input, Output, EventEmitter} from 'angular2/core';
 
+// Used for type of each item.
 export interface ITodo {
   id: number;
   text: string;
@@ -9,25 +10,30 @@ export interface ITodo {
 @Component({
   selector: 'todo',
   template: `
-    <li>
-      <input type="checkbox"
-        [checked]="todo.done"
-        (change)="toggleDone()"/>
-      <span [ng-class]="'done-' + todo.done">{{todo.text}}</span>
-      <button (click)="deleteTodo()">Delete</button>
-    </li>`,
-  directives: [FORM_DIRECTIVES]
+  <li>
+    <input type="checkbox"
+      [checked]="todo.done"
+      (change)="markDone()"/>
+    <span [ngClass]="'done-' + todo.done">{{todo.text}}</span>
+    <button (click)="deleteItem()">Delete</button>
+  </li>`
 })
 export class TodoCmp {
+  // input allows this component to receive initialization values
+  // from the containing component
   @Input() todo: ITodo;
-  @Output() onDeleteTodo: EventEmitter<number> = new EventEmitter<number>();
-  @Output() onToggleDone: EventEmitter<ITodo> = new EventEmitter<ITodo>();
+  // input allows this component publish values to the containing
+  // component
+  @Output() onDeleteTodo: EventEmitter<number> =
+    new EventEmitter<number>();
+  @Output() onToggleDone: EventEmitter<ITodo> =
+    new EventEmitter<ITodo>();
 
-  toggleDone(): void {
-    this.onToggleDone.next(this.todo);
+  deleteItem(): void {
+    this.onDeleteTodo.emit(this.todo.id);
   }
 
-  deleteTodo(): void {
-    this.onDeleteTodo.next(this.todo.id);
+  markDone(): void {
+    this.onToggleDone.emit(this.todo);
   }
 }

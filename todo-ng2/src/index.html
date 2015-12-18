@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>React Todo App</title>
-    <base href="/src/"/>
-    <link rel="stylesheet" href="todo.css">
-    <script src="../node_modules/systemjs/dist/system.src.js"></script>
-    <script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
-    <script>
-      System.config({
-        packages: {app: {defaultExtension: 'js'}}
-      });
-      System.import('app/todoListCmp').catch(console.log.bind(console));
-    </script>
-  </head>
-  <body>
+<head>
+    <meta charset=UTF-8>
+    <title>Angular Todo App</title>
+    <link rel="stylesheet" href="todo.css"/>
+    <base href="/">
+</head>
+<body>
     <todo-list>Loading...</todo-list>
-  </body>
+    <script src="vendor.bundle.js"></script>
+    <script src="bundle.js"></script>
+</body>
 </html>

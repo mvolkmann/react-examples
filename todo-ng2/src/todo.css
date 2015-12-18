@@ -1,23 +1,23 @@
 body {
-  font-family: sans-serif;
-  padding-left: 10px;
+    font-family: sans-serif;
+    padding-left: 10px;
 }
 
 button {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 li {
-  margin-top: 5px;
+    margin-top: 5px;
 }
 
 ul.unstyled {
-  list-style: none;
-  margin-left: 0;
-  padding-left: 0;
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
 }
 
 .done-true {
-  color: gray;
-  text-decoration: line-through;
+    color: gray;
+    text-decoration: line-through;
 }
