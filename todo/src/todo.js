@@ -6,7 +6,7 @@ const Todo = ({onDeleteTodo, onToggleDone, todo}) =>
     <input type="checkbox"
       checked={todo.done}
       onChange={onToggleDone}/>
-    <span className={'done-' + todo.done}> {todo.text}</span>
+    <span className={'done-' + todo.done}>{todo.text}</span>
     <button onClick={onDeleteTodo}>Delete</button>
   </li>;
 

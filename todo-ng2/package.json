@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Todo app in Angular",
   "scripts": {
-    "start": "webpack-dev-server --inline --colors --progress --display-error-details --display-cached --port 8081 --content-base src"
+    "start": "webpack-dev-server --content-base src --inline --port 8081"
   },
   "devDependencies": {
     "ts-loader": "^0.7.2",
