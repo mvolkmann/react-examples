@@ -1,6 +1,6 @@
 import React from 'react'; //eslint-disable-line
 
-// props is passed to this function and destructured.
+// A props object is passed to this function and destructured.
 const Todo = ({onDeleteTodo, onToggleDone, todo}) =>
   <li>
     <input type="checkbox"

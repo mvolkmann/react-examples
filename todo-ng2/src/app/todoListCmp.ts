@@ -1,3 +1,4 @@
+import 'angular2/bundles/angular2-polyfills';
 import {Component} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
 import {TodoCmp, ITodo} from './todoCmp';
