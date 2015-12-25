@@ -12,5 +12,12 @@ module.exports = {
       {test: jsPath, loader: 'babel-loader'},
       {test: jsPath, loader: 'eslint-loader'}
     ]
+  },
+  devServer: {
+    proxy: {
+      '/todos/*': {
+        target: 'http://localhost:1919/todos/'
+      }
+    }
   }
 };

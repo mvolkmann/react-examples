@@ -8,7 +8,8 @@ const ObjectID = MongoDb.ObjectID;
 
 const app = express();
 app.use(express.static(__dirname));
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // handle Content-Type 'application/json' requests
+app.use(bodyParser.text()); // handle Content-Type 'text/plain' requests
 
 MongoClient.connect('mongodb://127.0.0.1:27017/todos', (err, db) => {
   if (err) throw err;
@@ -59,28 +60,53 @@ MongoClient.connect('mongodb://127.0.0.1:27017/todos', (err, db) => {
     });
   });
 
-  // Adds a todos.
+  // Adds a todo.
   // Curl commmand to test:
   // curl -XPOST http://localhost:1919/todos \
-  //   -H"Content-Type: application/json" \
-  //   -d '{"text": "try this"}'
+  //   -d 'some todo text'
   // Mongo commands to verify:
   // mongo; use todos; db.todos.find()
   app.post('/todos', (req, res) => {
-    const obj = req.body;
-    if (obj) {
+    const text = req.body;
+    if (text) {
+      const todo = {text};
+      console.log('server.js post: before insert, todo =', todo);
       // This adds a _id property to the object with an assigned id.
-      coll.insert(obj, err => {
+      coll.insert(todo, err => {
         if (err) {
           res.send(err, null, 500);
         } else {
+          console.log('server.js post: after insert, todo =', todo);
           // Return URL of new resource.
-          res.send('/todos/' + obj._id);
+          res.send(req.headers.origin + '/todos/' + todo._id);
         }
       });
     } else {
-      res.status(400).send('missing todo JSON object in body');
+      res.status(400).send('missing todo text in body');
     }
+  });
+
+  // Archives todos that have beem marked completed.
+  app.post('/todos/archive', (req, res) => {
+    coll.remove({done: true}, err => {
+      if (err) {
+        res.send(err, null, 500);
+      } else {
+        res.send();
+      }
+    });
+  });
+
+  // Archives todos that have beem marked completed.
+  app.post('/todos/:id/toggle', (req, res) => {
+    //TODO: Finish this.
+    coll.update({done: true}, err => {
+      if (err) {
+        res.send(err, null, 500);
+      } else {
+        res.send();
+      }
+    });
   });
 
   // Update the todo with a given id.
