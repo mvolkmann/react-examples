@@ -1,10 +1,18 @@
+// This file uses the convention that variables
+// referring to immutable objects begin with "i".
+const axios = require('axios');
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Todo from './todo';
-//import 'fetch';
-require('whatwg-fetch');
-import {createStore} from 'redux';
 import rootReducer from './reducer';
+import {createStore} from 'redux';
+import Todo from './todo';
+
+function handleError(msg, res) {
+  store.dispatch({
+    type: 'error',
+    payload: msg + ': ' + res.data
+  });
+}
 
 class TodoList extends React.Component {
   getUncompletedCount(todos) {
@@ -20,29 +28,27 @@ class TodoList extends React.Component {
     const text = store.getState().get('text');
 
     // Update server-side model.
-    fetch('/todos', {method: 'post', body: text}).
-    then(res => res.text()).
-    then(resourceUrl => {
-      // Get the assigned id from the response.
-      const index = resourceUrl.lastIndexOf('/');
-      const _id = resourceUrl.substring(index + 1);
+    axios.post('/todos', text, {headers: {'Content-Type': 'text/plain'}}).
+      then(res => {
+        const resourceUrl = res.data;
+        // Get the assigned id from the response.
+        const index = resourceUrl.lastIndexOf('/');
+        const _id = resourceUrl.substring(index + 1);
 
-      // Update client-side model.
-      store.dispatch({type: 'addTodo', payload: {_id, text}});
-    }).
-    catch(res =>
-      console.error('onAddTodo error:', res));
+        // Update client-side model.
+        store.dispatch({type: 'addTodo', payload: {_id, text}});
+      }).
+      catch(res => handleError('Error adding todo', res));
   }
 
   onArchiveCompleted() {
     // Update server-side model.
-    fetch('/todos/archive', {method: 'post'}).
-    then(() => {
-      // Update client-side model.
-      store.dispatch({type: 'archiveCompleted'});
-    }).
-    catch(res =>
-      console.error('onArchiveCompleted error:', res));
+    axios.post('/todos/archive').
+      then(() => {
+        // Update client-side model.
+        store.dispatch({type: 'archiveCompleted'});
+      }).
+      catch(res => handleError('Error archiving todos', res));
   }
 
   onChange(name, event) {
@@ -52,37 +58,39 @@ class TodoList extends React.Component {
 
   onDeleteTodo(todoId) {
     // Update server-side model.
-    fetch('/todos/' + todoId, {method: 'delete'}).
-    then(() => {
-      // Update client-side model.
-      store.dispatch({type: 'deleteTodo', payload: {id: todoId}});
-    }).
-    catch(res =>
-      console.error('onDeleteTodo error:', res));
+    axios.delete('/todos/' + todoId).
+      then(() => {
+        console.log('todo-list.js onDeleteTodo: success');
+        // Update client-side model.
+        store.dispatch({type: 'deleteTodo', payload: {_id: todoId}});
+      }).
+      catch(res => handleError('Error deleting todo', res));
   }
 
-  onToggleDone(todoId) {
+  onToggleDone(todo) {
+    todo = todo.toJS();
+    console.log('todo-list.js onToggleDone: todo =', todo);
     // Update server-side model.
-    fetch('/todos/' + todoId + '/archive', {method: 'post'}).
-    then(() => {
-      // Update client-side model.
-      store.dispatch({type: 'toggleDone', payload: {id: todoId}});
-    }).
-    catch(res =>
-      console.error('onToggleDone error:', res));
+    // The Fetch API doesn't support PATCH requests, but axios does!
+    axios.patch('/todos/' + todo._id, {done: !todo.done}).
+      then(() => {
+        // Update client-side model.
+        store.dispatch({type: 'toggleDone', payload: {_id: todo._id}});
+      }).
+      catch(res => handleError('Error toggling todo done', res));
   }
 
   render() {
-    const state = store.getState();
-    const todos = state.get('todos');
-    //console.log('todo-list.js render: todos =', todos.toJS());
+    const iState = store.getState();
+    //console.log('todo-list.js render: state =', iState.toJS());
+    const iTodos = iState.get('todos');
 
-    const todoElements = todos.map(todo => {
-      const _id = todo.get('_id');
+    const todoElements = iTodos.map(iTodo => {
+      const _id = iTodo.get('_id');
       return (
-        <Todo key={_id} todo={todo}
+        <Todo key={_id} iTodo={iTodo}
           onDeleteTodo={this.onDeleteTodo.bind(this, _id)}
-          onToggleDone={this.onToggleDone.bind(this, _id)}/>
+          onToggleDone={this.onToggleDone.bind(this, iTodo)}/>
       );
     }).valueSeq();
 
@@ -90,18 +98,19 @@ class TodoList extends React.Component {
       <div>
         <h2>To Do List</h2>
         <div>
-          {this.getUncompletedCount(todos)} of {todos.size} remaining
+          {this.getUncompletedCount(iTodos)} of {iTodos.size} remaining
           <button onClick={() => this.onArchiveCompleted()}>
             Archive Completed
           </button>
         </div>
+        <div className="error">{iState.get('error')}</div>
         <br/>
         <form>
           <input type="text" size="30" autoFocus
             placeholder="enter new todo here"
-            value={state.get('text')}
+            value={iState.get('text')}
             onChange={e => this.onChange('todoText', e)}/>
-          <button disabled={!state.get('text')}
+          <button disabled={!iState.get('text')}
             onClick={event => this.onAddTodo(event)}>
             Add
           </button>
@@ -119,9 +128,9 @@ function render() {
 const store = createStore(rootReducer);
 store.subscribe(render);
 
-fetch('todos').
-  then(res => res.json()). // returns a Promise
-  then(todos => {
+axios.get('todos').
+  then(res => {
+    const todos = res.data;
     store.dispatch({type: 'setTodos', payload: todos});
     // This will trigger an event to which the store is subscribed
     // which will call the render function.

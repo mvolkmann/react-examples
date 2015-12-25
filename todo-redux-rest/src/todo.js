@@ -3,9 +3,9 @@ import React from 'react'; //eslint-disable-line
 // A props object is passed to this function and destructured.
 //TODO: Modify this to use shouldComponentUpdate
 //TODO: to avoid unnecessary re-rendering.
-const Todo = ({onDeleteTodo, onToggleDone, todo}) => {
-  const done = todo.get('done');
-  const text = todo.get('text');
+const Todo = ({onDeleteTodo, onToggleDone, iTodo}) => {
+  const done = iTodo.get('done');
+  const text = iTodo.get('text');
   return (
     <li>
       <input type="checkbox"
@@ -19,7 +19,7 @@ const Todo = ({onDeleteTodo, onToggleDone, todo}) => {
 
 const PropTypes = React.PropTypes;
 Todo.propTypes = {
-  todo: PropTypes.object.isRequired,
+  iTodo: PropTypes.object.isRequired,
   onDeleteTodo: PropTypes.func.isRequired,
   onToggleDone: PropTypes.func.isRequired
 };

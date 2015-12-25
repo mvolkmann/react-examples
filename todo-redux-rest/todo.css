@@ -21,3 +21,9 @@ ul.unstyled {
   color: gray;
   text-decoration: line-through;
 }
+
+.error {
+  color: red;
+  font-size: 18px;
+  font-weight: bold;
+}
