@@ -17,48 +17,36 @@ MongoClient.connect('mongodb://127.0.0.1:27017/todos', (err, db) => {
   const coll = db.collection('todos');
 
   // Deletes the todo with a given id.
+  // If no matching id is found, no error is generated.
+  // This code uses the variable name "_id" instead of "id"
+  // as a reminder that MongoDB names it that way.
   app.delete('/todos/:_id', (req, res) => {
     const _id = req.params._id;
-    coll.remove({_id: ObjectID(_id)}, err => {
-      err = 'Just testing';
-      // If no matching id is found, no error is generated.
-      if (err) {
-        console.log('server.js delete: sending 500');
-        //res.send(err, null, 500);
-        res.status(500).send(err);
-      } else {
-        res.send();
-      }
-    });
+    coll.remove({_id: ObjectID(_id)}).then(
+      () => res.send(),
+      err => res.status(500).send(err));
   });
 
   // Gets all todos.
   // Curl command to test:
   // curl -XGET http://localhost:1919/todos
   app.get('/todos', (req, res) => {
-    coll.find().toArray((err, docs) => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.send(docs);
-      }
-    });
+    function sortTodos(t1, t2) {
+      return t1.text.localeCompare(t2.text);
+    }
+
+    coll.find().toArray().then(
+      todos => res.send(todos.sort(sortTodos)),
+      err => res.status(500).send(err));
   });
 
   // Gets the todo with a given id.
-  // Curl command to test:
-  // curl -XGET http://localhost:1919/todos/567b1c2520c448764f0d57d9
+  // This isn't currently used by todo-list.js.
   app.get('/todos/:id', (req, res) => {
     const id = req.params.id;
-    coll.findOne(ObjectID(id), (err, todo) => {
-      if (err) {
-        res.status(500).send(err);
-      } else if (todo) {
-        res.send(todo);
-      } else {
-        res.sendStatus(404);
-      }
-    });
+    coll.findOne(ObjectID(id)).then(
+      todo => todo ? res.send(todo) : res.sendStatus(404),
+      err => res.status(500).send(err));
   });
 
   // Modifies a subset of the properties in a given todo.
@@ -80,15 +68,11 @@ MongoClient.connect('mongodb://127.0.0.1:27017/todos', (err, db) => {
     const text = req.body;
     if (text) {
       const todo = {text};
-      // This adds a _id property to the object with an assigned id.
-      coll.insert(todo, err => {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          // Return URL of new resource.
-          res.send(req.headers.origin + '/todos/' + todo._id);
-        }
-      });
+      // This adds a _id property to the object with the assigned id.
+      coll.insert(todo).then(
+        // Return URL of new resource.
+        () => res.send(req.headers.origin + '/todos/' + todo._id),
+        err => res.status(500).send(err));
     } else {
       res.status(400).send('missing todo text in body');
     }
@@ -96,47 +80,29 @@ MongoClient.connect('mongodb://127.0.0.1:27017/todos', (err, db) => {
 
   // Archives todos that have beem marked completed.
   app.post('/todos/archive', (req, res) => {
-    coll.remove({done: true}, err => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.send();
-      }
-    });
+    coll.remove({done: true}).then(
+      () => res.send(),
+      err => res.status(500).send(err));
   });
 
   // Toggles the done flag for a given todo.
   app.post('/todos/:id/toggle', (req, res) => {
     const _id = ObjectID(req.params.id);
-    coll.findOne({_id}).then(
-      todo => {
-        coll.updateOne(
-          {_id},
-          {$set: {done: !todo.done}},
-          err => {
-            console.log('server.js toggle: err =', err);
-            if (err) {
-              res.status(500).send(err);
-            } else {
-              res.send();
-            }
-          });
-      });
+    coll.findOne({_id}).
+      then(todo => coll.updateOne({_id}, {$set: {done: !todo.done}})).
+      then(() => res.send()).
+      catch(err => res.status(500).send(err));
   });
 
   // Update the todo with a given id.
+  // This isn't currently used by todo-list.js.
   app.put('/todos/:id', (req, res) => {
     const id = req.params.id;
-    const obj = req.body;
-    if (obj) {
-      coll.updateOne({_id: ObjectID(id)}, obj, err => {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          // Return URL of existing resource.
-          res.send('/todos/' + id);
-        }
-      });
+    const todo = req.body;
+    if (todo) {
+      coll.updateOne({_id: ObjectID(id)}, todo).then(
+        () => res.send('/todos/' + id), // URL of existing resource
+        err => res.status(500).send(err));
     } else {
       res.status(400).send('missing todo JSON object in body');
     }

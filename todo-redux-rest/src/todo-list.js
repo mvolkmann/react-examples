@@ -60,7 +60,6 @@ class TodoList extends React.Component {
     // Update server-side model.
     axios.delete('/todos/' + todoId).
       then(() => {
-        console.log('todo-list.js onDeleteTodo: success');
         // Update client-side model.
         store.dispatch({type: 'deleteTodo', payload: {_id: todoId}});
       }).
