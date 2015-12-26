@@ -18,8 +18,8 @@ class TodoList extends React.Component {
             const _id = iTodo.get('_id');
             return (
               <Todo key={_id} iTodo={iTodo}
-                onDeleteTodo={onDeleteTodo.bind(null, _id)}
-                onToggleDone={onToggleDone.bind(null, iTodo)}/>
+                onDeleteTodo={() => onDeleteTodo(_id)}
+                onToggleDone={() => onToggleDone(iTodo)}/>
             );
           }).valueSeq()
         }
