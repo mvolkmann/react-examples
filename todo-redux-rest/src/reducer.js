@@ -67,7 +67,7 @@ const reducers = {
 };
 
 function rootReducer(iState = iInitialState, action) {
-  console.log('reducer.js rootReducer: action =', action);
+  //console.log('reducer.js rootReducer: action =', action);
   const reducer = reducers[action.type];
   return reducer ? reducer(iState, action) : iState;
 }
