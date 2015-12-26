@@ -31,12 +31,12 @@ MongoClient.connect('mongodb://127.0.0.1:27017/todos', (err, db) => {
   // Curl command to test:
   // curl -XGET http://localhost:1919/todos
   app.get('/todos', (req, res) => {
-    function sortTodos(t1, t2) {
+    function todoComparator(t1, t2) {
       return t1.text.localeCompare(t2.text);
     }
 
     coll.find().toArray().then(
-      todos => res.send(todos.sort(sortTodos)),
+      todos => res.send(todos.sort(todoComparator)),
       err => res.status(500).send(err));
   });
 
