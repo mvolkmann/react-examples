@@ -41,16 +41,19 @@ const reducers = {
   setTodos(iState, action) {
     const todoArray = action.payload;
     // todos is an array of todo objects, but we need a map
-    // where keys are ids and values are todo objects
+    // where keys are ids and values are immutable todo objects
     const todoMap = todoArray.reduce(
       (map, todo) => {
-        map[todo._id] = todo;
+        map[todo._id] = Immutable.Map(todo);
         return map;
       },
       {});
+    // Unlike Immutable Map, OrderedMap iterates over values in
+    // the order they were inserted.  This is important for maintaining
+    // the order of todos after have some are deleted or archived.
     return iState.
       delete('error').
-      set('todos', Immutable.fromJS(todoMap));
+      set('todos', Immutable.OrderedMap(todoMap));
   },
   textChange(iState, action) {
     return iState.
