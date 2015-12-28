@@ -7,7 +7,8 @@ const MongoClient = MongoDb.MongoClient;
 const ObjectID = MongoDb.ObjectID;
 
 const app = express();
-app.use(express.static(__dirname));
+//app.use(express.static(__dirname));
+app.use(express.static('public'));
 app.use(bodyParser.json()); // handle Content-Type 'application/json' requests
 app.use(bodyParser.text()); // handle Content-Type 'text/plain' requests
 

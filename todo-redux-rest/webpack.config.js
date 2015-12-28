@@ -1,11 +1,11 @@
 const path = require('path');
-const jsPath = path.join(__dirname, 'src');
+const jsPath = path.join(__dirname, 'public');
 
 module.exports = {
-  entry: './src/todo-app.js',
+  entry: './public/todo-app.js',
   output: {
-    path: __dirname,
-    filename: 'build/bundle.js'
+    path: 'public/build', //__dirname,
+    filename: 'bundle.js'
   },
   module: {
     loaders: [

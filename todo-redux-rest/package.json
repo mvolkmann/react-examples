@@ -4,7 +4,7 @@
   "description": "Todo app in React",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --content-base . --inline"
+    "start": "webpack-dev-server --content-base public --inline"
   },
   "author": "R. Mark Volkmann",
   "license": "MIT",
