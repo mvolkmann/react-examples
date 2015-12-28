@@ -23,6 +23,7 @@ const Page2 = () => <div>
 </div>;
 
 function render() {
+  console.log('demo.js render: location =', location);
   const hash = location.hash;
   // Can perform validation here to prevent certain navigations
   // or redirect to a different hash.
