@@ -1,25 +1,33 @@
 const path = require('path');
-const jsPath = path.join(__dirname, 'public');
+const publicPath = path.join(__dirname, 'public');
 
 module.exports = {
-  entry: './public/todo-app.js',
+  entry: path.join(publicPath, 'todo-app.js'),
   output: {
-    path: 'public/build',
-    filename: 'bundle.js'
+    path: publicPath,
+    filename: 'build/bundle.js'
   },
   module: {
     loaders: [
-      {test: jsPath, loader: 'babel-loader'},
-      {test: jsPath, loader: 'eslint-loader'}
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loaders: ['babel-loader', 'eslint-loader']
+        //loaders: ['react-hot', 'babel-loader', 'eslint-loader']
+      }
     ]
   },
   devServer: {
     proxy: {
       '/todos': {
-        target: 'http://localhost:1919'
+        target: 'http://localhost:8081'
       },
       '/todos/*': {
-        target: 'http://localhost:1919'
+        target: 'http://localhost:8081'
       }
     }
   }

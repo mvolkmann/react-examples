@@ -7,10 +7,10 @@ const MongoClient = MongoDb.MongoClient;
 const ObjectID = MongoDb.ObjectID;
 
 const app = express();
-//app.use(express.static(__dirname));
-app.use(express.static('public'));
 app.use(bodyParser.json()); // handle Content-Type 'application/json' requests
 app.use(bodyParser.text()); // handle Content-Type 'text/plain' requests
+// Static middleware is not needed when using webpack-dev-server (npm start).
+app.use(express.static('public'));
 
 MongoClient.connect('mongodb://127.0.0.1:27017/todos', (err, db) => {
   if (err) throw err;
@@ -30,7 +30,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017/todos', (err, db) => {
 
   // Gets all todos.
   // Curl command to test:
-  // curl -XGET http://localhost:1919/todos
+  // curl -XGET http://localhost:8081/todos
   app.get('/todos', (req, res) => {
     function todoComparator(t1, t2) {
       return t1.text.localeCompare(t2.text);
@@ -61,7 +61,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017/todos', (err, db) => {
 
   // Adds a todo.
   // Curl commmand to test:
-  // curl -XPOST http://localhost:1919/todos \
+  // curl -XPOST http://localhost:8081/todos \
   //   -d 'some todo text'
   // Mongo commands to verify:
   // mongo; use todos; db.todos.find()
@@ -110,5 +110,5 @@ MongoClient.connect('mongodb://127.0.0.1:27017/todos', (err, db) => {
   });
 });
 
-const PORT = 1919;
+const PORT = 8081;
 app.listen(PORT, () => console.log('browse http://localhost:' + PORT));
