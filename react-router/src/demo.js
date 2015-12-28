@@ -1,103 +1,59 @@
 /* eslint no-unused-vars: 0 */
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
-import {Link, Router} from 'react-router';
+import {Link, Route, Router} from 'react-router';
 
 class App extends React.Component {
-  componentWillMount() {
-    console.log('this.props =', this.props);
-  }
-
-  /*
-  goTo(path) {
-    //this.transitionTo(path);
-    this.props.history.pushState(null, path);
-  }
-  */
-
   render() {
-    return (
-      <div>
-        <h1>Home</h1>
-        <Link class="btn btn-default" to="/page1">Page 1</Link>
-        &nbsp;
-        <Link to="/page2">Page 2</Link>
-        {/* THE NEXT LINE IS KEY! */}
-        {this.props.children}
-      </div>
-    );
+    return <div>
+      {/*} Could have content here for common content on all pages. {*/}
+      {/*} renders matching child route component {*/}
+      {this.props.children}
+    </div>;
   }
 }
 
-const Page1 = React.createClass({ //eslint-disable-line
-  render() {
-    return <h1>Page 1</h1>;
-  }
-});
+const Home = () => <div>
+  <h1>Home</h1>
+  <Link to="/page1">Page 1</Link>
+  &nbsp;
+  <Link to="/page2">Page 2</Link>
+</div>;
 
-/*
-const Page1 = props => ( //eslint-disable-line
-  <div>
-    <h1>Page 1</h1>
-    <button onClick="props.goToPage2">
-      Page 2
-    </button>
-  </div>
-);
-*/
+const Page1 = () => <div>
+  <h1>Page 1</h1>
+  <p>Use browser back button to return to home page.</p>
+</div>;
 
-const Page2 = () => ( //eslint-disable-line
-  <div>
-    <h1>Page 2</h1>
-  </div>
-);
+const Page2 = () => <div>
+  <h1>Page 2</h1>
+  <Link to="/">Home</Link>
+</div>;
 
-const routes = {
-  path: '/',
-  component: App,
-  childRoutes: [
-    {
-      path: 'page1',
-      component: Page1,
-      onEnter: () => {
-        console.log('entered page1 route');
-      },
-      onLeave: () => {
-        console.log('leaving page1 route');
-      }
-    },
-    {
-      path: 'page2',
-      component: Page2,
-      onEnter: () => {
-        console.log('entered page2 route');
-      },
-      onLeave: () => {
-        console.log('leaving page2 route');
-      }
-    }
-  ],
-  onEnter: () => {
-    console.log('entered top route');
-  },
-  onLeave: () => {
-    console.log('leaving top route');
-  }
-};
+// Defining routes using JSX
+// Note that the top route can have path of "/"
+// if that component renders content
+// that should appear for all routes.
 /*
 const routes = (
-  <Route path="/" component={App}>
+  <Route component={App}>
+    <Route path="/" component={Home}/>
     <Route path="page1" component={Page1}/>
     <Route path="page2" component={Page2}/>
   </Route>
 );
 */
 
-/*
-ReactDOM.render(
-  <Router history={createBrowserHistory()} routes={routes}/>,
-  document.getElementById('content'));
-*/
+// Defining routes using JavaScript
+const routes = {
+  component: App,
+  childRoutes: [
+    {path: '/', component: Home},
+    {path: 'page1', component: Page1},
+    {path: 'page2', component: Page2}
+  ]
+};
+
 ReactDOM.render(
   <Router routes={routes}/>,
-  document.getElementById('content'));
+  document.getElementById('container'));
