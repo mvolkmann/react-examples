@@ -1,7 +1,7 @@
 /* eslint no-unused-vars: 0 */
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
-import {Link, Route, Router} from 'react-router';
+import {IndexRoute, Lifecycle, Link, Route, Router} from 'react-router';
 
 class App extends React.Component {
   render() {
@@ -25,30 +25,57 @@ const Page1 = () => <div>
   <p>Use browser back button to return to home page.</p>
 </div>;
 
+/*
 const Page2 = () => <div>
   <h1>Page 2</h1>
   <Link to="/">Home</Link>
 </div>;
+*/
+// This version demonstrates use of the Lifecycle mixin.
+const Page2 = React.createClass({
+  mixins: [Lifecycle],
+  routerWillLeave(nextLocation) {
+    return 'Are you sure?';
+  },
+  render() {
+    return <div>
+      <h1>Page 2</h1>
+      <Link to="/">Home</Link>
+    </div>;
+  }
+});
 
+/*
 // Defining routes using JSX
 // Note that the top route can have path of "/"
 // if that component renders content
 // that should appear for all routes.
-/*
+// IndexRoute specifies component
+// to be rendered at root path.
 const routes = (
-  <Route component={App}>
-    <Route path="/" component={Home}/>
+  <Route path="/" component={App}>
+    <IndexRoute component={Home}/>
     <Route path="page1" component={Page1}/>
     <Route path="page2" component={Page2}/>
   </Route>
 );
 */
 
+/*
 // Defining routes using JavaScript
 const routes = {
-  component: App,
+  path: '/', component: App,
   childRoutes: [
-    {path: '/', component: Home},
+    {onlyActiveOnIndex: true, component: Home},
+    {path: 'page1', component: Page1},
+    {path: 'page2', component: Page2}
+  ]
+};
+*/
+const routes = {
+  path: '/', component: App,
+  childRoutes: [
+    {indexRoute: true, component: Home},
     {path: 'page1', component: Page1},
     {path: 'page2', component: Page2}
   ]
