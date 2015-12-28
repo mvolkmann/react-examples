@@ -3,12 +3,14 @@ Setup steps
 * mongod
 * npm run build
 
-To use only Node server to serve content and host REST services
+For production,
+use the Node server to serve content AND host REST services.
 * npm run rest-server
-* browse localhost:1919
+* browse localhost:8081
 
-To use Node server to host REST services
-and webpack to serve content (for hot reload)
+For development,
+use Node server to host REST services and
+use webpack-dev-server (with hot reload) to serve content.
 * npm run rest-server
 * npm start
 * browse localhost:8080
