@@ -1,12 +1,14 @@
-To run this,
+Setup steps
 * npm install
 * mongod
 * npm run build
-* node server.js
+
+To use only Node server to serve content and host REST services
+* npm run rest-server
 * browse localhost:1919
 
-Proposed steps that aren't working yet:
-* npm install
-* mongod
+To use Node server to host REST services
+and webpack to serve content (for hot reload)
+* npm run rest-server
 * npm start
-* browse localhost:1919
+* browse localhost:8080
