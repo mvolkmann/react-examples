@@ -3,5 +3,5 @@ import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
 
 ReactDOM.render(
-  <Greetingx name="Mark"/>,
+  <Greeting name="Mark"/>,
   document.getElementById('content'));

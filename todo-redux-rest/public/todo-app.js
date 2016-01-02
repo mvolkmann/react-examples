@@ -7,6 +7,7 @@ import rootReducer from './reducer';
 import {createStore} from 'redux';
 import TodoHeader from './todo-header';
 import TodoList from './todo-list';
+import './todo.css';
 
 function handleError(msg, res) {
   store.dispatch({

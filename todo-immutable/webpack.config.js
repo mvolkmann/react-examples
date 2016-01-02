@@ -1,6 +1,3 @@
-const path = require('path');
-const jsPath = path.join(__dirname, 'src');
-
 module.exports = {
   entry: './src/todo-list.js',
   output: {
@@ -9,8 +6,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      {test: jsPath, loader: 'babel-loader'},
-      {test: jsPath, loader: 'eslint-loader'}
+      {test: /\.js$/, exclude: /node_modules/, loader: 'babel!eslint'},
+      {test: /\.css$/, exclude: /node_modules/, loader: 'style!css'}
     ]
   }
 };

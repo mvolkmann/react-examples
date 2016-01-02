@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Todo from './todo';
+import './todo.css';
 
 let lastId = 0;
 

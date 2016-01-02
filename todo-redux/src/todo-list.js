@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Todo from './todo';
 import {createStore} from 'redux';
 import rootReducer from './reducer';
+import './todo.css';
 
 class TodoList extends React.Component {
   getUncompletedCount(todos) {

@@ -10,16 +10,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loaders: ['babel-loader', 'eslint-loader']
-        //loaders: ['react-hot', 'babel-loader', 'eslint-loader']
-      }
+      {test: /\.js$/, exclude: /node_modules/, loader: 'babel!eslint'},
+      {test: /\.css$/, exclude: /node_modules/, loader: 'style!css'}
     ]
   },
   devServer: {

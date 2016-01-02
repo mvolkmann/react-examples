@@ -7,7 +7,7 @@ const Todo = ({todo, onToggleDone, onDeleteTodo}) => (
     <input type="checkbox"
       checked={todo.get('done')}
       onChange={pa(onToggleDone, todo)}/>
-    <span className={'done-' + todo.done}> {todo.get('text')}</span>
+    <span className={'done-' + todo.get('done')}> {todo.get('text')}</span>
     <button onClick={pa(onDeleteTodo, todo.get('id'))}>Delete</button>
   </li>
 );

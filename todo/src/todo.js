@@ -8,6 +8,7 @@ const Todo = ({onDeleteTodo, onToggleDone, todo}) =>
       onChange={onToggleDone}/>
     <span className={'done-' + todo.done}>{todo.text}</span>
     <button onClick={onDeleteTodo}>Delete</button>
+    Foo
   </li>;
 
 const PropTypes = React.PropTypes;

@@ -2,6 +2,7 @@
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
 import {IndexRoute, Lifecycle, Link, Route, Router} from 'react-router';
+import './demo.css';
 
 class App extends React.Component {
   render() {

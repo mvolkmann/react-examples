@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Todo from './todo';
 import {bindMethods, pam} from './bind';
+import './todo.css';
 
 let lastId = 0;
 function createTodo(text, done = false) {

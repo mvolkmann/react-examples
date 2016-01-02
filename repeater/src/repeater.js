@@ -5,7 +5,9 @@ const Repeater = ({users}) =>
   <ul>
     {
       users.map(user =>
-       <li>{user.name} is {user.age} years old.</li>)
+       <li key={user.name}>
+         {user.name} is {user.age} years old.
+       </li>)
     }
   </ul>;
 
