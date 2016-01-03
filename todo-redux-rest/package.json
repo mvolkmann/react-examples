@@ -5,7 +5,8 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server --content-base public --inline",
-    "rest-server": "node server.js"
+    "rest-server": "node server.js",
+    "test": "mocha './test/**/*.spec.js' --compilers js:babel-core/register"
   },
   "author": "R. Mark Volkmann",
   "license": "MIT",
@@ -18,6 +19,9 @@
     "eslint": "^1.10.3",
     "eslint-loader": "^1.1.1",
     "eslint-plugin-react": "^3.13.1",
+    "expect": "^1.13.4",
+    "mocha": "^2.3.4",
+    "react-addons-test-utils": "^0.14.5",
     "react-hot-loader": "^1.3.0",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.9",

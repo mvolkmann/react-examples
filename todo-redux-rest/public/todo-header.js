@@ -3,7 +3,7 @@ import React from 'react'; //eslint-disable-line
 class TodoHeader extends React.Component {
   getUncompletedCount(todos) {
     return todos.reduce(
-      (count, todo) => todo.done ? count : count + 1,
+      (count, todo) => todo.get('done') ? count : count + 1,
       0);
   }
 
