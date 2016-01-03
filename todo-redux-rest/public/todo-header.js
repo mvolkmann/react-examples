@@ -18,7 +18,9 @@ class TodoHeader extends React.Component {
     return (
       <div>
         <h2>To Do List</h2>
-        {this.getUncompletedCount(iTodos)} of {iTodos.size} remaining
+        <div>
+          {this.getUncompletedCount(iTodos)} of {iTodos.size} remaining
+        </div>
         <button onClick={onArchiveCompleted}>
           Archive Completed
         </button>
