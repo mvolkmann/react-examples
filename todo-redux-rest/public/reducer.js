@@ -71,7 +71,11 @@ const reducers = {
 
 function rootReducer(iState = iInitialState, action) {
   //console.log('reducer.js rootReducer: action =', action);
-  const reducer = reducers[action.type];
+  const type = action.type;
+  const reducer = reducers[type];
+  if (!reducer && type !== '@@redux/INIT') {
+    throw new Error('Redux reducer got unsupported action type "' + type + '"');
+  }
   return reducer ? reducer(iState, action) : iState;
 }
 

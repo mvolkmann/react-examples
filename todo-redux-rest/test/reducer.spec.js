@@ -5,7 +5,7 @@ import reducer from '../public/reducer.js';
 
 describe('reducer', () => {
   it('should process add action', () => {
-    const _id = 1;
+    const _id = '1';
     const text = 'Get milk';
     let iState = Immutable.Map({text});
     const action = {type: 'addTodo', payload: {_id, text}};
@@ -14,7 +14,7 @@ describe('reducer', () => {
     expect(iState.get('text')).toBe('');
     const iTodos = iState.get('todos');
     expect(iTodos.size).toBe(1);
-    const iTodo = iTodos.get(1);
+    const iTodo = iTodos.get('1');
     expect(iTodo.get('_id')).toBe(_id);
     expect(iTodo.get('text')).toBe(text);
   });
@@ -23,8 +23,8 @@ describe('reducer', () => {
     let iState = Immutable.fromJS({
       text: 'foo',
       todos: {
-        1: {_id: 1, text: 'Get milk', done: true},
-        2: {_id: 2, text: 'Take out trash', done: false}
+        1: {_id: '1', text: 'Get milk', done: true},
+        2: {_id: '2', text: 'Take out trash', done: false}
       }
     });
     const action = {type: 'archiveCompleted'};
@@ -36,7 +36,7 @@ describe('reducer', () => {
     expect(iTodos.size).toBe(1);
     // The "Take out trash" todo should still be there.
     const iTodo = iTodos.get('2'); // keys are strings
-    expect(iTodo.get('_id')).toBe(2);
+    expect(iTodo.get('_id')).toBe('2');
     expect(iTodo.get('text')).toBe('Take out trash');
   });
 
@@ -44,8 +44,8 @@ describe('reducer', () => {
     let iState = Immutable.fromJS({
       text: 'foo',
       todos: {
-        1: {_id: 1, text: 'Get milk', done: true},
-        2: {_id: 2, text: 'Take out trash', done: false}
+        1: {_id: '1', text: 'Get milk', done: true},
+        2: {_id: '2', text: 'Take out trash', done: false}
       }
     });
     const action = {type: 'deleteTodo', payload: {_id: '1'}};
@@ -57,7 +57,7 @@ describe('reducer', () => {
     expect(iTodos.size).toBe(1);
     // The "Take out trash" todo should still be there.
     const iTodo = iTodos.get('2'); // keys are strings
-    expect(iTodo.get('_id')).toBe(2);
+    expect(iTodo.get('_id')).toBe('2');
     expect(iTodo.get('text')).toBe('Take out trash');
   });
 
@@ -72,8 +72,8 @@ describe('reducer', () => {
 
   it('should process setTodos action', () => {
     const todos = [
-      {_id: 1, text: 'Get milk', done: true},
-      {_id: 2, text: 'Take out trash', done: false}
+      {_id: '1', text: 'Get milk', done: true},
+      {_id: '2', text: 'Take out trash', done: false}
     ];
     const action = {type: 'setTodos', payload: todos};
     const iState = reducer(undefined, action);
@@ -104,8 +104,8 @@ describe('reducer', () => {
     let iState = Immutable.fromJS({
       text: 'foo',
       todos: {
-        1: {_id: 1, text: 'Get milk', done: true},
-        2: {_id: 2, text: 'Take out trash', done: false}
+        1: {_id: '1', text: 'Get milk', done: true},
+        2: {_id: '2', text: 'Take out trash', done: false}
       }
     });
     // Toggle done flag for "Take out trash" to true.
