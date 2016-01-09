@@ -7,7 +7,7 @@ let lastId = 0;
 
 class TodoList extends React.Component {
   constructor() {
-    super();
+    super(); // must call this before accessing "this"
 
     this.state = {
       todos: [
