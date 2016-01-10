@@ -142,7 +142,6 @@ store.subscribe(render);
 fetch('todos').
   then(res => res.json()).
   then(todos => {
-
     store.dispatch({type: 'setTodos', payload: todos});
     // This will trigger an event to which the store is subscribed
     // which will call the render function.
