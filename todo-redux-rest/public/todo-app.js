@@ -34,6 +34,7 @@ class TodoApp extends React.Component {
     const text = store.getState().get('text');
 
     // Update server-side model.
+    //axios.post('/todos', text).
     axios.post('/todos', text, {headers: {'Content-Type': 'text/plain'}}).
       then(res => {
         const resourceUrl = res.data;

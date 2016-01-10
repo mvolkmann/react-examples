@@ -13,7 +13,13 @@ app.use(bodyParser.text()); // handle Content-Type 'text/plain' requests
 app.use(express.static('public'));
 
 MongoClient.connect('mongodb://127.0.0.1:27017/todos', (err, db) => {
-  if (err) throw err;
+  if (err) {
+    if (err.name === 'MongoError' &&
+      err.message.includes('ECONNREFUSED')) {
+      console.error('MongoDB server may not be running');
+    }
+    throw err;
+  }
 
   const coll = db.collection('todos');
 
@@ -32,6 +38,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017/todos', (err, db) => {
   // Curl command to test:
   // curl -XGET http://localhost:8081/todos
   app.get('/todos', (req, res) => {
+    console.log('server.js get todos: entered');
     function todoComparator(t1, t2) {
       return t1.text.localeCompare(t2.text);
     }
