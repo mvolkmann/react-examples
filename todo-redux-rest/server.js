@@ -38,7 +38,6 @@ MongoClient.connect('mongodb://127.0.0.1:27017/todos', (err, db) => {
   // Curl command to test:
   // curl -XGET http://localhost:8081/todos
   app.get('/todos', (req, res) => {
-    console.log('server.js get todos: entered');
     function todoComparator(t1, t2) {
       return t1.text.localeCompare(t2.text);
     }

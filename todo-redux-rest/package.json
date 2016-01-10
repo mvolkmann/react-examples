@@ -36,7 +36,6 @@
     "mongodb": "^2.1.2",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
-    "redux": "^3.0.5",
-    "whatwg-fetch": "^0.10.1"
+    "redux": "^3.0.5"
   }
 }
