@@ -27,6 +27,12 @@ class TodoApp extends React.Component {
     this.onToggleDone = this.onToggleDone.bind(this);
   }
 
+  componentWillUnmount() {
+    //TODO: Will this ever be called?
+    console.log('todo-app.js componentWillUnmount: unsubscribing');
+    store.unsubscribe();
+  }
+
   onAddTodo(event) {
     // Prevent form submission which refreshes page.
     event.preventDefault();
