@@ -92,4 +92,4 @@ class TodoList extends React.Component {
   }
 }
 
-ReactDOM.render(<TodoList/>, document.getElementById('container'));
+ReactDOM.render(<TodoList/>, document.getElementById('content'));

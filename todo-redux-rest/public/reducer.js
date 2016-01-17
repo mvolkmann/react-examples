@@ -2,11 +2,6 @@
 // referring to immutable objects begin with "i".
 import Immutable from 'immutable';
 
-// Need fromJS instead of Map here because the JS object
-// passed contains a property with an object value.
-const iInitialState = Immutable.fromJS(
-  {text: '', todos: {}});
-
 const reducers = {
   addTodo(iState, action) {
     const todo = action.payload;
@@ -17,10 +12,11 @@ const reducers = {
     /*
     return iState.
       set('text', '').
+      delete('error').
       setIn(['todos', todo._id], Immutable.fromJS(todo));
     */
-    return iState.withMutations(iS =>
-      iS.set('text', ''). // clears input
+    return iState.withMutations(state =>
+      state.set('text', ''). // clears input
         delete('error').
         setIn(['todos', todo._id], Immutable.fromJS(todo)));
   },
@@ -40,6 +36,7 @@ const reducers = {
   },
   setTodos(iState, action) {
     const todoArray = action.payload;
+
     // todos is an array of todo objects, but we need a map
     // where keys are ids and values are immutable todo objects
     const todoMap = todoArray.reduce(
@@ -48,6 +45,7 @@ const reducers = {
         return map;
       },
       {});
+
     // Unlike Immutable Map, OrderedMap iterates over values in
     // the order they were inserted.  This is important for maintaining
     // the order of todos after have some are deleted or archived.
@@ -68,6 +66,11 @@ const reducers = {
         done => !done);
   }
 };
+
+// Need fromJS instead of Map here because the JS object
+// passed contains a property with an object value.
+const iInitialState = Immutable.fromJS(
+  {text: '', todos: {}});
 
 function rootReducer(iState = iInitialState, action) {
   //console.log('reducer.js rootReducer: action =', action);

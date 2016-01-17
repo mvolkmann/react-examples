@@ -21,7 +21,7 @@ class TodoApp extends React.Component {
     super();
 
     // Prebind some event handling methods because this is
-    // more effcient than doing it in every call to the render method.
+    // more efficient than doing it in every call to render method.
     this.onArchiveCompleted = this.onArchiveCompleted.bind(this);
     this.onDeleteTodo = this.onDeleteTodo.bind(this);
     this.onToggleDone = this.onToggleDone.bind(this);
@@ -39,8 +39,7 @@ class TodoApp extends React.Component {
 
     const text = store.getState().get('text');
 
-    // Update server-side model.
-    //axios.post('/todos', text).
+    // Update database.
     axios.post('/todos', text, {headers: {'Content-Type': 'text/plain'}}).
       then(res => {
         const resourceUrl = res.data;
@@ -55,7 +54,7 @@ class TodoApp extends React.Component {
   }
 
   onArchiveCompleted() {
-    // Update server-side model.
+    // Update database.
     axios.post('/todos/archive').
       then(() => {
         // Update client-side model.
@@ -64,13 +63,8 @@ class TodoApp extends React.Component {
       catch(res => handleError('Error archiving todos', res));
   }
 
-  onChange(name, event) {
-    // Update client-side model.
-    store.dispatch({type: 'textChange', payload: {text: event.target.value}});
-  }
-
   onDeleteTodo(todoId) {
-    // Update server-side model.
+    // Update database.
     axios.delete('/todos/' + todoId).
       then(() => {
         // Update client-side model.
@@ -79,10 +73,17 @@ class TodoApp extends React.Component {
       catch(res => handleError('Error deleting todo', res));
   }
 
-  onToggleDone(todo) {
-    todo = todo.toJS();
-    // Update server-side model.
-    // The Fetch API doesn't support PATCH requests, but axios does!
+  onTextChange(event) {
+    // Update client-side model.
+    store.dispatch({
+      type: 'textChange',
+      payload: {text: event.target.value}
+    });
+  }
+
+  onToggleDone(iTodo) {
+    const todo = iTodo.toJS();
+    // Update database.
     axios.patch('/todos/' + todo._id, {done: !todo.done}).
       then(() => {
         // Update client-side model.
@@ -92,7 +93,7 @@ class TodoApp extends React.Component {
   }
 
   // This component needs to be rendered for every change,
-  // so there is no need to write a shouldComponentUpdate method.
+  // so no need for shouldComponentUpdate method.
   render() {
     console.log('todo-app.js render: entered');
     const iState = store.getState();
@@ -105,12 +106,12 @@ class TodoApp extends React.Component {
           onArchiveCompleted={this.onArchiveCompleted}/>
         <div className="error">{iState.get('error')}</div>
         <br/>
-        {/*TODO: Consider moving this form to a TodoEntry component.*/}
+        {/*TODO: Consider moving this form to a TodoEntry component. */}
         <form>
           <input type="text" size="30" autoFocus
             placeholder="enter new todo here"
             value={iState.get('text')}
-            onChange={e => this.onChange('todoText', e)}/>
+            onChange={e => this.onTextChange(e)}/>
           <button disabled={!iState.get('text')}
             onClick={event => this.onAddTodo(event)}>
             Add
@@ -126,7 +127,7 @@ class TodoApp extends React.Component {
 }
 
 function render() {
-  ReactDOM.render(<TodoApp/>, document.getElementById('container'));
+  ReactDOM.render(<TodoApp/>, document.getElementById('content'));
 }
 
 const store = createStore(rootReducer);
@@ -139,4 +140,4 @@ axios.get('todos').
     // This will trigger an event to which the store is subscribed
     // which will call the render function.
   }).
-  catch(res => console.error(res));
+  catch(res => handleError('Error getting todos', res));

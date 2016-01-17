@@ -10,7 +10,6 @@ class TodoList extends React.Component {
   render() {
     console.log('todo-list.js render: entered');
     const {iTodos, onDeleteTodo, onToggleDone} = this.props;
-
     return (
       <ul className="unstyled">
         {
