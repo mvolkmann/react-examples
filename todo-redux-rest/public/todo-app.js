@@ -105,7 +105,7 @@ class TodoApp extends React.Component {
           onArchiveCompleted={this.onArchiveCompleted}/>
         <div className="error">{iState.get('error')}</div>
         <br/>
-        {/*}TODO: Consider moving this form to a TodoEntry component.{*/}
+        {/*TODO: Consider moving this form to a TodoEntry component.*/}
         <form>
           <input type="text" size="30" autoFocus
             placeholder="enter new todo here"

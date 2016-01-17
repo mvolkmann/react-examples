@@ -7,8 +7,8 @@ import './demo.css';
 class App extends React.Component {
   render() {
     return <div>
-      {/*} Could have content here for common content on all pages. {*/}
-      {/*} renders matching child route component {*/}
+      {/* Could have content here for common content on all pages. */}
+      {/* renders matching child route component */}
       {this.props.children}
     </div>;
   }
