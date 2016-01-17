@@ -103,7 +103,7 @@ for (const size of groups.keys()) {
   }
 }
 
-const numbers = Immutable.Range(100, 199).
+numbers = Immutable.Range(100, 199).
   filter(n => n % 7 === 0);
 console.log(numbers);
 
