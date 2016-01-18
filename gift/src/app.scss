@@ -1,0 +1,48 @@
+$label-width: 110px;
+$input-width: 100px;
+$spacing: 10px;
+
+body {
+  background-color: linen;
+  font-family: sans-serif;
+  padding-left: $spacing;
+}
+
+.gift-delete-btn, .name-delete-btn, .text-entry-btn {
+  border-radius: 5px;
+  margin-left: $spacing;
+
+  &:disabled {
+    background-color: white;
+    //color: white; /* doesn't work on character entities */
+  }
+}
+
+div {
+  margin-bottom: $spacing;
+}
+
+.gift-delete-btn {
+  vertical-align: top;
+}
+
+.gift-list {
+  width: $label-width + $spacing + $input-width;
+}
+
+label {
+  display: inline-block; // defaults to inline, need for width
+  margin-right: $spacing;
+  text-align: right;
+  width: $label-width;
+}
+
+.name-select {
+  width: $input-width;
+}
+
+.text-entry {
+  // input elements have padding and thicker border than select,
+  // so adjust to make widths match.
+  width: $input-width - 6px;
+}
