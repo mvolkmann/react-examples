@@ -1,7 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import autobind from './bind';
 import GiftList from './gift-list';
 import NameSelect from './name-select';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import TextEntry from './text-entry';
 import './app.scss';
 
@@ -15,16 +16,16 @@ class GiftApp extends React.Component {
     };
 
     // Prebind the event handling methods.
-    this.onAddGift = this.onAddGift.bind(this);
-    this.onAddName = this.onAddName.bind(this);
+    autobind(this, 'on');
     this.onChangeGift = this.onChange.bind(this, 'gift');
     this.onChangeName = this.onChange.bind(this, 'name');
     this.onChangeSelectedGift = this.onChange.bind(this, 'selectedGift');
     this.onChangeSelectedName = this.onChange.bind(this, 'selectedName');
-    this.onDeleteGift = this.onDeleteGift.bind(this);
-    this.onDeleteName = this.onDeleteName.bind(this);
-    this.onSelectGift = this.onSelectGift.bind(this);
-    this.onSelectName = this.onSelectName.bind(this);
+  }
+
+  componentDidMount() {
+    // When app starts, move focus to the "New Name" input.
+    document.getElementById('newName').focus();
   }
 
   onAddGift() {
@@ -89,6 +90,9 @@ class GiftApp extends React.Component {
 
   onSelectName(event) {
     this.setState({selectedName: event.target.value});
+    // Move focus to gift input.
+    //TODO: This doesn't work here!
+    document.getElementById('newGift').focus();
   }
 
   render() {
@@ -100,7 +104,8 @@ class GiftApp extends React.Component {
       <div>
         <h2>Gift App</h2>
 
-        <TextEntry label="New Name"
+        <TextEntry id="newName"
+          label="New Name"
           value={state.name}
           onChange={this.onChangeName}
           onAdd={this.onAddName}/>
@@ -110,7 +115,8 @@ class GiftApp extends React.Component {
           onSelect={this.onSelectName}
           onDelete={this.onDeleteName}/>
 
-        <TextEntry label="New Gift"
+        <TextEntry
+          label="New Gift"
           value={state.gift}
           onChange={this.onChangeGift}
           onAdd={this.onAddGift}/>
