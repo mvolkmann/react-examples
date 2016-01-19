@@ -11,6 +11,7 @@ class GiftApp extends React.Component {
     super(); // must call this before accessing "this"
 
     this.state = {
+      focusId: 'nameInput',
       gifts: {},
       names: []
     };
@@ -24,8 +25,16 @@ class GiftApp extends React.Component {
   }
 
   componentDidMount() {
-    // When app starts, move focus to the "New Name" input.
-    document.getElementById('newName').focus();
+    this.focus();
+  }
+
+  componentDidUpdate() {
+    this.focus();
+  }
+
+  focus() {
+    const focusId = this.state.focusId;
+    if (focusId) document.getElementById(focusId).focus();
   }
 
   onAddGift() {
@@ -47,6 +56,7 @@ class GiftApp extends React.Component {
     if (names.includes(name)) return;
 
     this.setState({
+      focusId: 'giftInput',
       name: '',
       names: names.concat(name).sort(),
       selectedName: name
@@ -54,7 +64,10 @@ class GiftApp extends React.Component {
   }
 
   onChange(name, event) {
-    this.setState({[name]: event.target.value});
+    this.setState({
+      focusId: name + 'Input',
+      [name]: event.target.value
+    });
   }
 
   onDeleteGift() {
@@ -89,40 +102,40 @@ class GiftApp extends React.Component {
   }
 
   onSelectName(event) {
-    this.setState({selectedName: event.target.value});
-    // Move focus to gift input.
-    //TODO: This doesn't work here!
-    document.getElementById('newGift').focus();
+    this.setState({
+      focusId: 'giftInput',
+      selectedName: event.target.value
+    });
   }
 
   render() {
-    const state = this.state;
-    const selectedName = state.selectedName;
-    const giftsForName = state.gifts[selectedName] || [];
+    // This is rendered every time, but subcomponents are not.
+    const {gift, gifts, name, names, selectedGift, selectedName} = this.state;
+    const giftsForName = gifts[selectedName] || [];
 
     return (
       <div>
         <h2>Gift App</h2>
 
-        <TextEntry id="newName"
+        <TextEntry id="nameInput"
           label="New Name"
-          value={state.name}
+          value={name}
           onChange={this.onChangeName}
           onAdd={this.onAddName}/>
 
-        <NameSelect names={state.names}
+        <NameSelect names={names}
           selectedName={selectedName}
           onSelect={this.onSelectName}
           onDelete={this.onDeleteName}/>
 
-        <TextEntry
+        <TextEntry id="giftInput"
           label="New Gift"
-          value={state.gift}
+          value={gift}
           onChange={this.onChangeGift}
           onAdd={this.onAddGift}/>
 
         <GiftList gifts={giftsForName}
-          selectedGift={state.selectedGift}
+          selectedGift={selectedGift}
           onSelect={this.onSelectGift}
           onDelete={this.onDeleteGift}/>
       </div>

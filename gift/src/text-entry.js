@@ -14,8 +14,8 @@ class TextEntry extends React.Component {
   }
 
   render() {
-    console.log('text-entry.js render: entered');
     const {id, label, onChange, onAdd, value} = this.props;
+    console.log('text-entry.js render: label =', label);
     const onKeyDown = callIfReturnKey.bind(null, onAdd);
 
     // &#x2795; is Unicode "heavy plus sign".
