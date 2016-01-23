@@ -16,9 +16,12 @@ class GiftApp extends React.Component {
 
     this.state = {
       focusId: 'nameInput',
+      gift: '',
       gifts: {},
+      name: '',
       names: []
     };
+    this.stateStack = [this.state];
 
     autobind(this, 'on');
 
@@ -50,7 +53,7 @@ class GiftApp extends React.Component {
     const newGiftsForName = giftsForName.concat(gift).sort();
     const newGifts =
       Object.assign({}, gifts, {[selectedName]: newGiftsForName});
-    this.setState({
+    this.pushState({
       gift: '',
       gifts: newGifts
     });
@@ -60,7 +63,7 @@ class GiftApp extends React.Component {
     const {name, names} = this.state;
     if (names.includes(name)) return;
 
-    this.setState({
+    this.pushState({
       focusId: 'giftInput',
       name: '',
       names: names.concat(name).sort(),
@@ -69,6 +72,7 @@ class GiftApp extends React.Component {
   }
 
   onChange(name, event) {
+    // Don't want this on stateStack.
     this.setState({
       focusId: name + 'Input',
       [name]: event.target.value
@@ -76,10 +80,12 @@ class GiftApp extends React.Component {
   }
 
   onCloseModal() {
+    // Don't want this on stateStack.
     this.setState({confirmDelete: false});
   }
 
   onConfirmDeleteName() {
+    // Don't want this on stateStack.
     this.setState({confirmDelete: true});
   }
 
@@ -89,7 +95,7 @@ class GiftApp extends React.Component {
     const newGiftsForName = giftsForName.filter(g => g !== selectedGift);
     const newGifts =
       Object.assign({}, gifts, {[selectedName]: newGiftsForName});
-    this.setState({
+    this.pushState({
       gifts: newGifts,
       selectedGift: newGiftsForName.length ? newGiftsForName[0] : null
     });
@@ -103,7 +109,7 @@ class GiftApp extends React.Component {
     const newGifts = Object.assign({}, gifts);
     delete newGifts[selectedName];
 
-    this.setState({
+    this.pushState({
       confirmDelete: false,
       names: newNames,
       gifts: newGifts,
@@ -112,14 +118,25 @@ class GiftApp extends React.Component {
   }
 
   onSelectGift(event) {
-    this.setState({selectedGift: event.target.value});
+    this.pushState({selectedGift: event.target.value});
   }
 
   onSelectName(event) {
-    this.setState({
+    this.pushState({
       focusId: 'giftInput',
       selectedName: event.target.value
     });
+  }
+
+  onUndo() {
+    const stack = this.stateStack;
+    stack.pop();
+    const prevState = stack[stack.length - 1];
+    this.setState(prevState);
+  }
+
+  pushState(stateMods) {
+    this.setState(stateMods, () => this.stateStack.push(this.state));
   }
 
   render() {
@@ -168,6 +185,10 @@ class GiftApp extends React.Component {
           selectedGift={selectedGift}
           onSelect={this.onSelectGift}
           onDelete={this.onDeleteGift}/>
+
+        <Button classNames="btn btn-default"
+          disabled={this.stateStack.length < 2}
+          onClick={this.onUndo}>Undo</Button>
       </div>
     );
   }
