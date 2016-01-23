@@ -1,14 +1,14 @@
 import React from 'react'; //eslint-disable-line
 
 class TodoHeader extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    return this.props.iTodo !== nextProps.iTodo;
-  }
-
   getUncompletedCount(todos) {
     return todos.reduce(
       (count, todo) => todo.get('done') ? count : count + 1,
       0);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.iTodos !== nextProps.iTodos;
   }
 
   render() {
