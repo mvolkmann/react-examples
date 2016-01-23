@@ -23,7 +23,6 @@
     "webpack-dev-server": "^1.14"
   },
   "dependencies": {
-    "lodash": "^4.0.0",
     "react": "^0.14",
     "react-dom": "^0.14"
   }
