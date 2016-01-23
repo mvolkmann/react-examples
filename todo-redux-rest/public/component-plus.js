@@ -1,13 +1,36 @@
-//import autobind from './bind.js';
+import Immutable from 'immutable';
 import React from 'react'; //eslint-disable-line
-const shallowCompare = require('react-addons-shallow-compare');
+import _ from 'lodash';
+
+/**
+  * Perform a deep equality check,
+  * including handling Immutable objects.
+  */
+function deepEqual(obj, nextObj) {
+  if (obj === nextObj) return true;
+  if (obj === null || nextObj === null) return false;
+  if (obj === undefined || nextObj === undefined) return false;
+
+  if (obj instanceof Immutable.Iterable &&
+    nextObj instanceof Immutable.Iterable) {
+    return Immutable.is(obj, nextObj);
+  }
+
+  if (typeof obj === 'object' &&
+      typeof nextObj === 'object') {
+    const keys = Object.keys(obj);
+    const nextKeys = Object.keys(nextObj);
+    if (!_.isEqual(keys, nextKeys)) return false;
+    return keys.every(key => deepEqual(obj[key], nextObj[key]));
+  }
+
+  return false;
+}
 
 /**
  * This is a React.Component superclass that adds
  * autobinding of all methods whose names begin with "on"
- * and an implementation of shouldComponentUpdate
- * that uses shallow compare from react-addons-shallow-compare.
- * See https://facebook.github.io/react/docs/shallow-compare.html.
+ * and a generic implementation of shouldComponentUpdate.
  *
  * To use this, write components that extend from
  * ComponentPlus instead of React.Component.
@@ -33,7 +56,8 @@ class ComponentPlus extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return shallowCompare(this, nextProps, nextState);
+    return !deepEqual(this.props, nextProps) ||
+      !deepEqual(this.state, nextState);
   }
 }
 

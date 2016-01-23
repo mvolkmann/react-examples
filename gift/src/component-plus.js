@@ -4,9 +4,7 @@ import _ from 'lodash';
 /**
  * This is a React.Component superclass that adds
  * autobinding of all methods whose names begin with "on"
- * and an implementation of shouldComponentUpdate
- * that uses shallow compare from react-addons-shallow-compare.
- * See https://facebook.github.io/react/docs/shallow-compare.html.
+ * and a generic implementation of shouldComponentUpdate.
  *
  * To use this, write components that extend from
  * ComponentPlus instead of React.Component.
@@ -31,11 +29,11 @@ class ComponentPlus extends React.Component {
     }
   }
 
+  // This implements will not work with Immutable objects.
+  // See the version in todo-redux-rest for that.
   shouldComponentUpdate(nextProps, nextState) {
-    function diff(obj, nextObj) {
-      return !_.isEqual(obj, nextObj);
-    }
-    return diff(this.props, nextProps) || diff(this.state, nextState);
+    return !_.isEqual(this.props, nextProps) ||
+      !_.isEqual(this.state, nextState);
   }
 }
 
