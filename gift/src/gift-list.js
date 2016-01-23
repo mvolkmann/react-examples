@@ -1,7 +1,11 @@
-import ComponentPlus from './component-plus.js';
+import deepEqual from './deep-equal';
 import React from 'react'; //eslint-disable-line
 
-class GiftList extends ComponentPlus {
+class GiftList extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return !deepEqual(this.props, nextProps);
+  }
+
   render() {
     console.log('gift-list.js render: entered');
     const {gifts, selectedGift, onSelect, onDelete} = this.props;

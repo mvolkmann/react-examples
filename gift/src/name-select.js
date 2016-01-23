@@ -1,8 +1,11 @@
-import ComponentPlus from './component-plus.js';
+import deepEqual from './deep-equal';
 import React from 'react'; //eslint-disable-line
-//import _ from 'lodash';
 
-class NameSelect extends ComponentPlus {
+class NameSelect extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return !deepEqual(this.props, nextProps);
+  }
+
   render() {
     console.log('name-select.js render: entered');
     const {names, selectedName, onSelect, onDelete} = this.props;

@@ -1,4 +1,4 @@
-import ComponentPlus from './component-plus.js';
+import deepEqual from './deep-equal';
 import React from 'react'; //eslint-disable-line
 
 function callIfReturnKey(fn, event) {
@@ -9,7 +9,11 @@ function callIfReturnKey(fn, event) {
   if (isReturnKey) fn();
 }
 
-class TextEntry extends ComponentPlus {
+class TextEntry extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return !deepEqual(this.props, nextProps);
+  }
+
   render() {
     const {id, label, onChange, onAdd, value} = this.props;
     console.log('text-entry.js render: label =', label);
