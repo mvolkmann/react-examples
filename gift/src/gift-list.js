@@ -22,7 +22,8 @@ class GiftList extends React.Component {
       </select>
       <button className="btn btn-default gift-delete-btn"
         disabled={!selectedGift}
-        onClick={onDelete}>&#x2796;</button>
+        onClick={onDelete}
+        tabIndex="-1">&#x2796;</button>
     </div>;
   }
 }

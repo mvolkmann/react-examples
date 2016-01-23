@@ -1,13 +1,14 @@
 import autobind from './autobind';
 import GiftList from './gift-list';
-import {Button, Modal} from 'react-bootstrap';
 import NameSelect from './name-select';
 import React from 'react'; //eslint-disable-line
+import {Button, Modal} from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import TextEntry from './text-entry';
 
-require('bootstrap-loader');
-require('./app.scss');
+// Styling
+import 'bootstrap-loader';
+import './app.scss';
 
 class GiftApp extends React.Component {
   constructor() {

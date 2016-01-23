@@ -20,7 +20,8 @@ class NameSelect extends React.Component {
       </select>
       <button className="btn btn-default name-delete-btn"
         disabled={!selectedName}
-        onClick={onDelete}>&#x2796;</button>
+        onClick={onDelete}
+        tabIndex="-1">&#x2796;</button>
     </div>;
   }
 }

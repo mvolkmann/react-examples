@@ -29,7 +29,8 @@ class TextEntry extends React.Component {
         onKeyDown={onKeyDown}/>
       <button className="btn btn-default text-entry-btn"
         disabled={!value}
-        onClick={onAdd}>&#x2795;</button>
+        onClick={onAdd}
+        tabIndex="-1">&#x2795;</button>
     </div>;
   }
 }
