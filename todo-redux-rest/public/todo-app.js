@@ -1,7 +1,8 @@
 // These files use the convention that variables
 // referring to immutable objects begin with "i".
 const axios = require('axios');
-import React from 'react';
+import ComponentPlus from './component-plus.js';
+import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
 import rootReducer from './reducer';
 import {createStore} from 'redux';
@@ -16,19 +17,9 @@ function handleError(msg, res) {
   });
 }
 
-class TodoApp extends React.Component {
-  constructor() {
-    super();
-
-    // Prebind some event handling methods because this is
-    // more efficient than doing it in every call to render method.
-    this.onArchiveCompleted = this.onArchiveCompleted.bind(this);
-    this.onDeleteTodo = this.onDeleteTodo.bind(this);
-    this.onToggleDone = this.onToggleDone.bind(this);
-  }
-
+class TodoApp extends ComponentPlus {
   componentWillUnmount() {
-    //TODO: Will this ever be called?
+    //TODO: This will probably never be called, and so isn't needed.
     console.log('todo-app.js componentWillUnmount: unsubscribing');
     store.unsubscribe();
   }
@@ -126,8 +117,17 @@ class TodoApp extends React.Component {
   }
 }
 
+let topComponent;
 function render() {
-  ReactDOM.render(<TodoApp/>, document.getElementById('content'));
+  if (topComponent) {
+    // We want to re-render the top component
+    // regardless of what shouldComponentUpdate returns
+    // because every change to the store requires a re-render.
+    topComponent.forceUpdate();
+  } else {
+    topComponent =
+      ReactDOM.render(<TodoApp/>, document.getElementById('content'));
+  }
 }
 
 const store = createStore(rootReducer);

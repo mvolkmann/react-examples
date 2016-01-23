@@ -1,15 +1,11 @@
+import ComponentPlus from './component-plus.js';
 import React from 'react'; //eslint-disable-line
 
-class TodoHeader extends React.Component {
+class TodoHeader extends ComponentPlus {
   getUncompletedCount(todos) {
     return todos.reduce(
       (count, todo) => todo.get('done') ? count : count + 1,
       0);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    // This test is easy because iTodo is an Immutable object!
-    return nextProps.iTodos !== this.props.iTodos;
   }
 
   render() {

@@ -1,11 +1,7 @@
+import ComponentPlus from './component-plus.js';
 import React from 'react'; //eslint-disable-line
 
-class Todo extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    // This test is easy because iTodo is an Immutable object!
-    return nextProps.iTodo !== this.props.iTodo;
-  }
-
+class Todo extends ComponentPlus {
   render() {
     console.log('todo.js render: entered');
     const {iTodo, onDeleteTodo, onToggleDone} = this.props;

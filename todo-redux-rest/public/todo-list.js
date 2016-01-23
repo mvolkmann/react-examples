@@ -1,12 +1,8 @@
+import ComponentPlus from './component-plus.js';
 import React from 'react';
 import Todo from './todo';
 
-class TodoList extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    // This test is easy because iTodos is an Immutable object!
-    return nextProps.iTodos !== this.props.iTodos;
-  }
-
+class TodoList extends ComponentPlus {
   render() {
     console.log('todo-list.js render: entered');
     const {iTodos, onDeleteTodo, onToggleDone} = this.props;

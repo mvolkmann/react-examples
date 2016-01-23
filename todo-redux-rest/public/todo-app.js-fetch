@@ -5,13 +5,14 @@
 
 // These files use the convention that variables
 // referring to immutable objects begin with "i".
-import 'whatwg-fetch';
+import ComponentPlus from './component-plus.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import rootReducer from './reducer';
 import {createStore} from 'redux';
 import TodoHeader from './todo-header';
 import TodoList from './todo-list';
+import 'whatwg-fetch';
 import './todo.css';
 
 function handleError(msg, res) {
@@ -21,17 +22,7 @@ function handleError(msg, res) {
   });
 }
 
-class TodoApp extends React.Component {
-  constructor() {
-    super();
-
-    // Prebind some event handling methods because this is
-    // more efficient than doing it in every call to render method.
-    this.onArchiveCompleted = this.onArchiveCompleted.bind(this);
-    this.onDeleteTodo = this.onDeleteTodo.bind(this);
-    this.onToggleDone = this.onToggleDone.bind(this);
-  }
-
+class TodoApp extends ComponentPlus {
   onAddTodo(event) {
     // Prevent form submission which refreshes page.
     event.preventDefault();
@@ -136,8 +127,17 @@ class TodoApp extends React.Component {
   }
 }
 
+let topComponent;
 function render() {
-  ReactDOM.render(<TodoApp/>, document.getElementById('container'));
+  if (topComponent) {
+    // We want to re-render the top component
+    // regardless of what shouldComponentUpdate returns
+    // because every change to the store requires a re-render.
+    topComponent.forceUpdate();
+  } else {
+    topComponent =
+      ReactDOM.render(<TodoApp/>, document.getElementById('content'));
+  }
 }
 
 const store = createStore(rootReducer);
