@@ -1,10 +1,13 @@
 import autobind from './autobind';
 import GiftList from './gift-list';
+import {Button, Modal} from 'react-bootstrap';
 import NameSelect from './name-select';
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
 import TextEntry from './text-entry';
-import './app.scss';
+
+require('bootstrap-loader');
+require('./app.scss');
 
 class GiftApp extends React.Component {
   constructor() {
@@ -71,6 +74,14 @@ class GiftApp extends React.Component {
     });
   }
 
+  onCloseModal() {
+    this.setState({confirmDelete: false});
+  }
+
+  onConfirmDeleteName() {
+    this.setState({confirmDelete: true});
+  }
+
   onDeleteGift() {
     const {gifts, selectedGift, selectedName} = this.state;
     const giftsForName = gifts[selectedName];
@@ -92,6 +103,7 @@ class GiftApp extends React.Component {
     delete newGifts[selectedName];
 
     this.setState({
+      confirmDelete: false,
       names: newNames,
       gifts: newGifts,
       selectedName: newNames.length ? newNames[0] : null
@@ -115,7 +127,23 @@ class GiftApp extends React.Component {
     const giftsForName = gifts[selectedName] || [];
 
     return (
-      <div>
+      <div className="form-inline">
+        <Modal bsSize="small"
+          show={this.state.confirmDelete}
+          onHide={this.onCloseModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Confirm Delete</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Are you sure you want to delete {selectedName} and
+            his/her {giftsForName.length} gift ideas?
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.onCloseModal}>Cancel</Button>
+            <Button onClick={this.onDeleteName}>OK</Button>
+          </Modal.Footer>
+        </Modal>
+
         <h2>Gift App</h2>
 
         <TextEntry id="nameInput"
@@ -127,7 +155,7 @@ class GiftApp extends React.Component {
         <NameSelect names={names}
           selectedName={selectedName}
           onSelect={this.onSelectName}
-          onDelete={this.onDeleteName}/>
+          onDelete={this.onConfirmDeleteName}/>
 
         <TextEntry id="giftInput"
           label="New Gift"

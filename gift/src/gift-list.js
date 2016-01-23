@@ -14,13 +14,13 @@ class GiftList extends React.Component {
 
     // &#x2796; is Unicode "heavy minus sign".
     return <div>
-      <select className="gift-list"
+      <select className="form-control gift-list"
         size="5"
         value={selectedGift}
         onChange={onSelect}>
         {options}
       </select>
-      <button className="gift-delete-btn"
+      <button className="btn btn-default gift-delete-btn"
         disabled={!selectedGift}
         onClick={onDelete}>&#x2796;</button>
     </div>;

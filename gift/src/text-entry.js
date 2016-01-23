@@ -22,12 +22,12 @@ class TextEntry extends React.Component {
     // &#x2795; is Unicode "heavy plus sign".
     return <div>
       <label>{label}</label>
-      <input className="text-entry" type="text"
+      <input className="form-control text-entry" type="text"
         id={id}
         value={value}
         onChange={onChange}
         onKeyDown={onKeyDown}/>
-      <button className="text-entry-btn"
+      <button className="btn btn-default text-entry-btn"
         disabled={!value}
         onClick={onAdd}>&#x2795;</button>
     </div>;

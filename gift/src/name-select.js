@@ -13,12 +13,12 @@ class NameSelect extends React.Component {
     // &#x2796; is Unicode "heavy minus sign".
     return <div>
       <label>Selected Name</label>
-      <select className="name-select"
+      <select className="form-control name-select"
         value={selectedName}
         onChange={onSelect}>
         {options}
       </select>
-      <button className="name-delete-btn"
+      <button className="btn btn-default name-delete-btn"
         disabled={!selectedName}
         onClick={onDelete}>&#x2796;</button>
     </div>;
