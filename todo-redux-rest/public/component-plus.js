@@ -9,7 +9,6 @@ import _ from 'lodash';
 function deepEqual(obj, nextObj) {
   if (obj === nextObj) return true;
   if (obj === null || nextObj === null) return false;
-  if (obj === undefined || nextObj === undefined) return false;
 
   if (obj instanceof Immutable.Iterable &&
     nextObj instanceof Immutable.Iterable) {
