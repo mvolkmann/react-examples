@@ -1,7 +1,7 @@
 // These files use the convention that variables
 // referring to immutable objects begin with "i".
+import autobind from './autobind.js';
 const axios = require('axios');
-import ComponentPlus from './component-plus.js';
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
 import rootReducer from './reducer';
@@ -17,7 +17,16 @@ function handleError(msg, res) {
   });
 }
 
-class TodoApp extends ComponentPlus {
+class TodoApp extends React.Component {
+  constructor() {
+    super();
+    autobind(this, 'on');
+  }
+
+  shouldComponentUpdate() {
+    return true; // always re-render this
+  }
+
   componentWillUnmount() {
     //TODO: This will probably never be called, and so isn't needed.
     console.log('todo-app.js componentWillUnmount: unsubscribing');
@@ -117,17 +126,8 @@ class TodoApp extends ComponentPlus {
   }
 }
 
-let topComponent;
 function render() {
-  if (topComponent) {
-    // We want to re-render the top component
-    // regardless of what shouldComponentUpdate returns
-    // because every change to the store requires a re-render.
-    topComponent.forceUpdate();
-  } else {
-    topComponent =
-      ReactDOM.render(<TodoApp/>, document.getElementById('content'));
-  }
+  ReactDOM.render(<TodoApp/>, document.getElementById('content'));
 }
 
 const store = createStore(rootReducer);

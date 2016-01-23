@@ -33,7 +33,6 @@
     "body-parser": "^1.14.2",
     "express": "^4",
     "immutable": "^3",
-    "lodash": "^4",
     "mongodb": "^2",
     "react": "^0.14",
     "react-dom": "^0.14",

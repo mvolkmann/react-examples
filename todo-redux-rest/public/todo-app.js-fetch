@@ -5,7 +5,8 @@
 
 // These files use the convention that variables
 // referring to immutable objects begin with "i".
-import ComponentPlus from './component-plus.js';
+
+import autobind from './autobind.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import rootReducer from './reducer';
@@ -22,7 +23,16 @@ function handleError(msg, res) {
   });
 }
 
-class TodoApp extends ComponentPlus {
+class TodoApp extends React.Component {
+  constructor() {
+    super();
+    autobind(this, 'on');
+  }
+
+  shouldComponentUpdate() {
+    return true;
+  }
+
   onAddTodo(event) {
     // Prevent form submission which refreshes page.
     event.preventDefault();
@@ -127,17 +137,8 @@ class TodoApp extends ComponentPlus {
   }
 }
 
-let topComponent;
 function render() {
-  if (topComponent) {
-    // We want to re-render the top component
-    // regardless of what shouldComponentUpdate returns
-    // because every change to the store requires a re-render.
-    topComponent.forceUpdate();
-  } else {
-    topComponent =
-      ReactDOM.render(<TodoApp/>, document.getElementById('content'));
-  }
+  ReactDOM.render(<TodoApp/>, document.getElementById('content'));
 }
 
 const store = createStore(rootReducer);

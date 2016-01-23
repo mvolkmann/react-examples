@@ -1,7 +1,10 @@
-import ComponentPlus from './component-plus.js';
 import React from 'react'; //eslint-disable-line
 
-class TodoHeader extends ComponentPlus {
+class TodoHeader extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return this.props.iTodo !== nextProps.iTodo;
+  }
+
   getUncompletedCount(todos) {
     return todos.reduce(
       (count, todo) => todo.get('done') ? count : count + 1,
