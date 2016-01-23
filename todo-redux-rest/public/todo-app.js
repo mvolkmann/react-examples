@@ -1,6 +1,6 @@
 // These files use the convention that variables
 // referring to immutable objects begin with "i".
-import autobind from './autobind.js';
+import autobind from './autobind';
 const axios = require('axios');
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
