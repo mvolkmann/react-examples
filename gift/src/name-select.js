@@ -1,14 +1,8 @@
+import ComponentPlus from './component-plus.js';
 import React from 'react'; //eslint-disable-line
-import _ from 'lodash';
+//import _ from 'lodash';
 
-class NameSelect extends React.Component {
-
-  shouldComponentUpdate(nextProps) {
-    const {names, selectedName} = this.props;
-    return !_.isEqual(names, nextProps.names) ||
-      selectedName !== nextProps.selectedName;
-  }
-
+class NameSelect extends ComponentPlus {
   render() {
     console.log('name-select.js render: entered');
     const {names, selectedName, onSelect, onDelete} = this.props;

@@ -1,12 +1,12 @@
-import autobind from './bind';
+import ComponentPlus from './component-plus.js';
 import GiftList from './gift-list';
 import NameSelect from './name-select';
-import React from 'react';
+import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
 import TextEntry from './text-entry';
 import './app.scss';
 
-class GiftApp extends React.Component {
+class GiftApp extends ComponentPlus {
   constructor() {
     super(); // must call this before accessing "this"
 
@@ -16,8 +16,7 @@ class GiftApp extends React.Component {
       names: []
     };
 
-    // Prebind the event handling methods.
-    autobind(this, 'on');
+    // Prebind event handling methods that need an argument.
     this.onChangeGift = this.onChange.bind(this, 'gift');
     this.onChangeName = this.onChange.bind(this, 'name');
     this.onChangeSelectedGift = this.onChange.bind(this, 'selectedGift');

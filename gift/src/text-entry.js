@@ -1,3 +1,4 @@
+import ComponentPlus from './component-plus.js';
 import React from 'react'; //eslint-disable-line
 
 function callIfReturnKey(fn, event) {
@@ -8,11 +9,7 @@ function callIfReturnKey(fn, event) {
   if (isReturnKey) fn();
 }
 
-class TextEntry extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    return this.props.value !== nextProps.value;
-  }
-
+class TextEntry extends ComponentPlus {
   render() {
     const {id, label, onChange, onAdd, value} = this.props;
     console.log('text-entry.js render: label =', label);

@@ -1,14 +1,7 @@
+import ComponentPlus from './component-plus.js';
 import React from 'react'; //eslint-disable-line
-import _ from 'lodash';
 
-class GiftList extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    const {gifts, selectedGift} = this.props;
-    // lodahs isEqual method performs a deep comparison of objects.
-    return !_.isEqual(gifts, nextProps.gifts) ||
-      selectedGift !== nextProps.selectedGift;
-  }
-
+class GiftList extends ComponentPlus {
   render() {
     console.log('gift-list.js render: entered');
     const {gifts, selectedGift, onSelect, onDelete} = this.props;
