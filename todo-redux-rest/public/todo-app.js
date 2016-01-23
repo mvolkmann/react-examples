@@ -111,9 +111,9 @@ class TodoApp extends React.Component {
           <input type="text" size="30" autoFocus
             placeholder="enter new todo here"
             value={iState.get('text')}
-            onChange={e => this.onTextChange(e)}/>
+            onChange={this.onTextChange}/>
           <button disabled={!iState.get('text')}
-            onClick={event => this.onAddTodo(event)}>
+            onClick={this.onAddTodo}>
             Add
           </button>
         </form>
