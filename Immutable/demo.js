@@ -117,7 +117,7 @@ console.log('slice result', seq);
 const result =
   Immutable.Range(1, Infinity). // all positive integers
   filter(n => n % 7 === 0). // all numbers divisible by 7
-  take(3). // just first three - 7, 14, 21
-  map(n => n * 2). // double them - 14, 28, 42
-  reduce((sum, n) => sum + n); // sum them - 84
+  take(3). // just first three: 7, 14, 21
+  map(n => n * 2). // double them: 14, 28, 42
+  reduce((sum, n) => sum + n); // sum them: 84
 console.log('result =', result);

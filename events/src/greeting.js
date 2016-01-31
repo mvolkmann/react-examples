@@ -4,6 +4,7 @@ class Greeting extends React.Component {
   constructor(props) {
     super(props);
     this.state = {name: 'World'}; // initial state
+    this.setName = this.setName.bind(this); // pre-bind
   }
 
   setName(event) {
@@ -16,8 +17,7 @@ class Greeting extends React.Component {
         <div>
           <label>Name: </label>
           <input type="text" value={this.state.name}
-            onChange={e => this.setName(e)}/>
-            {/*onChange={this.setName.bind(this)}/>*/}
+            onChange={this.setName}/>
         </div>
         <div>
           {this.props.greet}, {this.state.name}!
