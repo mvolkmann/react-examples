@@ -6,6 +6,15 @@ import rootReducer from './reducer';
 import './todo.css';
 
 class TodoList extends React.Component {
+  constructor() {
+    super(); // must call this before accessing "this"
+
+    // Pre-bind event handling methods.
+    this.onArchiveCompleted = this.onArchiveCompleted.bind(this);
+    this.onAddTodo = this.onAddTodo.bind(this);
+    this.onTextChange = this.onTextChange.bind(this);
+  }
+
   getUncompletedCount(todos) {
     return todos.reduce(
       (count, todo) => todo.done ? count : count + 1,
@@ -22,7 +31,7 @@ class TodoList extends React.Component {
     store.dispatch({type: 'archiveCompleted'});
   }
 
-  onChange(name, event) {
+  onTextChange(event) {
     store.dispatch({type: 'textChange', payload: {text: event.target.value}});
   }
 
@@ -52,7 +61,7 @@ class TodoList extends React.Component {
         <h2>To Do List</h2>
         <div>
           {this.getUncompletedCount(todos)} of {todos.size} remaining
-          <button onClick={() => this.onArchiveCompleted()}>
+          <button onClick={this.onArchiveCompleted}>
             Archive Completed
           </button>
         </div>
@@ -61,9 +70,9 @@ class TodoList extends React.Component {
           <input type="text" size="30" autoFocus
             placeholder="enter new todo here"
             value={state.get('text')}
-            onChange={e => this.onChange('todoText', e)}/>
+            onChange={this.onTextChange}/>
           <button disabled={!state.get('text')}
-            onClick={event => this.onAddTodo(event)}>
+            onClick={this.onAddTodo}>
             Add
           </button>
         </form>
