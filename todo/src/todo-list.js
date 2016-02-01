@@ -15,6 +15,11 @@ class TodoList extends React.Component {
         TodoList.createTodo('build a React app')
       ]
     };
+
+    // Pre-bind event handling methods.
+    this.onArchiveCompleted = this.onArchiveCompleted.bind(this);
+    this.onAddTodo = this.onAddTodo.bind(this);
+    this.onTextChange = this.onTextChange.bind(this);
   }
 
   static createTodo(text, done = false) {
@@ -41,14 +46,14 @@ class TodoList extends React.Component {
     });
   }
 
-  onChange(name, event) {
-    this.setState({[name]: event.target.value});
-  }
-
   onDeleteTodo(todoId) {
     this.setState({
       todos: this.state.todos.filter(t => t.id !== todoId)
     });
+  }
+
+  onTextChange(event) {
+    this.setState({todoText: event.target.value});
   }
 
   onToggleDone(todo) {
@@ -71,7 +76,7 @@ class TodoList extends React.Component {
         <h2>To Do List</h2>
         <div>
           {this.uncompletedCount} of {this.state.todos.length} remaining
-          <button onClick={() => this.onArchiveCompleted()}>
+          <button onClick={this.onArchiveCompleted}>
             Archive Completed
           </button>
         </div>
@@ -80,9 +85,9 @@ class TodoList extends React.Component {
           <input type="text" size="30" autoFocus
             placeholder="enter new todo here"
             value={this.state.todoText}
-            onChange={e => this.onChange('todoText', e)}/>
+            onChange={this.onTextChange}/>
           <button disabled={!this.state.todoText}
-            onClick={() => this.onAddTodo()}>
+            onClick={this.onAddTodo}>
             Add
           </button>
         </form>
