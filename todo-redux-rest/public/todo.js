@@ -1,9 +1,11 @@
 import React from 'react'; //eslint-disable-line
 
 class Todo extends React.Component {
+  /*
   shouldComponentUpdate(nextProps) {
     return this.props.iTodo !== nextProps.iTodo;
   }
+  */
 
   render() {
     console.log('todo.js render: entered');

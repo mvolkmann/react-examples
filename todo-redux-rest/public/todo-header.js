@@ -7,9 +7,11 @@ class TodoHeader extends React.Component {
       0);
   }
 
+  /*
   shouldComponentUpdate(nextProps) {
     return this.props.iTodos !== nextProps.iTodos;
   }
+  */
 
   render() {
     console.log('todo-header.js render: entered');

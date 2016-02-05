@@ -2,9 +2,11 @@ import React from 'react';
 import Todo from './todo';
 
 class TodoList extends React.Component {
+  /*
   shouldComponentUpdate(nextProps) {
     return this.props.iTodos !== nextProps.iTodos;
   }
+  */
 
   render() {
     console.log('todo-list.js render: entered');

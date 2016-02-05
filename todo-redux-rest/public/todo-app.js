@@ -6,9 +6,12 @@ import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
 import rootReducer from './reducer';
 import {createStore} from 'redux';
+import Perf from 'react-addons-perf';
 import TodoHeader from './todo-header';
 import TodoList from './todo-list';
 import './todo.css';
+
+//console.log('todo-app.js x: Perf =', Perf);
 
 function handleError(msg, res) {
   store.dispatch({
@@ -23,9 +26,11 @@ class TodoApp extends React.Component {
     autobind(this, 'on');
   }
 
+  /*
   shouldComponentUpdate() {
     return true; // always re-render this
   }
+  */
 
   componentWillUnmount() {
     //TODO: This will probably never be called, and so isn't needed.
@@ -34,6 +39,8 @@ class TodoApp extends React.Component {
   }
 
   onAddTodo(event) {
+    Perf.start();
+
     // Prevent form submission which refreshes page.
     event.preventDefault();
 
@@ -54,6 +61,8 @@ class TodoApp extends React.Component {
   }
 
   onArchiveCompleted() {
+    Perf.start();
+
     // Update database.
     axios.post('/todos/archive').
       then(() => {
@@ -64,6 +73,8 @@ class TodoApp extends React.Component {
   }
 
   onDeleteTodo(todoId) {
+    Perf.start();
+
     // Update database.
     axios.delete('/todos/' + todoId).
       then(() => {
@@ -74,6 +85,8 @@ class TodoApp extends React.Component {
   }
 
   onTextChange(event) {
+    Perf.start();
+
     // Update client-side model.
     store.dispatch({
       type: 'textChange',
@@ -82,6 +95,8 @@ class TodoApp extends React.Component {
   }
 
   onToggleDone(iTodo) {
+    Perf.start();
+
     const todo = iTodo.toJS();
     // Update database.
     axios.patch('/todos/' + todo._id, {done: !todo.done}).
@@ -126,8 +141,25 @@ class TodoApp extends React.Component {
   }
 }
 
+function logPerf() {
+  Perf.stop();
+  const measurements = Perf.getLastMeasurements();
+  console.log('Inclusive');
+  Perf.printInclusive(measurements);
+  console.log('Exclusive');
+  Perf.printExclusive(measurements);
+  console.log('Wasted');
+  Perf.printWasted(measurements);
+  console.log('DOM');
+  Perf.printDOM(measurements);
+  // This may be showing that all the components in this app
+  // render so fast, even when they don't need to,
+  // that shouldComponentUpdate methods are not needed.
+}
+
 function render() {
   ReactDOM.render(<TodoApp/>, document.getElementById('content'));
+  logPerf();
 }
 
 const store = createStore(rootReducer);
