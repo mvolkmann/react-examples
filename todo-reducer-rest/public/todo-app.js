@@ -1,5 +1,4 @@
 // These files use the convention that variables
-// // Get current todos.
 // referring to immutable objects begin with "i".
 import autobind from './autobind';
 const axios = require('axios');
