@@ -14,10 +14,13 @@ class TodoApp extends React.Component {
     super();
     autobind(this, 'on');
 
-    // To avoid setState losing the type of the Immutable Map
-    // returned by reducer, that must be a property on the state
-    // instead of the state itself.
-    this.state = {imm: reducer()};
+    // Get the initial state.
+    // If state is set to an Immutable collection,
+    // calling this.setState will lose its type.
+    // For example, an Immutable Map will become a plain Object.
+    // To avoid this, make the Immutable collection be
+    // a property on the state instead of the state itself.
+    this.state = {iState: reducer()};
 
     // Get current todos.
     axios.get('todos').
@@ -38,7 +41,7 @@ class TodoApp extends React.Component {
 
   dispatch(action) {
     this.setState(state => {
-      return {imm: reducer(state.imm, action)};
+      return {iState: reducer(state.iState, action)};
     });
   }
 
@@ -55,7 +58,7 @@ class TodoApp extends React.Component {
     // Prevent form submission which refreshes page.
     event.preventDefault();
 
-    const text = this.state.imm.get('text');
+    const text = this.state.iState.get('text');
 
     // Update database.
     axios.post('/todos', text, {headers: {'Content-Type': 'text/plain'}}).
@@ -114,7 +117,7 @@ class TodoApp extends React.Component {
   // so no need for shouldComponentUpdate method.
   render() {
     console.log('todo-app.js render: entered');
-    const iState = this.state.imm;
+    const iState = this.state.iState;
     //console.log('todo-app.js render: state =', iState.toJS());
     const iTodos = iState.get('todos');
 
