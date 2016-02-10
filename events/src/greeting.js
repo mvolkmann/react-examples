@@ -1,8 +1,8 @@
 import React from 'react';
 
 class Greeting extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {name: 'World'}; // initial state
     this.setName = this.setName.bind(this); // pre-bind
   }
@@ -28,7 +28,7 @@ class Greeting extends React.Component {
 }
 
 Greeting.propTypes = {
-  greet: React.PropTypes.string.isRequired
+  greet: React.PropTypes.string
   // Numbers pass because they can be coerced to a string.
   // Missing a required prop isn't an error
   // if a default value is specified

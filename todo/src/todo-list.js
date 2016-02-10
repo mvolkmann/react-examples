@@ -27,9 +27,7 @@ class TodoList extends React.Component {
   }
 
   get uncompletedCount() {
-    return this.state.todos.reduce(
-      (count, todo) => todo.done ? count : count + 1,
-      0);
+    return this.state.todos.filter(todo => !todo.done).length;
   }
 
   onAddTodo() {

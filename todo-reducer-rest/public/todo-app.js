@@ -40,9 +40,9 @@ class TodoApp extends React.Component {
   */
 
   dispatch(action) {
-    this.setState(state => {
-      return {iState: reducer(state.iState, action)};
-    });
+    this.setState(state => ({
+      iState: reducer(state.iState, action)
+    }));
   }
 
   handleError(msg, res) {
