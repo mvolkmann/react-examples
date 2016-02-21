@@ -10,7 +10,7 @@ expect.extend(expectJSX);
 
 describe('TodoHeader', () => {
   it('should have expected content', () => {
-    // Define prop values needed to render a Todo element.
+    // Define prop values needed to render a TodoHeader component.
     const iTodos = Immutable.fromJS([
       {_id: 1, text: 'Get milk', done: true},
       {_id: 2, text: 'Take out trash', done: false}
@@ -21,7 +21,7 @@ describe('TodoHeader', () => {
     // and does not require a DOM.
     const renderer = TestUtils.createRenderer();
 
-    // Render a Todo element.
+    // Render a TodoHeader component.
     renderer.render(
       <TodoHeader iTodos={iTodos}
         onArchiveCompleted={onArchiveCompleted}/>);
@@ -29,26 +29,18 @@ describe('TodoHeader', () => {
 
     // Test the rendered output.
 
-    /*
-    expect(output).toEqual(
-      <div>
-        <h2>To Do List</h2>
-        1 " of " 2 remaining
-        <button onClick={onArchiveCompleted}>
-          Archive Completed
-        </button>
-      </div>
-    );
-    */
     expect(output).toIncludeJSX(
       <h2>To Do List</h2>);
     expect(output).toIncludeJSX(
-      <div>1 of 2 remaining</div>);
-    expect(output).toIncludeJSX(
-      <button onClick={onArchiveCompleted}>
-        Archive Completed
-      </button>);
+      <div>
+        1 of 2 remaining
+        <button onClick={onArchiveCompleted}>
+          Archive Completed
+        </button>
+      </div>);
     /* This fails due to newline differences.
+     * Note that it differs from the previous assertion
+     * in that it uses toEqualJSX instead of toIncludeJSX.
      * You reported this at https://github.com/algolia/expect-jsx/issues/14.
     expect(output).toEqualJSX(
       <div>
@@ -61,17 +53,20 @@ describe('TodoHeader', () => {
     );
     */
 
-    // All of this works!
     expect(output.type).toEqual('div');
+
     const children = output.props.children;
     expect(children[0].type).toBe('h2');
     expect(children[0].props.children).toBe('To Do List');
     expect(children[1].type).toBe('div');
+
     const divChildren = children[1].props.children;
     expect(divChildren[0]).toBe(1);
     expect(divChildren[1]).toBe(' of ');
     expect(divChildren[2]).toBe(2);
     expect(divChildren[3]).toBe(' remaining');
-    expect(children[2].type).toBe('button');
+    const button = divChildren[4];
+    expect(button.type).toBe('button');
+    expect(button.props.children).toBe('Archive Completed');
   });
 });

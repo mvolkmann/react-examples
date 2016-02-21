@@ -1,3 +1,4 @@
+// @flow
 // These files use the convention that variables
 // referring to immutable objects begin with "i".
 import autobind from './autobind';
@@ -8,8 +9,13 @@ import reducer from './reducer';
 import TodoHeader from './todo-header';
 import TodoList from './todo-list';
 import './todo.css';
+import 'empty/object';
+
+type State = {iState: Object};
 
 class TodoApp extends React.Component {
+  state: State; //{iState: Object};
+
   constructor() {
     super();
     autobind(this, 'on');

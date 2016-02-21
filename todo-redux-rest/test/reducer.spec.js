@@ -108,15 +108,16 @@ describe('reducer', () => {
         2: {_id: '2', text: 'Take out trash', done: false}
       }
     });
+
     // Toggle done flag for "Take out trash" to true.
     const action = {type: 'toggleDone', payload: {_id: '2'}};
     iState = reducer(iState, action);
 
-    expect(iState.get('text')).toBe('foo'); // doesn't change
+    expect(iState.get('text')).toBe('foo'); // should not change
     const iTodos = iState.get('todos');
-    // The number of todos should not have changed.
-    expect(iTodos.size).toBe(2);
+    expect(iTodos.size).toBe(2); // # of todos should not change
     const iTodo = iTodos.get('2'); // keys are strings
-    expect(iTodo.get('done')).toBe(true);
+    expect(iTodo.get('text')).toBe('Take out trash'); // should not change
+    expect(iTodo.get('done')).toBe(true); // should change
   });
 });

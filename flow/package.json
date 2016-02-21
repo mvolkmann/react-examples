@@ -1,0 +1,14 @@
+{
+  "name": "flow-demo",
+  "version": "1.0.0",
+  "description": "demo of using Flow",
+  "main": "demo1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "R. Mark Volkmann",
+  "license": "MIT",
+  "dependencies": {
+    "flow": "^0.2.3"
+  }
+}

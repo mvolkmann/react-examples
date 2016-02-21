@@ -3,6 +3,7 @@ import Immutable from 'immutable';
 import React from 'react'; //eslint-disable-line
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
+import Todo from '../public/todo.js';
 import TodoList from '../public/todo-list.js';
 
 describe('TodoList', () => {
@@ -18,7 +19,7 @@ describe('TodoList', () => {
     // Create a "shallow renderer" that renders only the top-level component
     // and does not require a DOM.
     const renderer = TestUtils.createRenderer();
-    // Render a TodoList element.
+    // Render a TodoList component.
     renderer.render(
       <TodoList iTodos={iTodos}
         onDeleteTodo={onDeleteTodo}
@@ -32,11 +33,15 @@ describe('TodoList', () => {
     const children = output.props.children;
     expect(children.size).toEqual(2);
 
-    const iTodo1 = children.first().props.iTodo;
+    const firstChild = children.first();
+    expect(firstChild.type).toBe(Todo);
+    const iTodo1 = firstChild.props.iTodo;
     expect(iTodo1.get('text')).toEqual('Get milk');
     expect(iTodo1.get('done')).toEqual(true);
 
-    const iTodo2 = children.last().props.iTodo;
+    const lastChild = children.last();
+    expect(lastChild.type).toBe(Todo);
+    const iTodo2 = lastChild.props.iTodo;
     expect(iTodo2.get('text')).toEqual('Take out trash');
     expect(iTodo2.get('done')).toEqual(false);
   });

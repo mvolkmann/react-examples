@@ -1,0 +1,12 @@
+[ignore]
+.*/node_modules
+
+[include]
+public
+../node_modules/
+
+[libs]
+flow-libs/
+
+[options]
+module.name_mapper='\.css$' -> 'empty/object'

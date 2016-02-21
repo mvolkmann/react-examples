@@ -1,7 +1,9 @@
+// @flow
 import React from 'react'; //eslint-disable-line
+import Todo from './todo';
 
 class TodoHeader extends React.Component {
-  getUncompletedCount(todos) {
+  getUncompletedCount(todos: Array<Todo>): number {
     return todos.reduce(
       (count, todo) => todo.get('done') ? count : count + 1,
       0);

@@ -25,7 +25,7 @@ describe('dispatch', () => {
     const iState = store.getState();
     const iTodos = iState.get('todos');
     expect(iTodos.size).toBe(1);
-    const iTodo = iTodos.get('2');
+    const iTodo = iTodos.get('2'); // id of remaining Todo
     expect(iTodo.get('_id')).toBe('2');
     expect(iTodo.get('text')).toBe('Take out trash');
   });
