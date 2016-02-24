@@ -1,11 +1,13 @@
 // @flow
 import React from 'react'; //eslint-disable-line
 import Todo from './todo';
+import Immutable from 'immutable';
 
 class TodoHeader extends React.Component {
-  getUncompletedCount(todos: Array<Todo>): number {
+  getUncompletedCount(todos: Array<Immutable.IMap>): number {
     return todos.reduce(
-      (count, todo) => todo.get('done') ? count : count + 1,
+      (count, todo: Immutable.IMap) => todo.get('done') ? count : count + 1,
+      //(count, todo) => todo.getx('done') ? count : count + 1,
       0);
   }
 

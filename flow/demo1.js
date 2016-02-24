@@ -40,6 +40,10 @@ function testFn(foo: number, bar: boolean): string {
 }
 const someFn: MyFn = testFn;
 
-type MyParametricFn = <T>(p1: T, p2: T) => T;
+// Note the placement of <T> below.
+type MyParametricFn<T> = (p1: T, p2: T) => T;
 const add2: MyParametricFn = (p1: number, p2: number): number => p1 + p2;
 console.log(add2(2, 3));
+
+type ArrayOfArraysOfNumbers = Array<Array<number>>;
+const aoaon: ArrayOfArraysOfNumbers = [[1, 2], [3, 4, 5]];

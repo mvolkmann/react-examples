@@ -9,7 +9,6 @@ import reducer from './reducer';
 import TodoHeader from './todo-header';
 import TodoList from './todo-list';
 import './todo.css';
-import 'empty/object';
 
 type State = {iState: Object};
 

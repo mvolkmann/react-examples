@@ -6,7 +6,8 @@ public
 ../node_modules/
 
 [libs]
-flow-libs/
+interfaces
 
 [options]
-module.name_mapper='\.css$' -> 'empty/object'
+module.name_mapper='.+\.css$' -> 'CSSModule'
+module.system=haste
