@@ -6,7 +6,7 @@ src
 ./node_modules
 
 [libs]
-interfaces
+declarations
 
 [options]
 module.name_mapper='.+\.css$' -> 'CSSModule'
