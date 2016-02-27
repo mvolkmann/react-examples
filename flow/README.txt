@@ -15,3 +15,5 @@
   and use ES6 modules
   * webpack
   * node build/bundle.js
+  * to run Flow on these, may need to just run "flow"
+    from top directory and process every file

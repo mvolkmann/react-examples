@@ -1,4 +1,5 @@
 // @flow
+/* eslint no-unused-vars: 0 */
 
 // Just demonstrating that Flow is okay with this.
 import './demo.css';
@@ -28,15 +29,12 @@ const video = {title: 'Batman', year: 1969, purchasedOn: new Date(2016, 1, 21)};
 function format(obj: Object, formatter: MyFnType) {
   console.log(formatter(obj.title, obj.year, obj.purchasedOn));
 }
-/*
 format(video, (title: string, year: number, purchasedOn: Date) =>
   `You purchased ${title} from ${year} on ${purchasedOn}.`);
 format(video, (title: number, year: string) =>
   `You purchased ${title} from ${year}.`);
-*/
 format(video, (title, year) =>
   `You purchased ${title} from ${year}.`);
-(title, year) => `You purchased ${title} from ${year}.`;
 
 type MyFn = (foo: number, bar: boolean, baz: string) => string;
 function testFn(foo: number, bar: boolean): string {

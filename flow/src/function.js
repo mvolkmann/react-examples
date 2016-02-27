@@ -1,4 +1,7 @@
 // @flow
+/* eslint arrow-parens: 0, no-unused-vars: 0 */
+// The arrow-parens rule is disabled because parens are required
+// when Flow types are added to arraw function parameters.
 
 type TestFn = (p1: boolean, p2: number, p3: string) => void;
 
