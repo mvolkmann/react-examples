@@ -3,7 +3,7 @@
 
 [include]
 public
-../node_modules/
+node_modules
 
 [libs]
 interfaces
