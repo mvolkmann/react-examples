@@ -10,3 +10,8 @@
 
 - To run these examples
   * node build/{name}.js
+
+- To run examples that start from src/main.js
+  and use ES6 modules
+  * webpack
+  * node build/bundle.js

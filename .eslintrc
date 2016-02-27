@@ -5,18 +5,22 @@
     "node": true
   },
 
-  "ecmaFeatures": {
-    "jsx": true,
-    "modules": true
-  },
-
   "globals": {
     "angular": false,
     "mtzEnv": false,
     "$": false
   },
 
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+
   "plugins": [
+    "flowtype",
     "react"
   ],
 
@@ -45,7 +49,7 @@
     "eol-last": 0,
     "eqeqeq": 2,
     "func-names": 0,
-    "func-style": [0],
+    "func-style": [0, "declaration"],
     "generator-star-spacing": [2, {"before": false, "after": true}],
     "guard-for-in": 2,
     "handle-callback-err": 2,
@@ -54,7 +58,8 @@
     "indent": [2, 2, {"SwitchCase": 1}],
     "init-declarations": 0,
     "key-spacing": [2, {"beforeColon": false, "afterColon": true}],
-    "linebreak-style": [0, "unix"],
+    "keyword-spacing": 2,
+    "linebreak-style": [2, "unix"],
     "lines-around-comment": 0,
     "max-depth": [1, 5],
     "max-len": [1, 80, 4],
@@ -85,7 +90,6 @@
     "no-else-return": 1,
     "no-empty": 2,
     "no-empty-character-class": 2,
-    "no-empty-label": 2,
     "no-eq-null": 2,
     "no-eval": 1,
     "no-ex-assign": 2,
@@ -181,13 +185,10 @@
     "semi": [2, "always"],
     "semi-spacing": 2,
     "sort-vars": [1, {"ignoreCase": true}],
-    "space-after-keywords": 2,
     "space-before-blocks": [2, "always"],
     "space-before-function-paren": [2, {"anonymous": "always", "named": "never"}],
-    "space-before-keywords": [2, "always"],
     "space-in-parens": [2, "never"],
     "space-infix-ops": 2,
-    "space-return-throw-case": 2,
     "space-unary-ops": [2, { "words": true, "nonwords": false }],
     "spaced-comment": 0,
     "strict": 0,
@@ -197,6 +198,6 @@
     "vars-on-top": 0,
     "wrap-iife": 2,
     "wrap-regex": 0,
-    "yoda": 2
+    "yoda": 0
   }
 }

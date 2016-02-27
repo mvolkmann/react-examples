@@ -1,5 +1,5 @@
 // @flow
 
-import {sayHello} from 'type-alias-1';
+import {sayHello} from './type-alias-export';
 
 sayHello({name: 'Tami', hobby: 'swimming'});
