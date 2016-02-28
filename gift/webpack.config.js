@@ -8,8 +8,8 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery'
+      $: 'jquery', // used by Bootstrap
+      jQuery: 'jquery' // used by Bootstrap
     })
   ],
   module: {
