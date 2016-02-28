@@ -1,3 +1,6 @@
+// ESLint can't detect when a variable is only used in JSX.
+/* eslint no-unused-vars: 0 */
+
 import autobind from './autobind';
 import GiftList from './gift-list';
 import NameSelect from './name-select';
@@ -84,9 +87,22 @@ class GiftApp extends React.Component {
     this.setState({confirmDelete: false});
   }
 
+  /**
+   * Determines if the currently selected name has at least one gift.
+   */
+  selectedNameHasGifts() {
+    const {gifts, selectedName} = this.state;
+    const giftsForName = gifts[selectedName];
+    return giftsForName && giftsForName.length;
+  }
+
   onConfirmDeleteName() {
-    // Don't want this on stateStack.
-    this.setState({confirmDelete: true});
+    if (this.selectedNameHasGifts()) {
+      // Don't want this on stateStack.
+      this.setState({confirmDelete: true});
+    } else {
+      this.onDeleteName();
+    }
   }
 
   onDeleteGift() {
