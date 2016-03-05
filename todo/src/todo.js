@@ -10,11 +10,11 @@ const Todo = ({onDeleteTodo, onToggleDone, todo}) =>
     <button onClick={onDeleteTodo}>Delete</button>
   </li>;
 
-const PropTypes = React.PropTypes;
+const {func, object} = React.PropTypes;
 Todo.propTypes = {
-  todo: PropTypes.object.isRequired,
-  onDeleteTodo: PropTypes.func.isRequired,
-  onToggleDone: PropTypes.func.isRequired
+  todo: object.isRequired,
+  onDeleteTodo: func.isRequired,
+  onToggleDone: func.isRequired
 };
 
 export default Todo;

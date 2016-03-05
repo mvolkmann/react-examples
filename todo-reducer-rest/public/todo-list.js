@@ -29,11 +29,11 @@ class TodoList extends React.Component {
   }
 }
 
-const PropTypes = React.PropTypes;
+const {func, object} = React.PropTypes;
 TodoList.propTypes = {
-  iTodos: PropTypes.object.isRequired,
-  onDeleteTodo: PropTypes.func.isRequired,
-  onToggleDone: PropTypes.func.isRequired
+  iTodos: object.isRequired,
+  onDeleteTodo: func.isRequired,
+  onToggleDone: func.isRequired
 };
 
 export default TodoList;

@@ -30,10 +30,10 @@ class TodoHeader extends React.Component {
   }
 }
 
-const PropTypes = React.PropTypes;
+const {func, object} = React.PropTypes;
 TodoHeader.propTypes = {
-  iTodos: PropTypes.object.isRequired,
-  onArchiveCompleted: PropTypes.func.isRequired
+  iTodos: object.isRequired,
+  onArchiveCompleted: func.isRequired
 };
 
 export default TodoHeader;

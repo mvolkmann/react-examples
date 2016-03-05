@@ -25,11 +25,11 @@ class Todo extends React.Component {
   }
 }
 
-const PropTypes = React.PropTypes;
+const {func, object} = React.PropTypes;
 Todo.propTypes = {
-  iTodo: PropTypes.object.isRequired,
-  onDeleteTodo: PropTypes.func.isRequired,
-  onToggleDone: PropTypes.func.isRequired
+  iTodo: object.isRequired,
+  onDeleteTodo: func.isRequired,
+  onToggleDone: func.isRequired
 };
 
 export default Todo;
