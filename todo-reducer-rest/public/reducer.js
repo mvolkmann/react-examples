@@ -1,10 +1,9 @@
-// @flow
 // This file uses the convention that variables
 // referring to immutable objects begin with "i".
 import Immutable from 'immutable';
 
 const reducers = {
-  addTodo(iState: Object, action: Object): Object {
+  addTodo(iState, action) {
     const todo = action.payload;
 
     // The following commented out lines do the same
@@ -73,7 +72,7 @@ const reducers = {
 const iInitialState = Immutable.fromJS(
   {text: '', todos: {}});
 
-function rootReducer(iState: Object = iInitialState, action: ?Object): Object {
+function rootReducer(iState = iInitialState, action) {
   if (!action) return iInitialState;
 
   //console.log('reducer.js rootReducer: action =', action);

@@ -3,6 +3,7 @@ import Immutable from 'immutable';
 import React from 'react'; //eslint-disable-line
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
+import Todo from '../public/todo.js';
 import TodoList from '../public/todo-list.js';
 
 describe('TodoList', () => {
@@ -27,17 +28,21 @@ describe('TodoList', () => {
 
     // Test the rendered output.
 
-    expect(output.type).toEqual('ul');
+    expect(output.type).toBe('ul');
 
     const children = output.props.children;
-    expect(children.size).toEqual(2);
+    expect(children.size).toBe(2);
 
-    const iTodo1 = children.first().props.iTodo;
-    expect(iTodo1.get('text')).toEqual('Get milk');
-    expect(iTodo1.get('done')).toEqual(true);
+    let todo = children.first();
+    expect(todo.type).toBe(Todo);
+    let iTodo = todo.props.iTodo;
+    expect(iTodo.get('text')).toBe('Get milk');
+    expect(iTodo.get('done')).toBe(true);
 
-    const iTodo2 = children.last().props.iTodo;
-    expect(iTodo2.get('text')).toEqual('Take out trash');
-    expect(iTodo2.get('done')).toEqual(false);
+    todo = children.last();
+    expect(todo.type).toBe(Todo);
+    iTodo = todo.props.iTodo;
+    expect(iTodo.get('text')).toBe('Take out trash');
+    expect(iTodo.get('done')).toBe(false);
   });
 });

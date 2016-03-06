@@ -25,17 +25,17 @@ describe('Todo', () => {
 
     // Test the rendered output.
 
-    expect(output.type).toEqual('li');
+    expect(output.type).toBe('li');
 
     const children = output.props.children;
-    expect(children.length).toEqual(3);
+    expect(children.length).toBe(3);
 
     const [input, span, button] = children;
-    expect(input.type).toEqual('input');
-    expect(input.props.checked).toEqual(true);
-    expect(span.type).toEqual('span');
-    expect(span.props.children).toEqual('Get milk');
-    expect(button.type).toEqual('button');
-    expect(button.props.children).toEqual('Delete');
+    expect(input.type).toBe('input');
+    expect(input.props.checked).toBe(true);
+    expect(span.type).toBe('span');
+    expect(span.props.children).toBe('Get milk');
+    expect(button.type).toBe('button');
+    expect(button.props.children).toBe('Delete');
   });
 });

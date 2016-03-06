@@ -1,4 +1,3 @@
-// @flow
 import React from 'react'; //eslint-disable-line
 
 class Todo extends React.Component {

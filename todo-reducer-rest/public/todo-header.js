@@ -1,13 +1,14 @@
-// @flow
+// ESLint can't detect when a variable is only used in JSX.
+/* eslint no-unused-vars: 0 */
+
 import React from 'react'; //eslint-disable-line
 import Todo from './todo';
 import Immutable from 'immutable';
 
 class TodoHeader extends React.Component {
-  getUncompletedCount(todos: Array<Immutable.IMap>): number {
+  getUncompletedCount(todos): number {
     return todos.reduce(
-      (count, todo: Immutable.IMap) => todo.get('done') ? count : count + 1,
-      //(count, todo) => todo.getx('done') ? count : count + 1,
+      (count, todo) => todo.get('done') ? count : count + 1,
       0);
   }
 
@@ -24,7 +25,9 @@ class TodoHeader extends React.Component {
       <div>
         <h2>To Do List</h2>
         <div>
-          {this.getUncompletedCount(iTodos)} of {iTodos.size} remaining
+          <span>
+            {this.getUncompletedCount(iTodos)} of {iTodos.size} remaining
+          </span>
           <button onClick={onArchiveCompleted}>
             Archive Completed
           </button>
