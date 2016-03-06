@@ -7,7 +7,7 @@ class NameSelect extends React.Component {
   }
 
   render() {
-    console.log('name-select.js render: entered');
+    //console.log('name-select.js render: entered');
     const {giftCount, names, selectedName, onSelect, onDelete} = this.props;
     const msg =
       giftCount === 1 ? ` has ${giftCount} gift` :
@@ -31,13 +31,13 @@ class NameSelect extends React.Component {
   }
 }
 
-const PropTypes = React.PropTypes;
+const {array, func, number, string} = React.PropTypes;
 NameSelect.propTypes = {
-  names: PropTypes.array.isRequired,
-  selectedName: PropTypes.string,
-  giftCount: PropTypes.number,
-  onSelect: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired
+  giftCount: number,
+  names: array.isRequired,
+  onSelect: func.isRequired,
+  onDelete: func.isRequired,
+  selectedName: string
 };
 
 export default NameSelect;

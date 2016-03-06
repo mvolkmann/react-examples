@@ -55,6 +55,7 @@ class GiftApp extends React.Component {
 
         <NameSelect names={state.names}
           selectedName={selectedName}
+          giftCount={giftsForName.length}
           onSelect={app.onSelectName}
           onDelete={app.onConfirmDeleteName}/>
 

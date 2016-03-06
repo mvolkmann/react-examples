@@ -26,12 +26,12 @@ class NameSelect extends React.Component {
   }
 }
 
-const PropTypes = React.PropTypes;
+const {array, func, string} = React.PropTypes;
 NameSelect.propTypes = {
-  names: PropTypes.array.isRequired,
-  selectedName: PropTypes.string,
-  onSelect: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired
+  names: array.isRequired,
+  onSelect: func.isRequired,
+  onDelete: func.isRequired,
+  selectedName: string
 };
 
 export default NameSelect;

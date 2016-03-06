@@ -15,7 +15,22 @@ describe('GiftApp', () => {
     const renderer = TestUtils.createRenderer();
 
     // Render a TodoList element.
-    renderer.render(<GiftApp/>);
+    const app = {
+      state: {gifts: {}, names: []},
+      stateStack: [],
+      onAddGift() {},
+      onAddName() {},
+      onChangeGift() {},
+      onChangeName() {},
+      onCloseModal() {},
+      onConfirmDeleteName() {},
+      onDeleteGift() {},
+      onDeleteName() {},
+      onSelectGift() {},
+      onSelectName() {},
+      onUndo() {}
+    };
+    renderer.render(<GiftApp app={app}/>);
     const output = renderer.getRenderOutput();
 
     // Test the rendered output.
@@ -30,12 +45,38 @@ describe('GiftApp', () => {
     ] = children;
 
     expect(modal.type).toBe(Modal);
+    const modalChildren = modal.props.children;
+    expect(modalChildren.length).toBe(3);
+    const modalFooter = modalChildren[2];
+    const modalFooterChildren = modalFooter.props.children;
+    expect(modalFooterChildren.length).toBe(2);
+    const okBtn = modalFooterChildren[1];
+    expect(okBtn.type).toBe(Button);
+    expect(okBtn.props.children).toBe('OK');
+    expect(okBtn.props.onClick).toBe(app.onDeleteName);
+
     expect(header.type).toBe('h2');
     expect(header.props.children).toBe('Gift App');
+
     expect(nameInput.type).toBe(TextEntry);
+    expect(nameInput.props.label).toBe('New Name');
+    expect(nameInput.props.onAdd).toBe(app.onAddName);
+    expect(nameInput.props.onChange).toBe(app.onChangeName);
+
     expect(nameSelect.type).toBe(NameSelect);
+    expect(nameSelect.props.onDelete).toBe(app.onConfirmDeleteName);
+    expect(nameSelect.props.onSelect).toBe(app.onSelectName);
+
     expect(giftInput.type).toBe(TextEntry);
+    expect(giftInput.props.label).toBe('New Gift');
+    expect(giftInput.props.onAdd).toBe(app.onAddGift);
+    expect(giftInput.props.onChange).toBe(app.onChangeGift);
+
     expect(giftList.type).toBe(GiftList);
+    expect(giftList.props.onDelete).toBe(app.onDeleteGift);
+    expect(giftList.props.onSelect).toBe(app.onSelectGift);
+
     expect(undoBtn.type).toBe(Button);
+    expect(undoBtn.props.onClick).toBe(app.onUndo);
   });
 });

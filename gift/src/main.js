@@ -2,23 +2,19 @@
 /* eslint no-unused-vars: 0 */
 
 import autobind from './autobind';
-import GiftList from './gift-list';
-import NameSelect from './name-select';
+import GiftApp from './gift-app';
 import React from 'react'; //eslint-disable-line
-import {Button, Modal} from 'react-bootstrap';
 import ReactDOM from 'react-dom';
-import TextEntry from './text-entry';
 
 // Styling
 import 'bootstrap-loader';
 import './app.scss';
 
-class GiftApp extends React.Component {
+class Main extends React.Component {
   constructor() {
     super(); // must call this before accessing "this"
 
     this.state = {
-      focusId: 'nameInput',
       gift: '',
       gifts: {},
       name: '',
@@ -33,19 +29,6 @@ class GiftApp extends React.Component {
     this.onChangeName = this.onChange.bind(this, 'name');
     this.onChangeSelectedGift = this.onChange.bind(this, 'selectedGift');
     this.onChangeSelectedName = this.onChange.bind(this, 'selectedName');
-  }
-
-  componentDidMount() {
-    this.focus();
-  }
-
-  componentDidUpdate() {
-    this.focus();
-  }
-
-  focus() {
-    const focusId = this.state.focusId;
-    if (focusId) document.getElementById(focusId).focus();
   }
 
   onAddGift() {
@@ -85,15 +68,6 @@ class GiftApp extends React.Component {
   onCloseModal() {
     // Don't want this on stateStack.
     this.setState({confirmDelete: false});
-  }
-
-  /**
-   * Determines if the currently selected name has at least one gift.
-   */
-  selectedNameHasGifts() {
-    const {gifts, selectedName} = this.state;
-    const giftsForName = gifts[selectedName];
-    return giftsForName && giftsForName.length;
   }
 
   onConfirmDeleteName() {
@@ -155,59 +129,22 @@ class GiftApp extends React.Component {
     this.setState(stateMods, () => this.stateStack.push(this.state));
   }
 
+  /**
+   * Determines if the currently selected name has at least one gift.
+   */
+  selectedNameHasGifts() {
+    const {gifts, selectedName} = this.state;
+    const giftsForName = gifts[selectedName];
+    return giftsForName && giftsForName.length;
+  }
+
   render() {
-    // This is rendered every time, but subcomponents are not.
-    const {gift, gifts, name, names, selectedGift, selectedName} = this.state;
-    const giftsForName = gifts[selectedName] || [];
-
-    return (
-      <div className="form-inline">
-        <Modal bsSize="small"
-          show={this.state.confirmDelete}
-          onHide={this.onCloseModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>Confirm Delete</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            Are you sure you want to delete {selectedName} and
-            his/her {giftsForName.length} gift ideas?
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.onCloseModal}>Cancel</Button>
-            <Button onClick={this.onDeleteName}>OK</Button>
-          </Modal.Footer>
-        </Modal>
-
-        <h2>Gift App</h2>
-
-        <TextEntry id="nameInput"
-          label="New Name"
-          value={name}
-          onChange={this.onChangeName}
-          onAdd={this.onAddName}/>
-
-        <NameSelect names={names}
-          selectedName={selectedName}
-          onSelect={this.onSelectName}
-          onDelete={this.onConfirmDeleteName}/>
-
-        <TextEntry id="giftInput"
-          label="New Gift"
-          value={gift}
-          onChange={this.onChangeGift}
-          onAdd={this.onAddGift}/>
-
-        <GiftList gifts={giftsForName}
-          selectedGift={selectedGift}
-          onSelect={this.onSelectGift}
-          onDelete={this.onDeleteGift}/>
-
-        <Button classNames="btn btn-default"
-          disabled={this.stateStack.length < 2}
-          onClick={this.onUndo}>Undo</Button>
-      </div>
-    );
+    // A lot of data and many functions are being passed to GiftApp.
+    // This could be avoided by combining main.js and gift-app.js.
+    // However, spliting them made it much easier to write
+    // test/gift-app.spec.js.
+    return <GiftApp app={this}/>;
   }
 }
 
-ReactDOM.render(<GiftApp/>, document.getElementById('content'));
+ReactDOM.render(<Main/>, document.getElementById('content'));
