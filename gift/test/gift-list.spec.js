@@ -2,46 +2,42 @@
 import React from 'react'; //eslint-disable-line
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
-import expectJSX from 'expect-jsx';
-import NameSelect from '../src/name-select.js';
+import GiftList from '../src/gift-list.js';
 
-describe('NameSelect', () => {
+describe('GiftList', () => {
   it('should have expected content', () => {
-    const names = ['Moe', 'Larry', 'Curly'];
-    const selectedName = 'Larry';
+    const gifts = ['CD', 'headphones', 'iPad']
+    const selectedGift = 'headphones';
     function onDelete() {}
     function onSelect() {}
 
     // Create a "shallow renderer" that renders only the top-level component
     // and does not require a DOM.
     const renderer = TestUtils.createRenderer();
-
-    // Render a Todo element.
+    // Render a TodoList element.
     renderer.render(
-      <NameSelect names={names}
-        selectedName={selectedName}
-        onSelect={onSelect}
-        onDelete={onDelete}/>);
+      <GiftList gifts={gifts}
+        selectedGift={selectedGift}
+        onDelete={onDelete}
+        onSelect={onSelect}/>);
     const output = renderer.getRenderOutput();
 
     // Test the rendered output.
 
     expect(output.type).toEqual('div');
     const children = output.props.children;
-    expect(children.length).toEqual(3);
-    const [label, select, button] = children;
+    expect(children.length).toBe(2);
 
-    expect(label.type).toBe('label');
-    expect(label.props.children).toBe('Selected Name');
+    const [select, button] = children;
 
     expect(select.type).toBe('select');
-    expect(select.props.value).toBe(selectedName);
+    expect(select.props.value).toBe(selectedGift);
     const selectChildren = select.props.children;
     expect(selectChildren.length).toEqual(3);
     selectChildren.forEach((option, index) => {
       expect(option.type).toBe('option');
-      expect(option.key).toBe(names[index]);
-      expect(option.props.children).toBe(names[index]);
+      expect(option.key).toBe(gifts[index]);
+      expect(option.props.children).toBe(gifts[index]);
     });
 
     expect(button.type).toBe('button');

@@ -7,7 +7,7 @@ class NameSelect extends React.Component {
   }
 
   render() {
-    console.log('name-select.js render: entered');
+    //console.log('name-select.js render: entered');
     const {names, selectedName, onSelect, onDelete} = this.props;
     const options = names.map(name => <option key={name}>{name}</option>);
     // &#x2796; is Unicode "heavy minus sign".

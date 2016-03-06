@@ -7,7 +7,7 @@ class GiftList extends React.Component {
   }
 
   render() {
-    console.log('gift-list.js render: entered');
+    //console.log('gift-list.js render: entered');
     const {gifts, selectedGift, onSelect, onDelete} = this.props;
 
     const options = gifts.map(gift => <option key={gift}>{gift}</option>);
