@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "gift app in React",
   "scripts": {
-    "start": "webpack-dev-server --content-base . --inline"
+    "start": "webpack-dev-server --content-base . --inline",
+    "test": "mocha './test/**/*.spec.js' --compilers js:babel-core/register"
   },
   "author": "R. Mark Volkmann",
   "license": "MIT",
@@ -18,8 +19,12 @@
     "eslint": "^2",
     "eslint-loader": "^1",
     "eslint-plugin-react": "^3",
+    "expect": "^1",
+    "expect-jsx": "^2",
     "file-loader": "^0",
+    "mocha": "^2.4.5",
     "node-sass": "^3",
+    "react-addons-test-utils": "^0",
     "resolve-url-loader": "^1",
     "sass-loader": "^3",
     "style-loader": "^0",
