@@ -72,7 +72,7 @@ describe('GiftApp', () => {
     expect(giftInput.props.onAdd).toBe(app.onAddGift);
     expect(giftInput.props.onChange).toBe(app.onChangeGift);
 
-    //TODO: Assert that the type of the giftList component is GiftList.
+    expect(giftList.type).toBe(GiftList);
     expect(giftList.props.onDelete).toBe(app.onDeleteGift);
     expect(giftList.props.onSelect).toBe(app.onSelectGift);
 

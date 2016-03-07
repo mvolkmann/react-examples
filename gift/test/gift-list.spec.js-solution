@@ -31,17 +31,17 @@ describe('GiftList', () => {
     const [select, button] = children;
 
     expect(select.type).toBe('select');
-    //TODO: Assert that the value of the select is selectedGift.
+    expect(select.props.value).toBe(selectedGift);
     const selectChildren = select.props.children;
     expect(selectChildren.length).toEqual(3);
     selectChildren.forEach((option, index) => {
-      //TODO: Assert that the type of the option is "option".
-      //TODO: Assert that the key of the option is the gift at index.
-      //TODO: Assert that the text value of the option is the gift at index.
+      expect(option.type).toBe('option');
+      expect(option.key).toBe(gifts[index]);
+      expect(option.props.children).toBe(gifts[index]);
     });
 
     expect(button.type).toBe('button');
-    //TODO: Assert that the button onClick handler is the onDelete function.
+    expect(button.props.onClick).toBe(onDelete);
     const buttonText = button.props.children;
     const unicodePlusHex = 0x2796;
     expect(buttonText.charCodeAt(0)).toBe(unicodePlusHex);
