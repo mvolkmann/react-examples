@@ -2,7 +2,6 @@
   "name": "react-events",
   "version": "1.0.0",
   "description": "This demonstrates using React events.",
-  "main": "index.html",
   "scripts": {
     "start": "webpack-dev-server --content-base . --inline",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,18 +9,19 @@
   "author": "R. Mark Volkmann",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.1.2",
-    "babel-loader": "^6.0.1",
-    "babel-preset-es2015": "^6.1.2",
-    "babel-preset-react": "^6.1.2",
-    "eslint": "^1.6.0",
-    "eslint-loader": "^1.0.0",
-    "eslint-plugin-react": "^3.5.1",
-    "webpack": "^1.12.2",
-    "webpack-dev-server": "^1.12.0"
+    "babel-core": "^6",
+    "babel-eslint": "^5",
+    "babel-loader": "^6",
+    "babel-preset-es2015": "^6",
+    "babel-preset-react": "^6",
+    "eslint": "2.2.0",
+    "eslint-loader": "^1",
+    "eslint-plugin-react": "^3",
+    "webpack": "^1",
+    "webpack-dev-server": "^1"
   },
   "dependencies": {
-    "react": "^0.14.2",
-    "react-dom": "^0.14.2"
+    "react": "^0",
+    "react-dom": "^0"
   }
 }
