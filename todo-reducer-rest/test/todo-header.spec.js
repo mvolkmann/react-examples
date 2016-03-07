@@ -29,17 +29,6 @@ describe('TodoHeader', () => {
 
     // Test the rendered output.
 
-    /*
-    expect(output).toBe(
-      <div>
-        <h2>To Do List</h2>
-        1 " of " 2 remaining
-        <button onClick={onArchiveCompleted}>
-          Archive Completed
-        </button>
-      </div>
-    );
-    */
     expect(output).toIncludeJSX(
       <h2>To Do List</h2>);
     expect(output).toIncludeJSX(
@@ -48,18 +37,6 @@ describe('TodoHeader', () => {
       <button onClick={onArchiveCompleted}>
         Archive Completed
       </button>);
-    /* This fails due to newline differences.
-     * You reported this at https://github.com/algolia/expect-jsx/issues/14.
-    expect(output).toBeJSX(
-      <div>
-        <h2>To Do List</h2>
-        <div>1 of 2 remaining</div>
-        <button onClick={onArchiveCompleted}>
-          Archive Completed
-        </button>
-      </div>
-    );
-    */
 
     expect(output.type).toBe('div');
     const children = output.props.children;

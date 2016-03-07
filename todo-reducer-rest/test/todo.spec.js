@@ -32,8 +32,10 @@ describe('Todo', () => {
 
     const [input, span, button] = children;
     expect(input.type).toBe('input');
+    expect(input.props.type).toBe('checkbox');
     expect(input.props.checked).toBe(true);
     expect(span.type).toBe('span');
+    expect(span.props.className).toBe('done-true');
     expect(span.props.children).toBe('Get milk');
     expect(button.type).toBe('button');
     expect(button.props.children).toBe('Delete');

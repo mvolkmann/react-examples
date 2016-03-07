@@ -117,6 +117,7 @@ describe('reducer', () => {
     // The number of todos should not have changed.
     expect(iTodos.size).toBe(2);
     const iTodo = iTodos.get('2'); // keys are strings
+    expect(iTodo.get('text')).toBe('Take out trash'); // should not change
     expect(iTodo.get('done')).toBe(true);
   });
 });

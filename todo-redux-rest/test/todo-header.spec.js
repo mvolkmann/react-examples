@@ -32,12 +32,11 @@ describe('TodoHeader', () => {
     expect(output).toIncludeJSX(
       <h2>To Do List</h2>);
     expect(output).toIncludeJSX(
-      <div>
-        1 of 2 remaining
-        <button onClick={onArchiveCompleted}>
-          Archive Completed
-        </button>
-      </div>);
+      <span>1 of 2 remaining</span>);
+    expect(output).toIncludeJSX(
+      <button onClick={onArchiveCompleted}>
+        Archive Completed
+      </button>);
     /* This fails due to newline differences.
      * Note that it differs from the previous assertion
      * in that it uses toEqualJSX instead of toIncludeJSX.
@@ -53,20 +52,29 @@ describe('TodoHeader', () => {
     );
     */
 
-    expect(output.type).toEqual('div');
-
+    expect(output.type).toBe('div');
     const children = output.props.children;
-    expect(children[0].type).toBe('h2');
-    expect(children[0].props.children).toBe('To Do List');
-    expect(children[1].type).toBe('div');
+    expect(children.length).toBe(2);
 
-    const divChildren = children[1].props.children;
-    expect(divChildren[0]).toBe(1);
-    expect(divChildren[1]).toBe(' of ');
-    expect(divChildren[2]).toBe(2);
-    expect(divChildren[3]).toBe(' remaining');
-    const button = divChildren[4];
+    const [header, div] = children;
+
+    expect(header.type).toBe('h2');
+    expect(header.props.children).toBe('To Do List');
+
+    expect(div.type).toBe('div');
+    const divChildren = div.props.children;
+    expect(divChildren.length).toBe(2);
+
+    const [span, button] = divChildren;
+
+    const spanChildren = span.props.children;
+    expect(spanChildren[0]).toBe(1);
+    expect(spanChildren[1]).toBe(' of ');
+    expect(spanChildren[2]).toBe(2);
+    expect(spanChildren[3]).toBe(' remaining');
+
     expect(button.type).toBe('button');
     expect(button.props.children).toBe('Archive Completed');
+    expect(button.props.onClick).toBe(onArchiveCompleted);
   });
 });

@@ -1,3 +1,6 @@
+// ESLint can't detect when a variable is only used in JSX.
+/* eslint no-unused-vars: 0 */
+
 // These files use the convention that variables
 // referring to immutable objects begin with "i".
 import autobind from './autobind';

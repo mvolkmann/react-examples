@@ -1,3 +1,6 @@
+// ESLint can't detect when a variable is only used in JSX.
+/* eslint no-unused-vars: 0 */
+
 import React from 'react';
 import Todo from './todo';
 

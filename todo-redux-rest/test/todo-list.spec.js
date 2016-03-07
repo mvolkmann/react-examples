@@ -28,21 +28,21 @@ describe('TodoList', () => {
 
     // Test the rendered output.
 
-    expect(output.type).toEqual('ul');
+    expect(output.type).toBe('ul');
 
     const children = output.props.children;
-    expect(children.size).toEqual(2);
+    expect(children.size).toBe(2);
 
-    const firstChild = children.first();
-    expect(firstChild.type).toBe(Todo);
-    const iTodo1 = firstChild.props.iTodo;
-    expect(iTodo1.get('text')).toEqual('Get milk');
-    expect(iTodo1.get('done')).toEqual(true);
+    let todo = children.first();
+    expect(todo.type).toBe(Todo);
+    let iTodo = todo.props.iTodo;
+    expect(iTodo.get('text')).toBe('Get milk');
+    expect(iTodo.get('done')).toBe(true);
 
-    const lastChild = children.last();
-    expect(lastChild.type).toBe(Todo);
-    const iTodo2 = lastChild.props.iTodo;
-    expect(iTodo2.get('text')).toEqual('Take out trash');
-    expect(iTodo2.get('done')).toEqual(false);
+    todo = children.last();
+    expect(todo.type).toBe(Todo);
+    iTodo = todo.props.iTodo;
+    expect(iTodo.get('text')).toBe('Take out trash');
+    expect(iTodo.get('done')).toBe(false);
   });
 });
