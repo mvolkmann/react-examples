@@ -31,7 +31,7 @@ class GiftApp extends React.Component {
       <div className="form-inline">
         <Modal bsSize="small"
           show={state.confirmDelete}
-          onHide={app.onCloseModal}>
+          onHide={app.onCloseConfirmDeleteModal}>
           <Modal.Header closeButton>
             <Modal.Title>Confirm Delete</Modal.Title>
           </Modal.Header>
@@ -40,7 +40,7 @@ class GiftApp extends React.Component {
             his/her {giftsForName.length} gift ideas?
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={app.onCloseModal}>Cancel</Button>
+            <Button onClick={app.onCloseConfirmDeleteModal}>Cancel</Button>
             <Button onClick={app.onDeleteName}>OK</Button>
           </Modal.Footer>
         </Modal>

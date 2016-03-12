@@ -1,4 +1,5 @@
 import deepEqual from './deep-equal';
+import Immutable from 'immutable';
 import React from 'react'; //eslint-disable-line
 
 class NameSelect extends React.Component {
@@ -7,13 +8,9 @@ class NameSelect extends React.Component {
   }
 
   render() {
-    //console.log('name-select.js render: entered');
-    const {giftCount, names, selectedName, onSelect, onDelete} = this.props;
-    const msg =
-      giftCount === 1 ? ` has ${giftCount} gift` :
-      giftCount ? ` has ${giftCount} gifts` :
-      '';
-    const options = names.map(name => <option key={name}>{name}</option>);
+    const {names, selectedName, onSelect, onDelete} = this.props;
+    const options = names.map(name =>
+      <option key={name}>{name}</option>).toJS();
     const style = {visibility: options.length ? 'visible' : 'hidden'};
 
     // &#x2796; is Unicode "heavy minus sign".
@@ -30,15 +27,13 @@ class NameSelect extends React.Component {
         disabled={!selectedName}
         onClick={onDelete}
         tabIndex="-1">&#x2796;</button>
-      {msg}
     </div>;
   }
 }
 
-const {arrayOf, func, number, string} = React.PropTypes;
+const {func, instanceOf, string} = React.PropTypes;
 NameSelect.propTypes = {
-  giftCount: number,
-  names: arrayOf(string).isRequired,
+  names: instanceOf(Immutable.List).isRequired,
   onSelect: func.isRequired,
   onDelete: func.isRequired,
   selectedName: string

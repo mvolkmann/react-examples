@@ -3,6 +3,7 @@
  * Creates a new version of each method on obj
  * that begins with a given prefix (typically "on")
  * followed by an uppercase letter.
+ * The new version is a function that is "bound" to obj.
  */
 function autobind(obj: Object, prefix: string): void {
   /* eslint prefer-reflect:0 */

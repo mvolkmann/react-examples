@@ -1,4 +1,5 @@
 import deepEqual from './deep-equal';
+import Immutable from 'immutable';
 import React from 'react'; //eslint-disable-line
 
 class GiftList extends React.Component {
@@ -7,7 +8,6 @@ class GiftList extends React.Component {
   }
 
   render() {
-    //console.log('gift-list.js render: entered');
     const {gifts, selectedGift, onSelect, onDelete} = this.props;
 
     const options = gifts.map(gift => <option key={gift}>{gift}</option>);
@@ -28,9 +28,9 @@ class GiftList extends React.Component {
   }
 }
 
-const {array, func, string} = React.PropTypes;
+const {func, instanceOf, string} = React.PropTypes;
 GiftList.propTypes = {
-  gifts: array.isRequired,
+  gifts: instanceOf(Immutable.List).isRequired,
   selectedGift: string,
   onSelect: func.isRequired,
   onDelete: func.isRequired

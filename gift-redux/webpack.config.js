@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+var webpack = require('webpack');
 
 module.exports = {
   entry: './src/main.js',
@@ -14,7 +14,7 @@ module.exports = {
   ],
   module: {
     loaders: [
-      { // need to use Bootstrap
+      {
         test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         loader: 'file-loader'
       },

@@ -73,7 +73,7 @@ const iInitialState = Immutable.fromJS(
   {text: '', todos: {}});
 
 function rootReducer(iState = iInitialState, action) {
-  if (!action) return iInitialState;
+  if (!action) return iState;
 
   //console.log('reducer.js rootReducer: action =', action);
   const type = action.type;

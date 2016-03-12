@@ -13,6 +13,13 @@ import './app.scss';
 class Main extends React.Component {
   constructor() {
     super(); // must call this before accessing "this"
+    autobind(this, 'on');
+
+    // Prebind event handling methods that need an argument.
+    this.onChangeGift = this.onChange.bind(this, 'gift');
+    this.onChangeName = this.onChange.bind(this, 'name');
+    this.onChangeSelectedGift = this.onChange.bind(this, 'selectedGift');
+    this.onChangeSelectedName = this.onChange.bind(this, 'selectedName');
 
     this.state = {
       gift: '',
@@ -21,14 +28,6 @@ class Main extends React.Component {
       names: []
     };
     this.stateStack = [this.state];
-
-    autobind(this, 'on');
-
-    // Prebind event handling methods that need an argument.
-    this.onChangeGift = this.onChange.bind(this, 'gift');
-    this.onChangeName = this.onChange.bind(this, 'name');
-    this.onChangeSelectedGift = this.onChange.bind(this, 'selectedGift');
-    this.onChangeSelectedName = this.onChange.bind(this, 'selectedName');
   }
 
   onAddGift() {
@@ -57,6 +56,7 @@ class Main extends React.Component {
     });
   }
 
+  // Handles changes to both nameInput and giftInput.
   onChange(name, event) {
     // Don't want this on stateStack.
     this.setState({
@@ -65,7 +65,7 @@ class Main extends React.Component {
     });
   }
 
-  onCloseModal() {
+  onCloseConfirmDeleteModal() {
     // Don't want this on stateStack.
     this.setState({confirmDelete: false});
   }
