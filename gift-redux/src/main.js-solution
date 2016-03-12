@@ -57,6 +57,10 @@ class Callbacks {
     this.dispatch('deleteSelectedName');
   }
 
+  onPurge() {
+    this.dispatch('purge');
+  }
+
   onSelectGift(event) {
     this.dispatch('selectGift', event.target.value);
   }

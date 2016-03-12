@@ -89,6 +89,15 @@ const reducers = {
         set('gifts', gifts.delete(name)).
         set('selectedName', newNames.first()));
   },
+  purge(state) {
+    const gifts = state.get('gifts');
+    for (const [name, giftsForName] of gifts.entries()) {
+      if (giftsForName.size === 0) {
+        state = reducers.deleteName(state, name);
+      }
+    }
+    return state;
+  },
   selectGift(state, payload) {
     return state.set('selectedGift', payload);
   },
