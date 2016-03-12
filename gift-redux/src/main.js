@@ -12,9 +12,12 @@ import rootReducer from './reducer';
 import 'bootstrap-loader';
 import './app.scss';
 
-class Main extends React.Component {
+/**
+ * This class defines all the event handling callback functions
+ * used by the components in this app.
+ */
+class Callbacks {
   constructor() {
-    super(); // must call this before accessing "this"
     autobind(this, 'on');
   }
 
@@ -61,18 +64,18 @@ class Main extends React.Component {
   onSelectName(event) {
     this.dispatch('selectName', event.target.value);
   }
-
-  render() {
-    // A lot of functions are being passed to GiftApp.
-    // This could be avoided by combining main.js and gift-app.js.
-    // However, spliting them made it much easier to write
-    // test/gift-app.spec.js.
-    return <GiftApp callbacks={this} store={store}/>;
-  }
 }
 
+const callbacks = new Callbacks();
+
 function render() {
-  ReactDOM.render(<Main/>, document.getElementById('content'));
+  // A lot of functions are being passed to GiftApp.
+  // This could be avoided by combining main.js and gift-app.js.
+  // However, spliting them made it much easier to write
+  // test/gift-app.spec.js.
+  ReactDOM.render(
+    <GiftApp callbacks={callbacks} store={store}/>,
+    document.getElementById('content'));
 }
 
 const store = createStore(rootReducer);

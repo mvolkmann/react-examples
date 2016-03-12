@@ -1,11 +1,21 @@
 import Immutable from 'immutable';
 
+/**
+ * Adds an item to a list so the elements remain in sorted order.
+ */
 function addToSortedList(list, item) {
   // Find index where item should be inserted.
   const index = list.findIndex(element => element > item);
   // Return new List with item inserted before that index,
   // or at the end if no element greater than item was found.
   return index === -1 ? list.push(item) : list.insert(index, item);
+}
+
+/**
+ * Deletes an item from a list.
+ */
+function deleteFromList(list, item) {
+  return list.delete(list.findIndex(element => element === item));
 }
 
 function selectedNameHasGifts(state) {
@@ -59,7 +69,8 @@ const reducers = {
     const selectedName = state.get('selectedName');
     const gifts = state.get('gifts');
     const selectedGift = state.get('selectedGift');
-    const giftsForName = gifts.get(selectedName).delete(selectedGift);
+    const giftsForName =
+      deleteFromList(gifts.get(selectedName), selectedGift);
     return state.withMutations(s =>
       s.set('selectedGift', giftsForName.first()).
         set('gifts', gifts.set(selectedName, giftsForName)));
@@ -68,7 +79,7 @@ const reducers = {
     const names = state.get('names');
     const gifts = state.get('gifts');
     const selectedName = state.get('selectedName');
-    const newNames = names.delete(selectedName);
+    const newNames = deleteFromList(names, selectedName);
     return state.withMutations(s =>
       s.set('confirmDelete', false).
         set('names', newNames).
@@ -94,9 +105,16 @@ const initialState = Immutable.Map({
 });
 
 function rootReducer(state = initialState, action) {
+  // Redux dispatches this action when the store is created.
+  // Just return the initial state.
+  if (action.type === '@@redux/INIT') return state;
+
   const reducer = reducers[action.type];
+  if (!reducer) {
+    throw new Error('no reducer named "' + action.type + '" was found');
+  }
   const payload = action ? action.payload : null;
-  return reducer ? reducer(state, payload) : state;
+  return reducer(state, payload);
 }
 
 export default rootReducer;

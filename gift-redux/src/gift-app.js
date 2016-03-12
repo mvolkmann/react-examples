@@ -33,6 +33,7 @@ class GiftApp extends React.Component {
     const selectedName = iState.get('selectedName');
     const giftsForName = selectedName ?
       gifts.get(selectedName) : Immutable.List();
+    const giftCount = giftsForName ? giftsForName.size : 0;
 
     // Save focusId for use in focus method above.
     this.focusId = iState.get('focusId');
@@ -51,7 +52,7 @@ class GiftApp extends React.Component {
           </Modal.Header>
           <Modal.Body>
             Are you sure you want to delete {selectedName} and
-            his/her {giftsForName.size} gift ideas?
+            his/her {giftCount} gift ideas?
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={callbacks.onCloseConfirmDeleteModal}>
