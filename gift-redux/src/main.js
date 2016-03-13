@@ -16,9 +16,9 @@ import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
 import {setupStore} from './redux-util';
 
-// This object defines all the event handling callback functions
+// This object defines all the event handling functions
 // used by the components in this app.
-const callbacks = Object.assign({}, giftEventHandlers, nameEventHandlers);
+const handlers = Object.assign({}, giftEventHandlers, nameEventHandlers);
 
 function render() {
   // A lot of functions are being passed to GiftApp.
@@ -26,7 +26,7 @@ function render() {
   // However, spliting them made it much easier to write
   // test/gift-app.spec.js.
   ReactDOM.render(
-    <GiftApp callbacks={callbacks} store={store}/>,
+    <GiftApp handlers={handlers} store={store}/>,
     document.getElementById('content'));
 }
 

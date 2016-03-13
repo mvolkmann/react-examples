@@ -22,7 +22,7 @@ class GiftApp extends React.Component {
   }
 
   render() {
-    const {callbacks, store} = this.props;
+    const {handlers, store} = this.props;
     const state = store.getState();
     const confirmDelete = state.get('confirmDelete');
     const gift = state.get('gift');
@@ -46,7 +46,7 @@ class GiftApp extends React.Component {
       <div className="form-inline">
         <Modal bsSize="small"
           show={confirmDelete}
-          onHide={callbacks.onCloseConfirmDeleteModal}>
+          onHide={handlers.onCloseConfirmDeleteModal}>
           <Modal.Header closeButton>
             <Modal.Title>Confirm Delete</Modal.Title>
           </Modal.Header>
@@ -55,10 +55,10 @@ class GiftApp extends React.Component {
             his/her {giftCount} gift ideas?
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={callbacks.onCloseConfirmDeleteModal}>
+            <Button onClick={handlers.onCloseConfirmDeleteModal}>
               Cancel
             </Button>
-            <Button onClick={callbacks.onDeleteName}>OK</Button>
+            <Button onClick={handlers.onDeleteName}>OK</Button>
           </Modal.Footer>
         </Modal>
 
@@ -67,26 +67,26 @@ class GiftApp extends React.Component {
         <TextEntry id="nameInput"
           label="New Name"
           value={name}
-          onChange={callbacks.onChangeName}
-          onAdd={callbacks.onAddName}/>
+          onChange={handlers.onChangeName}
+          onAdd={handlers.onAddName}/>
 
         <NameSelect names={names}
           selectedName={selectedName}
-          onSelect={callbacks.onSelectName}
-          onDelete={callbacks.onConfirmDeleteName}/>
+          onSelect={handlers.onSelectName}
+          onDelete={handlers.onConfirmDeleteName}/>
 
         <TextEntry id="giftInput"
           label="New Gift"
           value={gift}
-          onChange={callbacks.onChangeGift}
-          onAdd={callbacks.onAddGift}/>
+          onChange={handlers.onChangeGift}
+          onAdd={handlers.onAddGift}/>
 
         <GiftList gifts={giftsForName}
           selectedGift={selectedGift}
-          onSelect={callbacks.onSelectGift}
-          onDelete={callbacks.onDeleteGift}/>
+          onSelect={handlers.onSelectGift}
+          onDelete={handlers.onDeleteGift}/>
 
-        <Button onClick={callbacks.onPurge}>Purge</Button>
+        <Button onClick={handlers.onPurge}>Purge</Button>
       </div>
     );
   }
@@ -94,7 +94,7 @@ class GiftApp extends React.Component {
 
 const {object} = React.PropTypes;
 GiftApp.props = {
-  callbacks: object.isRequired,
+  handlers: object.isRequired,
   store: object.isRequired,
 };
 
