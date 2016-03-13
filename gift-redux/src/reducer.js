@@ -12,9 +12,11 @@ const initialState = Immutable.Map({
 });
 
 export default function (state = initialState, action) {
-  // Redux dispatches this action when the store is created.
+  // If no state is provided, return the initial state.
+  // This is useful in tests.
+  // Redux dispatches the "@@redux/INIT" action when the store is created.
   // Just return the initial state.
-  if (action.type === '@@redux/INIT') return state;
+  if (!action || action.type === '@@redux/INIT') return initialState;
 
   const reducer = reducers[action.type];
   if (!reducer) {
