@@ -1,7 +1,6 @@
 // ESLint can't detect when a variable is only used in JSX.
 /* eslint no-unused-vars: 0 */
 
-import autobind from './autobind';
 import GiftApp from './gift-app';
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
@@ -12,65 +11,47 @@ import rootReducer from './reducer';
 import 'bootstrap-loader';
 import './app.scss';
 
-/**
- * This class defines all the event handling callback functions
- * used by the components in this app.
- */
-class Callbacks {
-  constructor() {
-    autobind(this, 'on');
-  }
-
-  dispatch(type, payload) {
-    store.dispatch({type, payload});
-  }
-
-  onAddGift() {
-    this.dispatch('addGift');
-  }
-
-  onAddName() {
-    this.dispatch('addName');
-  }
-
-  onChangeGift(event) {
-    this.dispatch('changeGift', event.target.value);
-  }
-
-  onChangeName(event) {
-    this.dispatch('changeName', event.target.value);
-  }
-
-  onCloseConfirmDeleteModal() {
-    this.dispatch('closeConfirmDeleteModal');
-  }
-
-  onConfirmDeleteName() {
-    this.dispatch('confirmDeleteName');
-  }
-
-  onDeleteGift() {
-    this.dispatch('deleteGift');
-  }
-
-  onDeleteName() {
-    this.dispatch('deleteSelectedName');
-  }
-
-  onPurge() {
-    this.dispatch('purge');
-  }
-
-  onSelectGift(event) {
-    this.dispatch('selectGift', event.target.value);
-  }
-
-  onSelectName(event) {
-    this.dispatch('selectName', event.target.value);
-  }
+function dispatch(type, payload) {
+  store.dispatch({type, payload});
 }
 
-const callbacks = new Callbacks();
+// This Object defines all the event handling callback functions
+// used by the components in this app.
+const callbacks = {
+  onAddGift() {
+    dispatch('addGift');
+  },
+  onAddName() {
+    dispatch('addName');
+  },
+  onChangeGift(event) {
+    dispatch('changeGift', event.target.value);
+  },
+  onChangeName(event) {
+    dispatch('changeName', event.target.value);
+  },
+  onCloseConfirmDeleteModal() {
+    dispatch('closeConfirmDeleteModal');
+  },
+  onConfirmDeleteName() {
+    dispatch('confirmDeleteName');
+  },
+  onDeleteGift() {
+    dispatch('deleteGift');
+  },
+  onDeleteName() {
+    dispatch('deleteSelectedName');
+  },
+  onPurge() {
+    this.dispatch('purge');
+  },
+  onSelectGift(event) {
+    dispatch('selectGift', event.target.value);
+  },
+  onSelectName(event) {
+    dispatch('selectName', event.target.value);
+  }
+};
 
 function render() {
   // A lot of functions are being passed to GiftApp.
