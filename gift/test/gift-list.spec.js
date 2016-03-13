@@ -14,7 +14,8 @@ describe('GiftList', () => {
     // Create a "shallow renderer" that renders only the top-level component
     // and does not require a DOM.
     const renderer = TestUtils.createRenderer();
-    // Render a TodoList element.
+
+    // Render a GiftList component.
     renderer.render(
       <GiftList gifts={gifts}
         selectedGift={selectedGift}

@@ -2,11 +2,12 @@
 import React from 'react'; //eslint-disable-line
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
+import Immutable from 'immutable';
 import GiftList from '../src/gift-list.js';
 
 describe('GiftList', () => {
   it('should have expected content', () => {
-    const gifts = ['CD', 'headphones', 'iPad']
+    const gifts = Immutable.List(['CD', 'headphones', 'iPad']);
     const selectedGift = 'headphones';
     function onDelete() {}
     function onSelect() {}
@@ -14,7 +15,8 @@ describe('GiftList', () => {
     // Create a "shallow renderer" that renders only the top-level component
     // and does not require a DOM.
     const renderer = TestUtils.createRenderer();
-    // Render a TodoList element.
+
+    // Render a GiftList component.
     renderer.render(
       <GiftList gifts={gifts}
         selectedGift={selectedGift}
@@ -31,17 +33,18 @@ describe('GiftList', () => {
     const [select, button] = children;
 
     expect(select.type).toBe('select');
-    //TODO: Assert that the value of the select is selectedGift.
+    expect(select.props.value).toBe(selectedGift);
     const selectChildren = select.props.children;
     expect(selectChildren.length).toEqual(3);
     selectChildren.forEach((option, index) => {
-      //TODO: Assert that the type of the option is "option".
-      //TODO: Assert that the key of the option is the gift at index.
-      //TODO: Assert that the text value of the option is the gift at index.
+      expect(option.type).toBe('option');
+      const gift = gifts.get(index);
+      expect(option.key).toBe(gift);
+      expect(option.props.children).toBe(gift);
     });
 
     expect(button.type).toBe('button');
-    //TODO: Assert that the button onClick handler is the onDelete function.
+    expect(button.props.onClick).toBe(onDelete);
     const buttonText = button.props.children;
     const unicodePlusHex = 0x2796;
     expect(buttonText.charCodeAt(0)).toBe(unicodePlusHex);

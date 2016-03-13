@@ -2,12 +2,12 @@
 import React from 'react'; //eslint-disable-line
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
-import expectJSX from 'expect-jsx';
+import Immutable from 'immutable';
 import NameSelect from '../src/name-select.js';
 
 describe('NameSelect', () => {
   it('should have expected content', () => {
-    const names = ['Moe', 'Larry', 'Curly'];
+    const names = Immutable.List(['Moe', 'Larry', 'Curly']);
     const selectedName = 'Larry';
     function onDelete() {}
     function onSelect() {}
@@ -16,7 +16,7 @@ describe('NameSelect', () => {
     // and does not require a DOM.
     const renderer = TestUtils.createRenderer();
 
-    // Render a Todo element.
+    // Render a NameSelect component.
     renderer.render(
       <NameSelect names={names}
         selectedName={selectedName}
@@ -40,8 +40,9 @@ describe('NameSelect', () => {
     expect(selectChildren.length).toEqual(3);
     selectChildren.forEach((option, index) => {
       expect(option.type).toBe('option');
-      expect(option.key).toBe(names[index]);
-      expect(option.props.children).toBe(names[index]);
+      const name = names.get(index);
+      expect(option.key).toBe(name);
+      expect(option.props.children).toBe(name);
     });
 
     expect(button.type).toBe('button');

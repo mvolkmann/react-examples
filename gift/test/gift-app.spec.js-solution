@@ -14,7 +14,7 @@ describe('GiftApp', () => {
     // and does not require a DOM.
     const renderer = TestUtils.createRenderer();
 
-    // Render a TodoList element.
+    // Setup mock environment for app.
     const app = {
       state: {gifts: {}, names: []},
       stateStack: [],
@@ -30,6 +30,8 @@ describe('GiftApp', () => {
       onSelectName() {},
       onUndo() {}
     };
+
+    // Render a GiftApp component.
     renderer.render(<GiftApp app={app}/>);
     const output = renderer.getRenderOutput();
 

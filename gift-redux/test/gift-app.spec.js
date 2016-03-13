@@ -2,6 +2,7 @@
 import React from 'react'; //eslint-disable-line
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
+import Immutable from 'immutable';
 import {Button, Modal} from 'react-bootstrap';
 import GiftApp from '../src/gift-app.js';
 import GiftList from '../src/gift-list.js';
@@ -14,10 +15,8 @@ describe('GiftApp', () => {
     // and does not require a DOM.
     const renderer = TestUtils.createRenderer();
 
-    // Render a TodoList element.
-    const app = {
-      state: {gifts: {}, names: []},
-      stateStack: [],
+    // Setup mock environment for component.
+    const handlers = {
       onAddGift() {},
       onAddName() {},
       onChangeGift() {},
@@ -30,18 +29,31 @@ describe('GiftApp', () => {
       onSelectName() {},
       onUndo() {}
     };
-    renderer.render(<GiftApp app={app}/>);
+    const state = Immutable.Map({
+      gift: '',
+      gifts: Immutable.Map(),
+      name: '',
+      names: Immutable.List()
+    });
+    const store = {
+      getState() {
+        return state;
+      }
+    };
+
+    // Render a GiftApp component.
+    renderer.render(<GiftApp handlers={handlers} store={store}/>);
     const output = renderer.getRenderOutput();
 
     // Test the rendered output.
 
     expect(output.type).toEqual('div');
     const children = output.props.children;
-    expect(children.length).toBe(7);
+    expect(children.length).toBe(6);
 
     const [
       modal, header, nameInput, nameSelect,
-      giftInput, giftList, undoBtn
+      giftInput, giftList
     ] = children;
 
     expect(modal.type).toBe(Modal);
@@ -53,30 +65,27 @@ describe('GiftApp', () => {
     const okBtn = modalFooterChildren[1];
     expect(okBtn.type).toBe(Button);
     expect(okBtn.props.children).toBe('OK');
-    expect(okBtn.props.onClick).toBe(app.onDeleteName);
+    expect(okBtn.props.onClick).toBe(handlers.onDeleteName);
 
     expect(header.type).toBe('h2');
     expect(header.props.children).toBe('Gift App');
 
     expect(nameInput.type).toBe(TextEntry);
     expect(nameInput.props.label).toBe('New Name');
-    expect(nameInput.props.onAdd).toBe(app.onAddName);
-    expect(nameInput.props.onChange).toBe(app.onChangeName);
+    expect(nameInput.props.onAdd).toBe(handlers.onAddName);
+    expect(nameInput.props.onChange).toBe(handlers.onChangeName);
 
     expect(nameSelect.type).toBe(NameSelect);
-    expect(nameSelect.props.onDelete).toBe(app.onConfirmDeleteName);
-    expect(nameSelect.props.onSelect).toBe(app.onSelectName);
+    expect(nameSelect.props.onDelete).toBe(handlers.onConfirmDeleteName);
+    expect(nameSelect.props.onSelect).toBe(handlers.onSelectName);
 
     expect(giftInput.type).toBe(TextEntry);
     expect(giftInput.props.label).toBe('New Gift');
-    expect(giftInput.props.onAdd).toBe(app.onAddGift);
-    expect(giftInput.props.onChange).toBe(app.onChangeGift);
+    expect(giftInput.props.onAdd).toBe(handlers.onAddGift);
+    expect(giftInput.props.onChange).toBe(handlers.onChangeGift);
 
-    //TODO: Assert that the type of the giftList component is GiftList.
-    expect(giftList.props.onDelete).toBe(app.onDeleteGift);
-    expect(giftList.props.onSelect).toBe(app.onSelectGift);
-
-    expect(undoBtn.type).toBe(Button);
-    expect(undoBtn.props.onClick).toBe(app.onUndo);
+    expect(giftList.type).toBe(GiftList);
+    expect(giftList.props.onDelete).toBe(handlers.onDeleteGift);
+    expect(giftList.props.onSelect).toBe(handlers.onSelectGift);
   });
 });

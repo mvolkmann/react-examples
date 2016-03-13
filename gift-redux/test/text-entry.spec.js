@@ -13,7 +13,7 @@ describe('Textentry', () => {
     // and does not require a DOM.
     const renderer = TestUtils.createRenderer();
 
-    // Render a Todo element.
+    // Render a TextEntry component.
     renderer.render(
       <TextEntry id="my-label"
         label="My Label"

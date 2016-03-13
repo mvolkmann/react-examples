@@ -16,7 +16,7 @@ describe('NameSelect', () => {
     // and does not require a DOM.
     const renderer = TestUtils.createRenderer();
 
-    // Render a Todo element.
+    // Render a NameSelect component.
     renderer.render(
       <NameSelect names={names}
         selectedName={selectedName}

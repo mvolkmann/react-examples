@@ -10,7 +10,8 @@ class GiftList extends React.Component {
   render() {
     const {gifts, selectedGift, onSelect, onDelete} = this.props;
 
-    const options = gifts.map(gift => <option key={gift}>{gift}</option>);
+    const options = gifts.map(
+      gift => <option key={gift}>{gift}</option>).toJS();
 
     // &#x2796; is Unicode "heavy minus sign".
     return <div>
