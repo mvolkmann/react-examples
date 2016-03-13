@@ -4,6 +4,8 @@
 // Unique imports for this app
 import GiftApp from './gift-app';
 import reducer from './reducer';
+import giftEventHandlers from './gift-event-handlers';
+import nameEventHandlers from './name-event-handlers';
 
 // Styling
 import 'bootstrap-loader';
@@ -12,42 +14,11 @@ import './app.scss';
 // Common imports for every app
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
+import {setupStore} from './redux-util';
 
-// This Object defines all the event handling callback functions
+// This object defines all the event handling callback functions
 // used by the components in this app.
-const callbacks = {
-  onAddGift() {
-    dispatch('addGift');
-  },
-  onAddName() {
-    dispatch('addName');
-  },
-  onChangeGift(event) {
-    dispatch('changeGift', event.target.value);
-  },
-  onChangeName(event) {
-    dispatch('changeName', event.target.value);
-  },
-  onCloseConfirmDeleteModal() {
-    dispatch('closeConfirmDeleteModal');
-  },
-  onConfirmDeleteName() {
-    dispatch('confirmDeleteName');
-  },
-  onDeleteGift() {
-    dispatch('deleteGift');
-  },
-  onDeleteName() {
-    dispatch('deleteSelectedName');
-  },
-  onSelectGift(event) {
-    dispatch('selectGift', event.target.value);
-  },
-  onSelectName(event) {
-    dispatch('selectName', event.target.value);
-  }
-};
+const callbacks = Object.assign({}, giftEventHandlers, nameEventHandlers);
 
 function render() {
   // A lot of functions are being passed to GiftApp.
@@ -59,12 +30,5 @@ function render() {
     document.getElementById('content'));
 }
 
-// Everything after this would be the same in every app.
-
-function dispatch(type, payload) {
-  store.dispatch({type, payload});
-}
-
-const store = createStore(reducer);
-store.subscribe(render);
+const store = setupStore(reducer, render);
 render();

@@ -23,23 +23,23 @@ class GiftApp extends React.Component {
 
   render() {
     const {callbacks, store} = this.props;
-    const iState = store.getState();
-    const confirmDelete = iState.get('confirmDelete');
-    const gift = iState.get('gift');
-    const gifts = iState.get('gifts'); // a Map
-    const name = iState.get('name');
-    const names = iState.get('names'); // a List
-    const selectedGift = iState.get('selectedGift');
-    const selectedName = iState.get('selectedName');
+    const state = store.getState();
+    const confirmDelete = state.get('confirmDelete');
+    const gift = state.get('gift');
+    const gifts = state.get('gifts'); // a Map
+    const name = state.get('name');
+    const names = state.get('names'); // a List
+    const selectedGift = state.get('selectedGift');
+    const selectedName = state.get('selectedName');
     const giftsForName = selectedName ?
       gifts.get(selectedName) : Immutable.List();
     const giftCount = giftsForName ? giftsForName.size : 0;
 
     // Save focusId for use in focus method above.
-    this.focusId = iState.get('focusId');
+    this.focusId = state.get('focusId');
     if (!this.focusId) {
       this.focusId = 'nameInput';
-      iState.set('focusId', this.focusId);
+      state.set('focusId', this.focusId);
     }
 
     return (
@@ -89,5 +89,11 @@ class GiftApp extends React.Component {
     );
   }
 }
+
+const {object} = React.PropTypes;
+GiftApp.props = {
+  callbacks: object.isRequired,
+  store: object.isRequired,
+};
 
 export default GiftApp;
