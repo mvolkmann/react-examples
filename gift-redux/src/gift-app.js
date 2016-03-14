@@ -1,6 +1,3 @@
-// ESLint can't detect when a variable is only used in JSX.
-/* eslint no-unused-vars: 0 */
-
 import GiftList from './gift-list';
 import Immutable from 'immutable';
 import NameSelect from './name-select';
@@ -91,7 +88,7 @@ class GiftApp extends React.Component {
 }
 
 const {object} = React.PropTypes;
-GiftApp.props = {
+GiftApp.propTypes = {
   handlers: object.isRequired,
   store: object.isRequired,
 };
