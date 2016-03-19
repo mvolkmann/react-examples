@@ -35,7 +35,7 @@ class TodoHeader extends React.Component {
 
 const {func, instanceOf} = React.PropTypes;
 TodoHeader.propTypes = {
-  iTodos: instanceOf(Immutable.OrderedMap).isRequired,
+  iTodos: instanceOf(Immutable.Map).isRequired,
   onArchiveCompleted: func.isRequired
 };
 

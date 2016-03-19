@@ -31,7 +31,7 @@ class TodoList extends React.Component {
 
 const {func, instanceOf} = React.PropTypes;
 TodoList.propTypes = {
-  iTodos: instanceOf(Immutable.OrderedMap).isRequired,
+  iTodos: instanceOf(Immutable.Map).isRequired,
   onDeleteTodo: func.isRequired,
   onToggleDone: func.isRequired
 };

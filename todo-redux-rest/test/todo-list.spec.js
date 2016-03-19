@@ -9,10 +9,10 @@ import TodoList from '../public/todo-list.js';
 describe('TodoList', () => {
   it('should have expected content', () => {
     // Define prop values needed to render a TodoList element.
-    const iTodos = Immutable.fromJS([
-      {_id: 1, text: 'Get milk', done: true},
-      {_id: 2, text: 'Take out trash', done: false}
-    ]);
+    const iTodos = Immutable.fromJS({
+      1: {_id: 1, text: 'Get milk', done: true},
+      2: {_id: 2, text: 'Take out trash', done: false}
+    });
     function onDeleteTodo() {}
     function onToggleDone() {}
 
