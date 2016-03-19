@@ -1,7 +1,9 @@
-/* eslint no-unused-vars: 0 */
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
-import {IndexRoute, Lifecycle, Link, Route, Router} from 'react-router';
+//import {IndexRoute, Route} from 'react-router';
+//import {Lifecycle} from 'react-router'; // deprecated
+import {History, Link, Router} from 'react-router';
+import {createHistory} from 'history';
 import './demo.css';
 
 class App extends React.Component {
@@ -13,6 +15,10 @@ class App extends React.Component {
     </div>;
   }
 }
+const {node} = React.PropTypes;
+App.propTypes = {
+  children: node.isRequired
+};
 
 const Home = () => <div>
   <h1>Home</h1>
@@ -34,16 +40,25 @@ const Page2 = () => <div>
 */
 // This version demonstrates use of the Lifecycle mixin.
 const Page2 = React.createClass({
-  mixins: [Lifecycle],
-  routerWillLeave(nextLocation) {
-    return 'Are you sure?';
-  },
+  //mixins: [Lifecycle],
+  //routerWillLeave(/*nextLocation*/) {
+  //  return 'Are you sure?';
+  //},
   render() {
     return <div>
       <h1>Page 2</h1>
       <Link to="/">Home</Link>
     </div>;
   }
+});
+
+const history = createHistory();
+history.listenBefore(location => {
+  console.log('demo.js x: location =', location);
+  console.log('demo.js x: History =', History);
+  //console.log('demo.js x: History =', History);
+  const goingHome = location.hash.startsWith('#/?');
+  return goingHome ? 'Are you sure?' : null;
 });
 
 /*
@@ -62,17 +77,7 @@ const routes = (
 );
 */
 
-/*
 // Defining routes using JavaScript
-const routes = {
-  path: '/', component: App,
-  childRoutes: [
-    {onlyActiveOnIndex: true, component: Home},
-    {path: 'page1', component: Page1},
-    {path: 'page2', component: Page2}
-  ]
-};
-*/
 const routes = {
   path: '/', component: App,
   childRoutes: [
