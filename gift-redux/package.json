@@ -1,7 +1,7 @@
 {
-  "name": "gift",
+  "name": "gift-redux",
   "version": "1.0.0",
-  "description": "gift app in React",
+  "description": "gift app in React using Redux",
   "scripts": {
     "start": "webpack-dev-server --content-base . --inline",
     "test": "mocha './test/**/*.spec.js' --compilers js:babel-core/register"

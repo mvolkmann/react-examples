@@ -1,3 +1,4 @@
+import Immutable from 'immutable';
 import React from 'react'; //eslint-disable-line
 
 class TodoHeader extends React.Component {
@@ -32,9 +33,9 @@ class TodoHeader extends React.Component {
   }
 }
 
-const {func, object} = React.PropTypes;
+const {func, instanceOf} = React.PropTypes;
 TodoHeader.propTypes = {
-  iTodos: object.isRequired,
+  iTodos: instanceOf(Immutable.OrderedMap).isRequired,
   onArchiveCompleted: func.isRequired
 };
 

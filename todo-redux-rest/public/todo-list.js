@@ -1,6 +1,4 @@
-// ESLint can't detect when a variable is only used in JSX.
-/* eslint no-unused-vars: 0 */
-
+import Immutable from 'immutable';
 import React from 'react';
 import Todo from './todo';
 
@@ -31,9 +29,9 @@ class TodoList extends React.Component {
   }
 }
 
-const {func, object} = React.PropTypes;
+const {func, instanceOf} = React.PropTypes;
 TodoList.propTypes = {
-  iTodos: object.isRequired,
+  iTodos: instanceOf(Immutable.OrderedMap).isRequired,
   onDeleteTodo: func.isRequired,
   onToggleDone: func.isRequired
 };

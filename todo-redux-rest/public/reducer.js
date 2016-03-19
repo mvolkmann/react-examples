@@ -48,7 +48,7 @@ const reducers = {
 
     // Unlike Immutable Map, OrderedMap iterates over values in
     // the order they were inserted.  This is important for maintaining
-    // the order of todos after have some are deleted or archived.
+    // the order of todos after some are deleted or archived.
     return iState.
       delete('error').
       set('todos', Immutable.OrderedMap(todoMap));
@@ -65,7 +65,7 @@ const reducers = {
         ['todos', action.payload._id, 'done'],
         done => !done);
   }
-};
+}; // end of reducers
 
 // Need fromJS instead of Map here because the JS object
 // passed contains a property with an object value.

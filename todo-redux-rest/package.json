@@ -19,7 +19,7 @@
     "css-loader": "^0",
     "eslint": "2.2.0",
     "eslint-loader": "^1",
-    "eslint-plugin-react": "^3",
+    "eslint-plugin-react": "^4",
     "expect": "^1",
     "expect-jsx": "^2",
     "jsdom": "^8",

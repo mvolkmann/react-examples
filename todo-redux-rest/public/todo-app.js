@@ -1,6 +1,3 @@
-// ESLint can't detect when a variable is only used in JSX.
-/* eslint no-unused-vars: 0 */
-
 // These files use the convention that variables
 // referring to immutable objects begin with "i".
 import autobind from './autobind';
@@ -27,18 +24,6 @@ class TodoApp extends React.Component {
   constructor() {
     super();
     autobind(this, 'on');
-  }
-
-  /*
-  shouldComponentUpdate() {
-    return true; // always re-render this
-  }
-  */
-
-  componentWillUnmount() {
-    //TODO: This will probably never be called, and so isn't needed.
-    console.log('todo-app.js componentWillUnmount: unsubscribing');
-    store.unsubscribe();
   }
 
   onAddTodo(event) {
@@ -115,7 +100,6 @@ class TodoApp extends React.Component {
   render() {
     console.log('todo-app.js render: entered');
     const iState = store.getState();
-    //console.log('todo-app.js render: state =', iState.toJS());
     const iTodos = iState.get('todos');
 
     return (
@@ -168,6 +152,7 @@ function render() {
 const store = createStore(rootReducer);
 store.subscribe(render);
 
+// Initial hydration of store
 axios.get('todos').
   then(res => {
     const todos = res.data;

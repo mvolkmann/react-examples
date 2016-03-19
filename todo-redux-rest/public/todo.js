@@ -1,3 +1,4 @@
+import Immutable from 'immutable';
 import React from 'react'; //eslint-disable-line
 
 class Todo extends React.Component {
@@ -24,9 +25,9 @@ class Todo extends React.Component {
   }
 }
 
-const {func, object} = React.PropTypes;
+const {func, instanceOf} = React.PropTypes;
 Todo.propTypes = {
-  iTodo: object.isRequired,
+  iTodo: instanceOf(Immutable.Map).isRequired,
   onDeleteTodo: func.isRequired,
   onToggleDone: func.isRequired
 };
