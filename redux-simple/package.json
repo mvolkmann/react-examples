@@ -1,0 +1,27 @@
+{
+  "name": "redux-simple",
+  "version": "1.0.0",
+  "description": "simple example of using Redux with React",
+  "scripts": {
+    "start": "webpack-dev-server --content-base . --inline"
+  },
+  "author": "R. Mark Volkmann",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6",
+    "babel-eslint": "^5",
+    "babel-loader": "^6",
+    "babel-preset-es2015": "^6",
+    "babel-preset-react": "^6",
+    "eslint": "2.2.0",
+    "eslint-loader": "^1",
+    "eslint-plugin-react": "^4",
+    "webpack": "^1",
+    "webpack-dev-server": "^1"
+  },
+  "dependencies": {
+    "react": "^0",
+    "react-dom": "^0",
+    "redux": "^3"
+  }
+}
