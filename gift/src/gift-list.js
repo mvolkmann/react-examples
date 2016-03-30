@@ -28,9 +28,9 @@ class GiftList extends React.Component {
   }
 }
 
-const {array, func, string} = React.PropTypes;
+const {arrayOf, func, string} = React.PropTypes;
 GiftList.propTypes = {
-  gifts: array.isRequired,
+  gifts: arrayOf(string).isRequired,
   selectedGift: string,
   onSelect: func.isRequired,
   onDelete: func.isRequired

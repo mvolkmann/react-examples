@@ -1,9 +1,10 @@
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
+import {Lifecycle} from 'react-router'; // deprecated
+import {Link, Router} from 'react-router';
 //import {IndexRoute, Route} from 'react-router';
-//import {Lifecycle} from 'react-router'; // deprecated
-import {History, Link, Router} from 'react-router';
-import {createHistory} from 'history';
+//import {History, Link, Router} from 'react-router';
+//import {createHistory} from 'history';
 import './demo.css';
 
 class App extends React.Component {
@@ -40,10 +41,10 @@ const Page2 = () => <div>
 */
 // This version demonstrates use of the Lifecycle mixin.
 const Page2 = React.createClass({
-  //mixins: [Lifecycle],
-  //routerWillLeave(/*nextLocation*/) {
-  //  return 'Are you sure?';
-  //},
+  mixins: [Lifecycle],
+  routerWillLeave(/*nextLocation*/) {
+    return 'Are you sure?';
+  },
   render() {
     return <div>
       <h1>Page 2</h1>
@@ -52,6 +53,7 @@ const Page2 = React.createClass({
   }
 });
 
+/* I wasn't able to get this approach to work yet.
 const history = createHistory();
 history.listenBefore(location => {
   console.log('demo.js x: location =', location);
@@ -60,6 +62,7 @@ history.listenBefore(location => {
   const goingHome = location.hash.startsWith('#/?');
   return goingHome ? 'Are you sure?' : null;
 });
+*/
 
 /*
 // Defining routes using JSX
