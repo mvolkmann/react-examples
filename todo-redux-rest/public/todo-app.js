@@ -1,12 +1,11 @@
 // These files use the convention that variables
 // referring to immutable objects begin with "i".
-import autobind from './autobind';
 const axios = require('axios');
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
 import rootReducer from './reducer';
 import {createStore} from 'redux';
-import Perf from 'react-addons-perf';
+//import Perf from 'react-addons-perf';
 import TodoHeader from './todo-header';
 import TodoList from './todo-list';
 import './todo.css';
@@ -21,13 +20,8 @@ function handleError(msg, res) {
 }
 
 class TodoApp extends React.Component {
-  constructor() {
-    super();
-    autobind(this, 'on');
-  }
-
   onAddTodo(event) {
-    Perf.start();
+    //Perf.start();
 
     // Prevent form submission which refreshes page.
     event.preventDefault();
@@ -49,7 +43,7 @@ class TodoApp extends React.Component {
   }
 
   onArchiveCompleted() {
-    Perf.start();
+    //Perf.start();
 
     // Update database.
     axios.post('/todos/archive').
@@ -61,7 +55,7 @@ class TodoApp extends React.Component {
   }
 
   onDeleteTodo(todoId) {
-    Perf.start();
+    //Perf.start();
 
     // Update database.
     axios.delete('/todos/' + todoId).
@@ -73,7 +67,7 @@ class TodoApp extends React.Component {
   }
 
   onTextChange(event) {
-    Perf.start();
+    //Perf.start();
 
     // Update client-side model.
     store.dispatch({
@@ -83,14 +77,16 @@ class TodoApp extends React.Component {
   }
 
   onToggleDone(iTodo) {
-    Perf.start();
+    //Perf.start();
 
-    const todo = iTodo.toJS();
+    const _id = iTodo.get('_id');
+    const done = iTodo.get('done') || false;
+
     // Update database.
-    axios.patch('/todos/' + todo._id, {done: !todo.done}).
+    axios.patch('/todos/' + _id, {done: !done}).
       then(() => {
         // Update client-side model.
-        store.dispatch({type: 'toggleDone', payload: {_id: todo._id}});
+        store.dispatch({type: 'toggleDone', payload: {_id}});
       }).
       catch(res => handleError('Error toggling todo done', res));
   }
@@ -128,6 +124,7 @@ class TodoApp extends React.Component {
   }
 }
 
+/*
 function logPerf() {
   Perf.stop();
   const measurements = Perf.getLastMeasurements();
@@ -143,10 +140,11 @@ function logPerf() {
   // render so fast, even when they don't need to,
   // that shouldComponentUpdate methods are not needed.
 }
+*/
 
 function render() {
   ReactDOM.render(<TodoApp/>, document.getElementById('content'));
-  logPerf();
+  //logPerf();
 }
 
 const store = createStore(rootReducer);
