@@ -20,8 +20,8 @@
     "webpack-dev-server": "^1"
   },
   "dependencies": {
-    "react": "^0",
-    "react-dom": "^0",
+    "react": "^15",
+    "react-dom": "^15",
     "redux": "^3"
   }
 }

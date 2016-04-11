@@ -44,6 +44,7 @@ describe('Todo', () => {
     expect(input.type).toBe('input');
     expect(input.props.type).toBe('checkbox');
     expect(input.props.checked).toBe(true);
+    expect(input.props.onChange).toBe(onToggleDone);
 
     expect(span.type).toBe('span');
     expect(span.props.className).toBe('done-true');
@@ -51,6 +52,7 @@ describe('Todo', () => {
 
     expect(button.type).toBe('button');
     expect(button.props.children).toBe('Delete');
+    expect(button.props.onClick).toBe(onDeleteTodo);
 
     // Test use of Delete button.
     const todo = TestUtils.renderIntoDocument(

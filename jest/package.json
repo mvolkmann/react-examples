@@ -26,8 +26,8 @@
     "webpack-dev-server": "*"
   },
   "dependencies": {
-    "react": "*",
-    "react-dom": "*"
+    "react": "^15",
+    "react-dom": "^15"
   },
   "jest": {
     "scriptPreprocessor": "jest/preprocessor.js",

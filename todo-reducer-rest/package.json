@@ -23,7 +23,7 @@
     "expect": "^1",
     "expect-jsx": "^2",
     "mocha": "^2",
-    "react-addons-test-utils": "^0",
+    "react-addons-test-utils": "^15",
     "react-hot-loader": "^1",
     "style-loader": "^0",
     "webpack": "^1",
@@ -35,8 +35,8 @@
     "express": "^4",
     "immutable": "^3",
     "mongodb": "^2",
-    "react": "^0",
-    "react-addons-perf": "^0",
-    "react-dom": "^0"
+    "react": "^15",
+    "react-addons-perf": "^15",
+    "react-dom": "^15"
   }
 }
