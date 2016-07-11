@@ -2,7 +2,7 @@ import React from 'react';
 
 class Greeting extends React.Component {
   constructor() {
-    super();
+    super(); // must call before accessing "this"
     this.state = {name: 'World'}; // initial state
     this.setName = this.setName.bind(this); // pre-bind
   }

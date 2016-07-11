@@ -16,7 +16,7 @@
     "css-loader": "^0",
     "eslint": "2.2.0",
     "eslint-loader": "^1",
-    "eslint-plugin-react": "^3",
+    "eslint-plugin-react": "^5",
     "style-loader": "^0",
     "webpack": "^1",
     "webpack-dev-server": "^1"

@@ -13,6 +13,7 @@ class TodoList extends React.Component {
     super(); // must call this before accessing "this"
 
     this.state = {
+      todoText: '', // must initialize
       todos: [
         TodoList.createTodo('learn React', true),
         TodoList.createTodo('build a React app')
