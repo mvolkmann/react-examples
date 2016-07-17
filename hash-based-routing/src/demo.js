@@ -32,7 +32,7 @@ function render() {
     hash === '#page1' ? <Page1/> :
     hash === '#page2' ? <Page2/> :
     <Home/>; // default page; could use a custom 404 page
-  ReactDOM.render(jsx, document.getElementById('container'));
+  ReactDOM.render(jsx, document.getElementById('content'));
   // Browser back and forward buttons will work.
   // User can change hash in browser address bar.
 

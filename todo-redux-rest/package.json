@@ -37,7 +37,7 @@
     "immutable": "^3",
     "mongodb": "^2",
     "react": "^15",
-    "react-addons-perf": "^0",
+    "react-addons-perf": "^15",
     "react-dom": "^15",
     "redux": "^3"
   }
