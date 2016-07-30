@@ -21,8 +21,8 @@ class GiftApp extends React.Component {
   }
 
   render() {
-    const app = this.props.app;
-    const state = app.state; // the data for the app
+    const {app} = this.props;
+    const {state} = app; // the data for the app
     this.focusId = state.focusId || 'nameInput';
     const {selectedName} = state;
     const giftsForName = state.gifts[selectedName] || [];
@@ -69,7 +69,7 @@ class GiftApp extends React.Component {
           onSelect={app.onSelectGift}
           onDelete={app.onDeleteGift}/>
 
-        <Button classNames="btn btn-default"
+        <Button className="btn btn-default"
           disabled={app.stateStack.length < 2}
           onClick={app.onUndo}>Undo</Button>
       </div>

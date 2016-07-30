@@ -66,12 +66,14 @@ class Main extends React.Component {
   }
 
   onCloseConfirmDeleteModal() {
+    // Closing dialog without pressing OK button doesn't delete.
     // Don't want this on stateStack.
     this.setState({confirmDelete: false});
   }
 
   onConfirmDeleteName() {
     if (this.selectedNameHasGifts()) {
+      // Must confirm delete of a name if they have gifts.
       // Don't want this on stateStack.
       this.setState({confirmDelete: true});
     } else {
@@ -87,6 +89,7 @@ class Main extends React.Component {
       Object.assign({}, gifts, {[selectedName]: newGiftsForName});
     this.pushState({
       gifts: newGifts,
+      // If there are remaining gifts, select first one.
       selectedGift: newGiftsForName.length ? newGiftsForName[0] : null
     });
   }
@@ -103,6 +106,7 @@ class Main extends React.Component {
       confirmDelete: false,
       names: newNames,
       gifts: newGifts,
+      // If there are remaining names, select first one.
       selectedName: newNames.length ? newNames[0] : null
     });
   }
@@ -113,6 +117,7 @@ class Main extends React.Component {
 
   onSelectName(event) {
     this.pushState({
+      // When a name is selected, move focus to giftInput.
       focusId: 'giftInput',
       selectedName: event.target.value
     });
@@ -126,6 +131,8 @@ class Main extends React.Component {
   }
 
   pushState(stateMods) {
+    // Modify the state and
+    // add the new state to the stack after the state has been updated.
     this.setState(stateMods, () => this.stateStack.push(this.state));
   }
 

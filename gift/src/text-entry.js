@@ -37,7 +37,6 @@ class TextEntry extends React.Component {
 const {func, string} = React.PropTypes;
 TextEntry.propTypes = {
   id: string,
-  inputRef: string,
   label: string,
   onAdd: func.isRequired,
   onChange: func.isRequired,
