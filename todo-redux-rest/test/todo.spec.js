@@ -1,4 +1,4 @@
-/* global describe, it */
+/* global beforeEach, describe, it */
 import Immutable from 'immutable';
 import React from 'react'; //eslint-disable-line
 import TestUtils from 'react-addons-test-utils';
@@ -11,16 +11,21 @@ global.document = jsdom.jsdom();
 global.window = global.document.defaultView;
 
 describe('Todo', () => {
-  it('should have expected content', () => {
+  let deletedTodo, iTodo;
+
+  function onDeleteTodo() {
+    deletedTodo = true;
+  }
+
+  function onToggleDone() {}
+
+  beforeEach(() => {
+    deletedTodo = false;
     // Define prop values needed to render a Todo component.
-    const iTodo = Immutable.fromJS({text: 'Get milk', done: true});
+    iTodo = Immutable.fromJS({text: 'Get milk', done: true});
+  });
 
-    let deletedTodo = false;
-    function onDeleteTodo() {
-      deletedTodo = true;
-    }
-    function onToggleDone() {}
-
+  it('should have expected content', () => {
     // Create a "shallow renderer" that renders only the top-level component
     // and does not require a DOM.
     const renderer = TestUtils.createRenderer();
@@ -53,8 +58,9 @@ describe('Todo', () => {
     expect(button.type).toBe('button');
     expect(button.props.children).toBe('Delete');
     expect(button.props.onClick).toBe(onDeleteTodo);
+  });
 
-    // Test use of Delete button.
+  it('should have functioning delete button', () => {
     const todo = TestUtils.renderIntoDocument(
       <Todo iTodo={iTodo}
         onDeleteTodo={onDeleteTodo}

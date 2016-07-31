@@ -34,11 +34,11 @@ describe('GiftList', () => {
     expect(select.type).toBe('select');
     //TODO: Assert that the value of the select is selectedGift.
     const selectChildren = select.props.children;
-    expect(selectChildren.length).toEqual(3);
+    //TODO: Assert that there are three children.
     selectChildren.forEach((option, index) => {
       //TODO: Assert that the type of the option is "option".
       //TODO: Assert that the key of the option is the gift at index.
-      //TODO: Assert that the text value of the option is the gift at index.
+      //TODO: Assert that the text value of the option is also the gift at index.
     });
 
     expect(button.type).toBe('button');
