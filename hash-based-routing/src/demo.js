@@ -6,7 +6,7 @@ const Home = () => <div>
 
   {/* Demonstrate hash change via a link. */}
   <a href="#page1">Page 1</a>
-  &nbsp;
+  {' '}
 
   {/* Demonstrate hash change via code. */}
   <button onClick={() => location.hash = '#page2'}>Page 2</button>

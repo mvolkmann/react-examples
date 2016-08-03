@@ -24,7 +24,7 @@ App.propTypes = {
 const Home = () => <div>
   <h1>Home</h1>
   <Link to="/page1">Page 1</Link>
-  &nbsp;
+  {' '}
   <Link to="/page2">Page 2</Link>
 </div>;
 
