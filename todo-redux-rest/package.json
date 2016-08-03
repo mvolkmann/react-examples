@@ -6,7 +6,7 @@
     "build": "webpack",
     "start": "webpack-dev-server --content-base public --inline",
     "rest-server": "node server.js",
-    "test": "mocha './test/**/*.spec.js' --compilers js:babel-core/register"
+    "test": "mocha ./test/**/*.spec.js --compilers js:babel-core/register"
   },
   "author": "R. Mark Volkmann",
   "license": "MIT",

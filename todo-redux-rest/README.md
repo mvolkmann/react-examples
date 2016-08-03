@@ -1,4 +1,12 @@
 Setup steps
+* download and install MongoDB
+  - browse https://www.mongodb.com/
+  - press "Download" button
+  - select "Community Server" tab
+  - press "DOWNLOAD" button
+  - unzip the downloaded file
+  - for Mac OS X, add bin directory of new directory to PATH
+  - for Windows, ?
 * npm install
 * mongod
 * npm run build

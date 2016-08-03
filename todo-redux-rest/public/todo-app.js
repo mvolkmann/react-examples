@@ -10,8 +10,6 @@ import TodoHeader from './todo-header';
 import TodoList from './todo-list';
 import './todo.css';
 
-//console.log('todo-app.js x: Perf =', Perf);
-
 function handleError(msg, res) {
   store.dispatch({
     type: 'error',

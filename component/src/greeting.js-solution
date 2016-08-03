@@ -3,8 +3,8 @@ import React from 'react'; //eslint-disable-line
 /*
 class Greeting extends React.Component {
   render() {
-    let msg = `Hello, ${props.name}!`;
-    if (props.shout) msg = msg.toUpperCase();
+    let msg = `Hello, ${this.props.name}!`;
+    if (this.props.shout) msg = msg.toUpperCase();
     return <h1>{msg}</h1>;
   }
 }

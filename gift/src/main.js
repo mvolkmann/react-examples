@@ -7,7 +7,7 @@ import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
 
 // Styling
-import 'bootstrap-loader';
+import 'bootstrap-loader'; // need for Bootstrap styling
 import './app.scss';
 
 class Main extends React.Component {
@@ -57,11 +57,11 @@ class Main extends React.Component {
   }
 
   // Handles changes to both nameInput and giftInput.
-  onChange(name, event) {
+  onChange(inputName, event) {
     // Don't want this on stateStack.
     this.setState({
-      focusId: name + 'Input',
-      [name]: event.target.value
+      focusId: inputName + 'Input',
+      [inputName]: event.target.value
     });
   }
 
@@ -133,7 +133,8 @@ class Main extends React.Component {
   pushState(stateMods) {
     // Modify the state and
     // add the new state to the stack after the state has been updated.
-    this.setState(stateMods, () => this.stateStack.push(this.state));
+    this.setState(stateMods,
+      () => this.stateStack.push(this.state));
   }
 
   /**

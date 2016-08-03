@@ -22,6 +22,6 @@ export default function (state = initialState, action) {
   if (!reducer) {
     throw new Error('no reducer named "' + action.type + '" was found');
   }
-  const payload = action ? action.payload : null;
-  return reducer(state, payload);
+
+  return reducer(state, action.payload);
 }
