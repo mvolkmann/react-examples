@@ -1,0 +1,11 @@
+[ignore]
+.*/node_modules/.*
+
+[options]
+module.name_mapper='.+.css$' -> 'empty/object'
+module.file_ext=.js
+module.file_ext=.json
+module.file_ext=.jsx
+module.file_ext=.css
+module.file_ext=.scss
+suppress_comment= \\(.\\|\n\\)*\\$FlowSuppressNextLine
