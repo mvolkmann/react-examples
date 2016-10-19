@@ -1,5 +1,4 @@
 // @flow
-
 type Point = [number, number]; // a tuple
 type PointArr = Array<Point>;
 
