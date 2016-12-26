@@ -1,24 +1,25 @@
 // @flow
 /* eslint arrow-parens: 0, no-unused-vars: 0 */
 // The arrow-parens rule is disabled because parens are required
-// when Flow types are added to arraw function parameters.
+// when Flow types are added to arrow function parameters.
 
-type TestFn = (p1: boolean, p2: number, p3: string) => void;
+type TestFnType = (p1: boolean, p2: number, p3: string) => void;
 
 // Perfect match
-const f1: TestFn = (a: boolean, b: number, c: string): void => {};
+const f1: TestFnType = (a: boolean, b: number, c: string): void => {};
 // Missing last parameter and return type - okay
-const f2: TestFn = (a: boolean, b: number) => {};
+const f2: TestFnType = (a: boolean, b: number) => {};
 // Missing last two parameters and return type - okay
-const f3: TestFn = (a: boolean) => {};
+const f3: TestFnType = (a: boolean) => {};
 // Missing all parameters and return type - okay
-const f4: TestFn = () => {};
+const f4: TestFnType = () => {};
 // Wrong type for first parameter - error
-const f5: TestFn = (a: number) => {};
+const f5: TestFnType = (a: number) => {}; // error
 // Missing return type and returns wrong type - error
-const f6: TestFn = (a: boolean, b: number, c: string) => 'bad';
+const f6: TestFnType = (a: boolean, b: number, c: string) => 'bad'; // error
 // Wrong return type - error
-const f7: TestFn = (a: boolean, b: number, c: string): string => 'bad';
+const f7: TestFnType =
+  (a: boolean, b: number, c: string): string => 'bad'; // error
 
 /*
 type Callback = (err: ?Error, result: string) => void;

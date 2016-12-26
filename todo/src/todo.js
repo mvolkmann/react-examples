@@ -1,3 +1,5 @@
+import gronk from 'gronk';
+console.log('todo.js x: gronk =', gronk);
 import React from 'react'; //eslint-disable-line
 
 // A props object is passed to this function and destructured.
@@ -14,12 +16,12 @@ const Todo = ({onDeleteTodo, onToggleDone, todo}) =>
 const {bool, func, shape, string} = React.PropTypes;
 Todo.propTypes = {
   //todo: object.isRequired,
+  onDeleteTodo: func.isRequired,
+  onToggleDone: func.isRequired,
   todo: shape({
     done: bool.isRequired,
     text: string.isRequired
-  }).isRequired,
-  onDeleteTodo: func.isRequired,
-  onToggleDone: func.isRequired
+  }).isRequired
 };
 
 export default Todo;

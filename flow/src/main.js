@@ -8,4 +8,4 @@ sayHello(mark);
 
 sayHello({name: 'Tami', hobby: 'swimming'});
 
-sayHello('Mark');
+sayHello('Mark'); // error

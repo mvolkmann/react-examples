@@ -1,11 +1,13 @@
 // ESLint can't detect when a variable is only used in JSX.
 /* eslint no-unused-vars: 0 */
 
+/*
 import GiftList from './gift-list';
 import NameSelect from './name-select';
 import React from 'react'; //eslint-disable-line
 import {Button, Modal} from 'react-bootstrap';
 import TextEntry from './text-entry';
+*/
 
 class GiftApp extends React.Component {
   componentDidMount() {

@@ -1,7 +1,7 @@
 // @flow
 
-export type Named = {name: string};
+export type NamedType = {name: string};
 
-export function sayHello(thing: Named) {
+export function sayHello(thing: NamedType) {
   console.log('Hello, ' + thing.name + '!');
 }

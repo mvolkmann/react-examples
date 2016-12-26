@@ -1,18 +1,18 @@
 // @flow
 
-type Person = {
-  name: string,
+type PersonType = {
   birthday: Date,
+  name: string,
   spouse?: Person
 };
 
-const tami: Person = {
+const tami: PersonType = {
   name: 'Tami',
   birthday: new Date(1961, 8, 9),
   height: 65
 };
 
-const mark: Person = {
+const mark: PersonType = {
   name: 'Mark',
   birthday: new Date(1961, 3, 16),
   height: 74,
@@ -21,10 +21,10 @@ const mark: Person = {
 
 tami.spouse = mark;
 
-function dumpPerson(person: Person) {
+function dumpPerson(person: PersonType) {
   const status = person.spouse ? 'married to ' + person.spouse.name : 'single';
   console.log(person.name + ' is ' + status + '.');
 }
 
 dumpPerson(mark);
-dumpPerson(new Date());
+dumpPerson(new Date()); // error
