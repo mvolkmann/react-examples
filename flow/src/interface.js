@@ -23,10 +23,10 @@ class Car {
   }
 }
 
-class House {
+class House { // has no methods
 }
 
-function testDrive(vehicle: Vehicle) {
+function testDrive(vehicle: Vehicle): void {
   vehicle.start();
   vehicle.stop();
 }
@@ -35,5 +35,5 @@ const boat:Vehicle = new Boat();
 testDrive(boat);
 const car:Vehicle = new Car();
 testDrive(car);
-//const house:Vehicle = new House(); // error, doesn't have properties of Vehicle
-//testDrive(house); // run-time error
+const house:Vehicle = new House();
+testDrive(house); // run-time error

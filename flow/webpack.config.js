@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './src/main.js',
+  entry: './src/type-alias-import.js',
   output: {
     path: 'build',
     filename: 'bundle.js'
