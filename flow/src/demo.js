@@ -48,6 +48,3 @@ type MyParametricFnType<T> = (p1: T, p2: T) => T;
 const add2: MyParametricFnType<*> = // infers number for *
   (p1: number, p2: number): number => p1 + p2;
 console.log(add2(2, 3));
-
-type ArrayOfArraysOfNumbersType = Array<Array<number>>;
-const aoaon: ArrayOfArraysOfNumbersType = [[1, 2], [3, 4, 5]];

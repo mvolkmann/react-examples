@@ -1,4 +1,5 @@
 // @flow
+
 type PointType = [number, number]; // a tuple
 type PointArrType = Array<PointType>;
 
@@ -19,4 +20,4 @@ const points: PointArrType = [
   [0, 0], [3, 4], [5, 2] //, 'foo'
 ];
 console.log('perimeter =', perimiter(points).toFixed(2));
-//console.log('perimeter =', perimiter(7));
+console.log('perimeter =', perimiter(7));

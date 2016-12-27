@@ -3,7 +3,7 @@
 type PersonType = {
   birthday: Date,
   name: string,
-  spouse?: Person
+  spouse?: PersonType
 };
 
 const tami: PersonType = {
@@ -21,8 +21,8 @@ const mark: PersonType = {
 
 tami.spouse = mark;
 
-function dumpPerson(person: PersonType) {
-  const status = person.spouse ? 'married to ' + person.spouse.name : 'single';
+function dumpPerson(person: PersonType): void {
+  const status: string = person.spouse ? 'married to ' + person.spouse.name : 'single';
   console.log(person.name + ' is ' + status + '.');
 }
 
