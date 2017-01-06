@@ -34,14 +34,8 @@ class TodoList extends React.Component {
     return this.state.todos.filter(todo => !todo.done).length;
   }
 
-  /**
-   * line 1
-   * line 2
-   */
   onAddTodo() {
-    /*
     const newTodo = TodoList.createTodo(this.state.todoText);
-    */
     this.setState({
       todoText: '',
       todos: this.state.todos.concat(newTodo)

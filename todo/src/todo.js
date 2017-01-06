@@ -1,5 +1,3 @@
-import gronk from 'gronk';
-console.log('todo.js x: gronk =', gronk);
 import React from 'react'; //eslint-disable-line
 
 // A props object is passed to this function and destructured.
