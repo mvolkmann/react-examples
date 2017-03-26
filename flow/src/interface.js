@@ -1,9 +1,10 @@
 // @flow
 
-interface Vehicle {
-  start(): void;
-  stop(): void;
-}
+//interface Vehicle {
+type Vehicle = {
+  start(): void,
+  stop(): void
+};
 
 class Boat {
   start(): void {
@@ -31,9 +32,9 @@ function testDrive(vehicle: Vehicle): void {
   vehicle.stop();
 }
 
-const boat:Vehicle = new Boat();
+const boat: Vehicle = new Boat();
 testDrive(boat);
-const car:Vehicle = new Car();
+const car: Vehicle = new Car();
 testDrive(car);
-const house:Vehicle = new House();
+const house: Vehicle = new House();
 testDrive(house); // run-time error

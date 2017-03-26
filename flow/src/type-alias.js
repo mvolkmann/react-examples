@@ -22,8 +22,8 @@ const mark: PersonType = {
 tami.spouse = mark;
 
 function dumpPerson(person: PersonType): void {
-  const status: string = person.spouse ? 'married to ' + person.spouse.name : 'single';
-  console.log(person.name + ' is ' + status + '.');
+  const status = person.spouse ? 'married to ' + person.spouse.name : 'single';
+  console.log(`${person.name} is ${status}.`);
 }
 
 dumpPerson(mark);

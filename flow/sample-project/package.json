@@ -1,0 +1,22 @@
+{
+  "name": "sample-project",
+  "version": "1.0.0",
+  "description": "Sample project for demonstrating use of Flow",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "Flow",
+    "Node"
+  ],
+  "author": "R. Mark Volkmann <r.mark.volkmann@gmail.com> (http://ociweb.com/mark)",
+  "license": "MIT",
+  "dependencies": {
+    "liner": "^0.3.3",
+    "lodash": "^4.17.3"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.37.4"
+  }
+}

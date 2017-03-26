@@ -1,0 +1,7 @@
+// @flow
+
+declare module 'filer' {
+  declare module.exports: {
+    processFile(path: string, cb: (number) => void): void;
+  };
+}
