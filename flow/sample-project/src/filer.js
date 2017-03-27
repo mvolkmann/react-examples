@@ -1,6 +1,9 @@
 // @flow
 const Liner = require('liner');
-const _ = require('lodash/string');
+// If this is used, Flow doesn't detect type errors.
+// I suppose this is because it doesn't match any name under flow-typed/npm.
+//const _ = require('lodash/string');
+const _ = require('lodash');
 
 /**
  * Outputs each line in the text file at the given path,

@@ -1,9 +1,6 @@
 {
   "name": "sample-project",
   "version": "1.0.0",
-  "description": "Sample project for demonstrating use of Flow",
-  "license": "MIT",
-  "main": "index.js",
   "dependencies": {
     "liner": "^0.3.3",
     "lodash": "^4.17.3"
