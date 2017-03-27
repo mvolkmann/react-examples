@@ -18,7 +18,7 @@
     "babel-preset-env": "^1.2.0",
     "eslint": "^3.12.2",
     "eslint-loader": "^1.6.1",
-    "flow-bin": "^0.36.0",
+    "flow-bin": "^0.42.0",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   }

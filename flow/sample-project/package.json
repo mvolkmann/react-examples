@@ -2,21 +2,27 @@
   "name": "sample-project",
   "version": "1.0.0",
   "description": "Sample project for demonstrating use of Flow",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "keywords": [
-    "Flow",
-    "Node"
-  ],
-  "author": "R. Mark Volkmann <r.mark.volkmann@gmail.com> (http://ociweb.com/mark)",
   "license": "MIT",
+  "main": "index.js",
   "dependencies": {
     "liner": "^0.3.3",
     "lodash": "^4.17.3"
   },
   "devDependencies": {
-    "flow-bin": "^0.37.4"
+    "babel-cli": "^6.24.0",
+    "babel-eslint": "^7.2.1",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-preset-env": "^1.2.2",
+    "eslint": "^3.18.0",
+    "eslint-plugin-flowtype": "^2.30.4",
+    "flow-bin": "^0.42.0",
+    "npm-run-all": "^4.0.2"
+  },
+  "scripts": {
+    "babel": "babel src -d build",
+    "flow": "flow",
+    "lint": "eslint --quiet src --ext .js",
+    "run": "node build/index.js",
+    "start": "npm-run-all lint flow babel run"
   }
 }
