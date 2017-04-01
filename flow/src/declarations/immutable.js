@@ -4,8 +4,8 @@ declare module immutable {
   // Flow can't handle that, so I'm giving the class
   // an alternate name for type checking purposes.
   declare class IMap {
-    get(key: any, notSetValue?: any): any;
-    set(key: any, value: any): IMap;
+    get(key: any, notSetValue?: any): any,
+    set(key: any, value: any): IMap
   }
 
   declare function fromJS(value: any): any;

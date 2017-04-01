@@ -1,12 +1,12 @@
 // @flow
 
-//interface Vehicle {
-type Vehicle = {
+//type Vehicle = {
+interface Vehicle {
   start(): void,
   stop(): void
-};
+}
 
-class Boat {
+class Boat implements Vehicle {
   start(): void {
     console.log('The boat is started.');
   }
@@ -15,7 +15,7 @@ class Boat {
   }
 }
 
-class Car {
+class Car implements Vehicle {
   start(): void {
     console.log('The car is started.');
   }
