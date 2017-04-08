@@ -13,12 +13,14 @@
     "eslint": "^3.18.0",
     "eslint-plugin-flowtype": "^2.30.4",
     "flow-bin": "^0.42.0",
+    "flow-watch": "^1.1.1",
     "npm-run-all": "^4.0.2"
   },
   "scripts": {
     "babel": "babel src -d build",
     "flow": "flow",
-    "lint": "eslint --quiet src --ext .js",
+    "floww": "flow-watch",
+    "lint": "eslint --quiet src",
     "run": "node build/index.js",
     "start": "npm-run-all lint flow babel run"
   }
