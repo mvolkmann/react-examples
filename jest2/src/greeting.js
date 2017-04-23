@@ -15,8 +15,11 @@ class Greeting extends Component {
       <form>
         <div>
           <label>Name: </label>
-          <input type="text" value={this.state.name}
-            onChange={e => this.setName(e)} />
+          <input
+            type="text"
+            value={this.state.name}
+            onChange={e => this.setName(e)}
+          />
         </div>
         <div className="message">
           {this.props.greet}, {this.state.name}!

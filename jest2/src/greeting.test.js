@@ -4,7 +4,6 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 
 describe('Greeting', () => {
-
   it('should match snapshot', () => {
     const tree = renderer.create(<Greeting />).toJSON();
     expect(tree).toMatchSnapshot();

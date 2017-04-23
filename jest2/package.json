@@ -19,7 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "format": "prettier --write",
+    "format": "prettier --bracket-spacing false --single-quote --write src/**/*.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
