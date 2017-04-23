@@ -8,7 +8,7 @@ const _ = require('lodash');
 /**
  * Outputs each line in the text file at the given path,
  * capitalizing the first letter of each word,
- * and returns the number of lines read.
+ * and calls cb with the number of lines read.
  */
 function processFile(path: string, cb: (number) => void): void {
   let count = 0;

@@ -1,0 +1,20 @@
+exports[`Greeting should match snapshot 1`] = `
+<form>
+  <div>
+    <label>
+      Name: 
+    </label>
+    <input
+      onChange={[Function]}
+      type="text"
+      value="World" />
+  </div>
+  <div
+    className="message">
+    Hello
+    , 
+    World
+    !
+  </div>
+</form>
+`;

@@ -1,7 +1,8 @@
 // @flow
 
 type PointType = [number, number]; // a tuple
-type PointArrType = Array<PointType>;
+//type PointArrType = Array<PointType>;
+type PointArrType = PointType[];
 
 function distance(p1: PointType, p2: PointType): number {
   return Math.hypot(p2[0] - p1[0], p2[1] - p1[1]);
