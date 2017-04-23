@@ -7,6 +7,7 @@
     "eslint": "^3.19.0",
     "eslint-plugin-flowtype": "^2.32.1",
     "eslint-plugin-react": "^6.10.3",
+    "prettier": "^1.2.2",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
