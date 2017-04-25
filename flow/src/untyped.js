@@ -1,7 +1,7 @@
 // @flow
 
 function rectangleArea(width, height) {
-  return width * Number(height);
+  return width * height;
 }
 
 const area = rectangleArea(100, 50);
