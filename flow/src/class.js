@@ -4,7 +4,7 @@ class Person {
   name: string;
   birthday: Date;
   height: number;
-  spouse: Person;
+  spouse: ?Person;
 
   constructor(name: string, birthday: Date, height: number): void {
     this.name = name;

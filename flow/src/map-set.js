@@ -12,12 +12,12 @@ const lemieux: PlayerType =
   {name: 'Mario Lemieux', number: 66, position: 'center'};
 
 const players: PlayerType[] = [gretzky, lemieux];
-const playerMap: Map<number, PlayerType> = new Map();
 const playerSet: Set<PlayerType> = new Set(players);
+const playerMap: Map<number, PlayerType> = new Map();
 
 for (const player of players) {
   playerMap.set(player.number, player);
 }
 
-console.log('map-set.js: playerMap =', playerMap);
 console.log('map-set.js: playerSet =', playerSet);
+console.log('map-set.js: playerMap =', playerMap);
