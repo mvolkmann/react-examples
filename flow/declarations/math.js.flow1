@@ -1,0 +1,2 @@
+//function double(n: number): number {}
+declare export function double(n: number): number;
