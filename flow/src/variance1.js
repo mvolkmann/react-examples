@@ -24,6 +24,7 @@ const dog: Animal = animals[0]; // works
 console.log('dog =', dog);
 
 // Typecasting to any and then to Dog works.
+// This is referred to as "casting through any".
 const dogTypecast: Dog = ((animals[0]: any): Dog);
 console.log('dogTypecast =', dogTypecast);
 

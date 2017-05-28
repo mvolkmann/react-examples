@@ -7,4 +7,5 @@
 [libs]
 
 [options]
+emoji=true
 module.name_mapper='.+\.css$' -> 'CSSModule'
