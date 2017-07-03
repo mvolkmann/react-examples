@@ -1,16 +1,17 @@
+// @flow
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Delta from './delta';
-// Only using prop-types to keep this example simple.
-// We would use Flow instead.
-import t from 'prop-types';
+import type {DispatchType, StateType} from './types';
+
+type PropsType = {
+  counter: number,
+  onDecrement: () => void,
+  onIncrement: () => void
+};
 
 class Counter extends Component {
-  static propTypes = {
-    counter: t.number.isRequired,
-    onDecrement: t.func.isRequired,
-    onIncrement: t.func.isRequired
-  };
+  props: PropsType;
 
   render() {
     const {counter, onDecrement, onIncrement} = this.props;
@@ -34,7 +35,7 @@ class Counter extends Component {
 // Functions on the object this returns
 // are passed as props to this component
 // and can be used as event handlers.
-const mapDispatch = dispatch => ({
+const mapDispatch = (dispatch: DispatchType) => ({
   onDecrement() {
     dispatch({type: 'decrement'});
   },
@@ -45,7 +46,7 @@ const mapDispatch = dispatch => ({
 
 // This makes desired state properties
 // available to this component as props.
-function mapState({counter}) {
+function mapState({counter}: StateType) {
   return {counter};
 }
 

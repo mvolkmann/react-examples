@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
@@ -11,7 +12,7 @@ import reducer from './reducer';
 // Note how no props are passed to Counter.
 // It gets all its props from the store using
 // mapStateToProps at the bottom of counter.js.
-function render() {
+function render(): void {
   ReactDOM.render(
     <Provider store={store}>
       <Counter />

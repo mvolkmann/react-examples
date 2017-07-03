@@ -1,14 +1,15 @@
+// @flow
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-// Only using prop-types to keep this example simple.
-// We would use Flow instead.
-import t from 'prop-types';
+import type {DispatchType, StateType} from './types';
+
+type PropsType = {
+  delta: number,
+  onDeltaChange: () => void
+};
 
 class Delta extends Component {
-  static propTypes = {
-    delta: t.number.isRequired,
-    onDeltaChange: t.func.isRequired
-  };
+  props: PropsType;
 
   render() {
     return (
@@ -27,8 +28,8 @@ class Delta extends Component {
 // Functions on the object this returns
 // are passed as props to this component
 // and can be used as event handlers.
-const mapDispatch = dispatch => ({
-  onDeltaChange(e) {
+const mapDispatch = (dispatch: DispatchType) => ({
+  onDeltaChange(e: SyntheticInputEvent) {
     dispatch({
       type: 'deltaChange',
       payload: Number(e.target.value)
@@ -38,7 +39,7 @@ const mapDispatch = dispatch => ({
 
 // This makes desired state properties
 // available to this component as props.
-function mapState({delta}) {
+function mapState({delta}: StateType) {
   return {delta};
 }
 

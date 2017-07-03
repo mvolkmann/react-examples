@@ -1,4 +1,7 @@
-const initialState = {
+// @flow
+import type {ActionType, StateType, SubstateType} from './types';
+
+const initialState: StateType = {
   counter: 0,
   delta: 1
 };
@@ -6,20 +9,20 @@ const initialState = {
 // In this example, all reducer functions are in one file,
 // but we could mix in functions from other files here.
 const functions = {
-  decrement(state) {
+  decrement(state: StateType): SubstateType {
     const {counter, delta} = state;
     return {counter: counter - delta};
   },
-  deltaChange(state, delta) {
+  deltaChange(state: StateType, delta: number): SubstateType {
     return {delta};
   },
-  increment(state) {
+  increment(state: StateType): SubstateType {
     const {counter, delta} = state;
     return {counter: counter + delta};
   }
 };
 
-function reducer(state, action) {
+function reducer(state: StateType, action: ActionType): StateType {
   const {payload, type} = action;
   if (type === '@@redux/INIT') return initialState;
 
