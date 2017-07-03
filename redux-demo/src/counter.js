@@ -31,13 +31,6 @@ class Counter extends Component {
   }
 }
 
-// This makes desired state properties
-// available to this component as props.
-function mapState(state) {
-  const {counter} = state;
-  return {counter};
-}
-
 // Functions on the object this returns
 // are passed as props to this component
 // and can be used as event handlers.
@@ -49,5 +42,11 @@ const mapDispatch = dispatch => ({
     dispatch({type: 'increment'});
   }
 });
+
+// This makes desired state properties
+// available to this component as props.
+function mapState({counter}) {
+  return {counter};
+}
 
 export default connect(mapState, mapDispatch)(Counter);

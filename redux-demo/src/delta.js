@@ -24,13 +24,6 @@ class Delta extends Component {
   }
 }
 
-// This makes desired state properties
-// available to this component as props.
-function mapState(state) {
-  const {delta} = state;
-  return {delta};
-}
-
 // Functions on the object this returns
 // are passed as props to this component
 // and can be used as event handlers.
@@ -42,5 +35,11 @@ const mapDispatch = dispatch => ({
     });
   }
 });
+
+// This makes desired state properties
+// available to this component as props.
+function mapState({delta}) {
+  return {delta};
+}
 
 export default connect(mapState, mapDispatch)(Delta);
