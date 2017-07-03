@@ -1,2 +1,4 @@
-function double(n: number): number {}
-//declare export function double(n: number): number;
+// @flow
+
+//function double(n: number): number {}
+declare export function double(n: number): number;

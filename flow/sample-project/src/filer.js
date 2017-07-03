@@ -17,6 +17,7 @@ function processFile(path: string, cb: (number) => void): void {
   liner.on('readable', () => {
     while (true) {
       const line = liner.read();
+      console.log('filer.js x: line =', line);
       if (line === null) break;
       console.log(_.startCase(line));
       count++;
