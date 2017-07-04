@@ -1,4 +1,5 @@
 // @flow
+
 import reducer from './reducer';
 import type {StateType} from './types';
 

@@ -1,4 +1,5 @@
 // @flow
+
 import type {ActionType, StateType, SubstateType} from './types';
 
 const initialState: StateType = {
