@@ -7,15 +7,17 @@ import type {DispatchType, StateType} from './types';
 
 type PropsType = {
   counter: number,
-  onDecrement: () => void,
-  onIncrement: () => void
+  dispatch: DispatchType
 };
 
 class Counter extends Component {
   props: PropsType;
 
+  onDecrement = () => this.props.dispatch({type: 'decrement'});
+  onIncrement = () => this.props.dispatch({type: 'increment'});
+
   render() {
-    const {counter, onDecrement, onIncrement} = this.props;
+    const {counter} = this.props;
     return (
       <div>
         <div>
@@ -23,8 +25,12 @@ class Counter extends Component {
           {counter}
         </div>
         <div>
-          <button className="inc-btn" onClick={onIncrement}>Increment</button>
-          <button className="dec-btn" onClick={onDecrement}>Decrement</button>
+          <button className="inc-btn" onClick={this.onIncrement}>
+            Increment
+          </button>
+          <button className="dec-btn" onClick={this.onDecrement}>
+            Decrement
+          </button>
         </div>
         {/* Note how no props are passed to this component. */}
         <Delta />
@@ -33,22 +39,6 @@ class Counter extends Component {
   }
 }
 
-// Functions on the object this returns
-// are passed as props to this component
-// and can be used as event handlers.
-const mapDispatch = (dispatch: DispatchType) => ({
-  onDecrement() {
-    dispatch({type: 'decrement'});
-  },
-  onIncrement() {
-    dispatch({type: 'increment'});
-  }
-});
-
-// This makes desired state properties
-// available to this component as props.
-function mapState({counter}: StateType) {
-  return {counter};
-}
-
+const mapDispatch = (dispatch: DispatchType) => ({dispatch});
+const mapState = ({counter}: StateType) => ({counter});
 export default connect(mapState, mapDispatch)(Counter);
