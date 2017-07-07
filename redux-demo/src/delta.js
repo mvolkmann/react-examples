@@ -32,6 +32,5 @@ class Delta extends Component {
   }
 }
 
-const mapDispatch = (dispatch: DispatchType) => ({dispatch});
 const mapState = ({delta}: StateType) => ({delta});
-export default connect(mapState, mapDispatch)(Delta);
+export default connect(mapState)(Delta);

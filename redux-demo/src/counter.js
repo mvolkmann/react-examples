@@ -39,6 +39,5 @@ class Counter extends Component {
   }
 }
 
-const mapDispatch = (dispatch: DispatchType) => ({dispatch});
 const mapState = ({counter}: StateType) => ({counter});
-export default connect(mapState, mapDispatch)(Counter);
+export default connect(mapState)(Counter);
