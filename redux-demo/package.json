@@ -10,14 +10,19 @@
     "redux": "^3.7.1"
   },
   "scripts": {
-    "build": "react-scripts build",
+    "build": "npm build-css && react-scripts build",
+    "build-css": "node-sass src/ -o src/",
     "flow": "flow",
-    "start": "react-scripts start",
-    "test": "react-scripts test --env=jsdom"
+    "start": "npm-run-all -p watch-css react-start",
+    "react-start": "react-scripts start",
+    "test": "react-scripts test --env=jsdom",
+    "watch-css": "npm run build-css && node-sass src/ -o src/ --watch"
   },
   "devDependencies": {
     "enzyme": "^2.9.1",
     "flow-bin": "^0.49.1",
+    "node-sass": "^4.5.3",
+    "npm-run-all": "^4.0.2",
     "react-test-renderer": "^15.6.1",
     "redux-mock-store": "^1.2.3"
   }

@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import Delta from './delta';
 import type {DispatchType, StateType} from './types';
 
+import './counter.css';
+
 type PropsType = {
   counter: number,
   dispatch: DispatchType
@@ -19,20 +21,16 @@ class Counter extends Component {
   render() {
     const {counter} = this.props;
     return (
-      <div>
-        <div>
-          <label>Counter = </label>
-          {counter}
-        </div>
-        <div>
-          <button className="inc-btn" onClick={this.onIncrement}>
-            Increment
-          </button>
+      <div className="counter">
+        <div className="button-row">
           <button className="dec-btn" onClick={this.onDecrement}>
-            Decrement
+            -
+          </button>
+          {counter}
+          <button className="inc-btn" onClick={this.onIncrement}>
+            +
           </button>
         </div>
-        {/* Note how no props are passed to this component. */}
         <Delta />
       </div>
     );

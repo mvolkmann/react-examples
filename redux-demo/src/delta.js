@@ -4,6 +4,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {DispatchType, StateType} from './types';
 
+import './delta.css';
+
 type PropsType = {
   delta: number,
   dispatch: DispatchType
@@ -20,7 +22,7 @@ class Delta extends Component {
 
   render() {
     return (
-      <div>
+      <div className="delta">
         <label>Delta</label>
         <input
           type="number"

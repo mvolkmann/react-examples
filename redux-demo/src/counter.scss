@@ -1,0 +1,24 @@
+body {
+  background-color: linen;
+}
+
+.counter {
+  font-family: sans-serif;
+
+  .button-row {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    outline: solid red 1px;
+    width: 70px;
+
+    $button-size: 18px;
+    button {
+      border: none;
+      border-radius: $button-size / 2;
+      height: $button-size;
+      width: $button-size;
+    }
+  }
+}
