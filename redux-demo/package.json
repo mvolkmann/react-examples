@@ -16,13 +16,15 @@
     "format": "prettier-eslint --no-bracket-spacing --single-quote --write src/**/*.js",
     "lint": "eslint --quiet src --ext .js",
     "prepush": "npm run verify",
-    "verify": "npm-run-all lint flow format test",
     "start": "npm-run-all -p watch-css react-start",
     "react-start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
+    "test-no-watch": "cross-env CI=true npm test -- --verbose",
+    "verify": "npm-run-all lint flow format test-no-watch",
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch"
   },
   "devDependencies": {
+    "cross-env": "^5.0.1",
     "enzyme": "^2.9.1",
     "eslint": "^4.2.0",
     "eslint-plugin-flowtype": "^2.35.0",
