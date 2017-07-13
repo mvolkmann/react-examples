@@ -14,7 +14,8 @@ type PropsType = {
 class Delta extends Component {
   props: PropsType;
 
-  onDeltaChange = (e: SyntheticInputEvent) =>
+  //onDeltaChange = (e: SyntheticInputEvent) =>
+  onDeltaChange = e =>
     this.props.dispatch({
       type: 'deltaChange',
       payload: Number(e.target.value)
