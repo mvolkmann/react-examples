@@ -24,11 +24,13 @@ describe('Counter', () => {
   });
 
   test('should match snapshot', () => {
-    const tree = renderer.create(
-      <Provider store={store}>
-        <Counter />
-      </Provider>
-    ).toJSON();
+    const tree = renderer
+      .create(
+        <Provider store={store}>
+          <Counter />
+        </Provider>
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
