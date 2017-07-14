@@ -1,10 +1,12 @@
 // @flow
 
 import React from 'react';
+import Counter from './counter';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {mount} from 'enzyme';
-import Counter from './counter';
+import renderer from 'react-test-renderer';
+
 import './types';
 
 /**
@@ -21,7 +23,16 @@ describe('Counter', () => {
     store = mockStore(initialState);
   });
 
-  it('should decrement', () => {
+  test('should match snapshot', () => {
+    const tree = renderer.create(
+      <Provider store={store}>
+        <Counter />
+      </Provider>
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  test('should decrement', () => {
     const wrapper = mount(
       <Provider store={store}>
         <Counter />
@@ -34,7 +45,7 @@ describe('Counter', () => {
     expect(actions[0]).toEqual({type: 'decrement'});
   });
 
-  it('should increment', () => {
+  test('should increment', () => {
     const wrapper = mount(
       <Provider store={store}>
         <Counter />
