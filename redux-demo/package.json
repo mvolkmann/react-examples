@@ -13,7 +13,7 @@
     "build": "npm build-css && react-scripts build",
     "build-css": "node-sass src/ -o src/",
     "flow": "flow",
-    "format": "prettier-eslint --no-bracket-spacing --single-quote --write src/**/*.js",
+    "format": "prettier-eslint --no-bracket-spacing --single-quote --write src/**/*.{css,js}",
     "lint": "eslint --quiet src --ext .js",
     "prepush": "npm run verify",
     "start": "npm-run-all -p watch-css react-start",

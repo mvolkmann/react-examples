@@ -8,7 +8,7 @@ import Delta from './delta';
 
 /**
  * These tests just verify that when the user
- * interacts with the UI in in a certain way,
+ * interacts with the UI in a certain way,
  * the expected Redux actions are dispatched.
  */
 describe('Delta', () => {
