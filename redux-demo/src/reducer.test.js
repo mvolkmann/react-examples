@@ -35,7 +35,8 @@ describe('reducer', () => {
   it('should throw on unsupported action type', () => {
     const state: StateType = {counter: 0, delta: 1};
     const action = {type: 'notSupported'};
-    expect(() => reducer(state, action))
-      .toThrowError('unsupported action type "notSupported"');
+    expect(() => reducer(state, action)).toThrowError(
+      'unsupported action type "notSupported"'
+    );
   });
 });

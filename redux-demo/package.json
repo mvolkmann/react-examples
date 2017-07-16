@@ -23,9 +23,8 @@
   "scripts": {
     "build": "npm build-css && react-scripts build",
     "build-css": "node-sass src/ -o src/",
-    "cover": "npm-run-all cover:*",
-    "cover:gen": "cross-env CI=true npm test -- --coverage",
-    "cover:open": "open coverage/lcov-report/index.html",
+    "cover": "cross-env CI=true npm test -- --coverage",
+    "cover-open": "open coverage/lcov-report/index.html",
     "flow": "flow",
     "format": "prettier-eslint --no-bracket-spacing --single-quote --write src/**/*.js",
     "lint": "eslint --quiet src --ext .js",
@@ -34,7 +33,7 @@
     "react-start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
     "test-no-watch": "cross-env CI=true npm test -- --verbose",
-    "verify": "npm-run-all lint flow format cover:gen",
+    "verify": "npm-run-all lint flow format cover",
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch"
   },
   "devDependencies": {
