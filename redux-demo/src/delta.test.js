@@ -1,10 +1,11 @@
 // @flow
 
 import React from 'react';
+import Delta from './delta';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {mount} from 'enzyme';
-import Delta from './delta';
+import renderer from 'react-test-renderer';
 
 /**
  * These tests just verify that when the user
@@ -20,7 +21,18 @@ describe('Delta', () => {
     store = mockStore(initialState);
   });
 
-  it('should dispatch', () => {
+  test('should match snapshot', () => {
+    const tree = renderer
+      .create(
+        <Provider store={store}>
+          <Delta />
+        </Provider>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  test('should dispatch', () => {
     const wrapper = mount(
       <Provider store={store}>
         <Delta />
