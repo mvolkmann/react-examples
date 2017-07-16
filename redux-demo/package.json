@@ -9,9 +9,23 @@
     "react-scripts": "^1.0.10",
     "redux": "^3.7.1"
   },
+  "jest": {
+    "collectCoverageFrom": ["src/**/*.js", "!src/index.js"],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  },
   "scripts": {
     "build": "npm build-css && react-scripts build",
     "build-css": "node-sass src/ -o src/",
+    "cover": "npm-run-all cover:*",
+    "cover:gen": "cross-env CI=true npm test -- --coverage",
+    "cover:open": "open coverage/lcov-report/index.html",
     "flow": "flow",
     "format": "prettier-eslint --no-bracket-spacing --single-quote --write src/**/*.js",
     "lint": "eslint --quiet src --ext .js",
@@ -20,7 +34,7 @@
     "react-start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
     "test-no-watch": "cross-env CI=true npm test -- --verbose",
-    "verify": "npm-run-all lint flow format test-no-watch",
+    "verify": "npm-run-all lint flow format cover:gen",
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch"
   },
   "devDependencies": {

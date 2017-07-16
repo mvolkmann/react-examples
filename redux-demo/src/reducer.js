@@ -29,9 +29,9 @@ function reducer(state: StateType, action: ActionType): StateType {
 
   const fn = functions[type];
   if (!fn) {
-    console.error(`unsupported action type "${type}"`);
+    throw new Error(`unsupported action type "${type}"`);
   }
-  const changes = fn ? fn(state, payload) : state;
+  const changes = fn(state, payload);
   return {...state, ...changes};
 }
 

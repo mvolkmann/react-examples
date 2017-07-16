@@ -24,4 +24,18 @@ describe('reducer', () => {
     const newState = reducer(state, action);
     expect(newState.delta).toBe(3);
   });
+
+  it('should return initial state on INIT', () => {
+    const state: StateType = {counter: 0, delta: 1};
+    const action = {type: '@@redux/INIT'};
+    const newState = reducer(state, action);
+    expect(newState).toEqual(state);
+  });
+
+  it('should throw on unsupported action type', () => {
+    const state: StateType = {counter: 0, delta: 1};
+    const action = {type: 'notSupported'};
+    expect(() => reducer(state, action))
+      .toThrowError('unsupported action type "notSupported"');
+  });
 });
