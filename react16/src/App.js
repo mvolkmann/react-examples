@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -11,8 +11,8 @@ class App extends Component {
     console.log('App.js componentWillMount: entered');
   }
 
-  handleOne = () =>  console.log('got one');
-  handleTwo = () =>  console.log('got two');
+  handleOne = () => console.log('got one');
+  handleTwo = () => console.log('got two');
 
   render() {
     console.log('App.js render: entered');
@@ -25,8 +25,12 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <button id="#one" onClick={this.handleOne}>One</button>
-        <button id="#two" onClick={this.handleTwo}>Two</button>
+        <button id="#one" onClick={this.handleOne}>
+          One
+        </button>
+        <button id="#two" onClick={this.handleTwo}>
+          Two
+        </button>
       </div>
     );
   }
