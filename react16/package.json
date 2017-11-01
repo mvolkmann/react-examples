@@ -5,7 +5,7 @@
   "scripts": {
     "build": "npm run build-css && react-scripts build",
     "build-css": "node-sass src/ -o src/",
-    "format": "prettier-eslint --write src/**/*.{css,js}",
+    "format": "prettier-eslint --write src/**/*.{js}",
     "lint": "eslint --quiet src --ext .js",
     "start": "npm-run-all -p watch-css start-js",
     "start-js": "react-scripts start",
