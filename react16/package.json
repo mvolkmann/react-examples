@@ -6,10 +6,14 @@
     "build": "npm run build-css && react-scripts build",
     "build-css": "node-sass src/ -o src/",
     "format": "prettier-eslint --write src/**/*.{js}",
+    "flow": "flow",
     "lint": "eslint --quiet src --ext .js",
+    "prepush": "npm run verify",
     "start": "npm-run-all -p watch-css start-js",
     "start-js": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
+    "test-no-watch": "CI=true react-scripts test --env=jsdom",
+    "verify": "npm-run-all lint flow test-no-watch",
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch"
   },
   "dependencies": {
@@ -18,11 +22,15 @@
     "react-scripts": "1.0.14"
   },
   "devDependencies": {
+    "enzyme": "^3.1.0",
     "eslint": "^4.10.0",
     "eslint-plugin-flow": "^2.29.1",
     "eslint-plugin-html": "^3.2.2",
     "eslint-plugin-react": "^7.4.0",
     "eslint-plugin-volkmann": "^0.3.3",
+    "flow-bin": "^0.57.3",
+    "husky": "^0.14.3",
+    "jest-cli": "^21.2.1",
     "node-sass": "^4.5.3",
     "npm-run-all": "^4.1.1",
     "prettier": "^1.7.4",

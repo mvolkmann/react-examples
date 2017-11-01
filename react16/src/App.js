@@ -1,8 +1,12 @@
+// @flow
+
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
+type PropsType = {||};
+
+class App extends Component<PropsType> {
   componentDidMount() {
     console.log('App.js componentWillMount: entered');
   }
