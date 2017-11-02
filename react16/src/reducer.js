@@ -2,11 +2,11 @@
 
 import type {ActionType, StateType} from './types';
 
-const initialState = {
+export const initialState = {
   color: 'green'
 };
 
-function reducer(
+export function reducer(
   state: StateType = initialState,
   action: ActionType
 ): StateType {
@@ -17,5 +17,3 @@ function reducer(
       return state;
   }
 }
-
-export default reducer;
