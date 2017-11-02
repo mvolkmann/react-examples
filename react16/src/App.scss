@@ -1,6 +1,12 @@
 .App {
   text-align: center;
+
+  .body {
+    padding: 10px;
+  }
 }
+
+/* The rest of this file came from create-react-app. */
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
