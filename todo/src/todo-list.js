@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Todo from './todo';
 import './todo.css';
 
@@ -6,7 +6,7 @@ let lastId = 0;
 
 const createTodo = (text, done = false) => ({id: ++lastId, text, done});
 
-class TodoList extends React.Component {
+class TodoList extends Component {
   state = {
     todoText: '',
     todos: [createTodo('learn React', true), createTodo('build a React app')]

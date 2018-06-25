@@ -1,5 +1,5 @@
-import {arrayOf, bool, shape, string} from 'prop-types';
-import React from 'react';
+import {arrayOf, string} from 'prop-types';
+import React, {Component} from 'react';
 import {dispatchFilter, dispatchPush, dispatchSet, watch} from 'redux-easy';
 import Todo from './todo';
 import './todo.css';
@@ -8,14 +8,9 @@ let lastId = 0;
 
 export const createTodo = (text, done = false) => ({id: ++lastId, text, done});
 
-class TodoList extends React.Component {
+class TodoList extends Component {
   static propTypes = {
-    todos: arrayOf(
-      shape({
-        done: bool.isRequired,
-        text: string.isRequired
-      })
-    ).isRequired,
+    todos: arrayOf(Todo.propTypes.todo).isRequired,
     todoText: string.isRequired
   };
 
