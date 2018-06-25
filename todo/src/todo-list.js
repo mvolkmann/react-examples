@@ -1,102 +1,84 @@
-// ESLint can't detect when a variable is only used in JSX.
-/* eslint no-unused-vars: 0 */
-
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Todo from './todo';
 import './todo.css';
 
 let lastId = 0;
 
+const createTodo = (text, done = false) => ({id: ++lastId, text, done});
+
 class TodoList extends React.Component {
-  constructor() {
-    super(); // must call this before accessing "this"
-
-    this.state = {
-      todoText: '', // must initialize
-      todos: [
-        TodoList.createTodo('learn React', true),
-        TodoList.createTodo('build a React app')
-      ]
-    };
-
-    // Pre-bind event handling methods.
-    this.onArchiveCompleted = this.onArchiveCompleted.bind(this);
-    this.onAddTodo = this.onAddTodo.bind(this);
-    this.onTextChange = this.onTextChange.bind(this);
-  }
-
-  static createTodo(text, done = false) {
-    return {id: ++lastId, text, done};
-  }
+  state = {
+    todoText: '',
+    todos: [createTodo('learn React', true), createTodo('build a React app')]
+  };
 
   get uncompletedCount() {
     return this.state.todos.filter(todo => !todo.done).length;
   }
 
-  onAddTodo() {
-    const newTodo = TodoList.createTodo(this.state.todoText);
-    this.setState({
+  onAddTodo = () =>
+    this.setState(state => ({
       todoText: '',
-      todos: this.state.todos.concat(newTodo)
-    });
-  }
+      todos: state.todos.concat(createTodo(state.todoText))
+    }));
 
-  onArchiveCompleted() {
-    this.setState({
+  onArchiveCompleted = () =>
+    this.setState(state => ({
       todos: this.state.todos.filter(t => !t.done)
-    });
-  }
+    }));
 
-  onDeleteTodo(todoId) {
-    this.setState({
+  onDeleteTodo = todoId =>
+    this.setState(state => ({
       todos: this.state.todos.filter(t => t.id !== todoId)
+    }));
+
+  onTextChange = event => this.setState({todoText: event.target.value});
+
+  onToggleDone = todo =>
+    this.setState(state => {
+      const id = todo.id;
+      const todos = state.todos.map(
+        t => (t.id === id ? {id, text: todo.text, done: !todo.done} : t)
+      );
+      return {todos};
     });
-  }
-
-  onTextChange(event) {
-    this.setState({todoText: event.target.value});
-  }
-
-  onToggleDone(todo) {
-    const id = todo.id;
-    const todos = this.state.todos.map(t =>
-      t.id === id ?
-        {id, text: todo.text, done: !todo.done} :
-        t);
-    this.setState({todos});
-  }
 
   render() {
-    const todos = this.state.todos.map(todo =>
-      <Todo key={todo.id} todo={todo}
-        onDeleteTodo={this.onDeleteTodo.bind(this, todo.id)}
-        onToggleDone={this.onToggleDone.bind(this, todo)}/>);
+    const {todos, todoText} = this.state;
+    const todoElements = todos.map(todo => (
+      <Todo
+        key={todo.id}
+        todo={todo}
+        onDeleteTodo={() => this.onDeleteTodo(todo.id)}
+        onToggleDone={() => this.onToggleDone(todo)}
+      />
+    ));
 
     return (
       <div>
         <h2>To Do List</h2>
         <div>
-          {this.uncompletedCount} of {this.state.todos.length} remaining
-          <button onClick={this.onArchiveCompleted}>
-            Archive Completed
-          </button>
+          {this.uncompletedCount} of {todos.length} remaining
+          <button onClick={this.onArchiveCompleted}>Archive Completed</button>
         </div>
-        <br/>
+        <br />
         <form>
-          <input type="text" size="30" autoFocus
+          <input
+            type="text"
+            size="30"
+            autoFocus
             placeholder="enter new todo here"
-            value={this.state.todoText}
-            onChange={this.onTextChange}/>
-          <button disabled={!this.state.todoText}
-            onClick={this.onAddTodo}>
+            value={todoText}
+            onChange={this.onTextChange}
+          />
+          <button disabled={!todoText} onClick={this.onAddTodo}>
             Add
           </button>
         </form>
-        <ul className="unstyled">{todos}</ul>
+        <ul className="unstyled">{todoElements}</ul>
       </div>
     );
   }
 }
 
-ReactDOM.render(<TodoList/>, document.getElementById('content'));
+export default TodoList;

@@ -1,19 +1,16 @@
 import React from 'react'; //eslint-disable-line
+import {bool, func, shape, string} from 'prop-types';
 
 // A props object is passed to this function and destructured.
-const Todo = ({onDeleteTodo, onToggleDone, todo}) =>
+const Todo = ({onDeleteTodo, onToggleDone, todo}) => (
   <li>
-    <input type="checkbox"
-      checked={todo.done}
-      onChange={onToggleDone}/>
+    <input type="checkbox" checked={todo.done} onChange={onToggleDone} />
     <span className={'done-' + todo.done}>{todo.text}</span>
     <button onClick={onDeleteTodo}>Delete</button>
-  </li>;
+  </li>
+);
 
-//const {func, object} = React.PropTypes;
-const {bool, func, shape, string} = React.PropTypes;
 Todo.propTypes = {
-  //todo: object.isRequired,
   onDeleteTodo: func.isRequired,
   onToggleDone: func.isRequired,
   todo: shape({
