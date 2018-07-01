@@ -6,7 +6,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",
-    "redux-easy": "^2.7.3"
+    "redux-easy": "^2.8.0"
   },
   "scripts": {
     "start": "react-scripts start",

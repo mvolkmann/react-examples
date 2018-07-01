@@ -1,5 +1,5 @@
 import {bool, shape, string} from 'prop-types';
-import React from 'react'; //eslint-disable-line
+import React from 'react';
 import {dispatchFilter, dispatchMap} from 'redux-easy';
 
 function onDeleteTodo(todoId) {
@@ -8,10 +8,7 @@ function onDeleteTodo(todoId) {
 
 function onToggleDone(todo) {
   const id = todo.id;
-  dispatchMap(
-    'todos',
-    t => (t.id === id ? {id, text: todo.text, done: !todo.done} : t)
-  );
+  dispatchMap('todos', t => (t.id === id ? {...t, done: !t.done} : t));
 }
 
 // A props object is passed to this function and destructured.

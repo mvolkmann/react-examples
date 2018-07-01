@@ -1,6 +1,12 @@
 import {arrayOf, string} from 'prop-types';
 import React, {Component} from 'react';
-import {dispatchFilter, dispatchPush, dispatchSet, watch} from 'redux-easy';
+import {
+  dispatchFilter,
+  dispatchPush,
+  dispatchSet,
+  Input,
+  watch
+} from 'redux-easy';
 import Todo from './todo';
 import './todo.css';
 
@@ -25,8 +31,6 @@ class TodoList extends Component {
 
   onArchiveCompleted = () => dispatchFilter('todos', todo => !todo.done);
 
-  onTextChange = event => dispatchSet('todoText', event.target.value);
-
   render() {
     const {todos, todoText} = this.props;
 
@@ -41,13 +45,12 @@ class TodoList extends Component {
         </div>
         <br />
         <form>
-          <input
+          <Input
             type="text"
             size="30"
             autoFocus
+            path="todoText"
             placeholder="enter new todo here"
-            value={todoText}
-            onChange={this.onTextChange}
           />
           <button disabled={!todoText} onClick={this.onAddTodo}>
             Add
