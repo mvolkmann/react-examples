@@ -36,9 +36,9 @@ class TodoList extends Component {
 
   onToggleDone = todo =>
     this.setState(state => {
-      const id = todo.id;
+      const {id} = todo;
       const todos = state.todos.map(
-        t => (t.id === id ? {id, text: todo.text, done: !todo.done} : t)
+        t => (t.id === id ? {...t, done: !t.done} : t)
       );
       return {todos};
     });

@@ -14,6 +14,8 @@ let lastId = 0;
 
 export const createTodo = (text, done = false) => ({id: ++lastId, text, done});
 
+const onArchiveCompleted = () => dispatchFilter('todos', t => !t.done);
+
 class TodoList extends Component {
   static propTypes = {
     todos: arrayOf(Todo.propTypes.todo).isRequired,
@@ -21,15 +23,13 @@ class TodoList extends Component {
   };
 
   get uncompletedCount() {
-    return this.props.todos.filter(todo => !todo.done).length;
+    return this.props.todos.filter(t => !t.done).length;
   }
 
   onAddTodo = () => {
     dispatchPush('todos', createTodo(this.props.todoText));
     dispatchSet('todoText', '');
   };
-
-  onArchiveCompleted = () => dispatchFilter('todos', todo => !todo.done);
 
   render() {
     const {todos, todoText} = this.props;
@@ -41,7 +41,7 @@ class TodoList extends Component {
         <h2>To Do List</h2>
         <div>
           {this.uncompletedCount} of {todos.length} remaining
-          <button onClick={this.onArchiveCompleted}>Archive Completed</button>
+          <button onClick={onArchiveCompleted}>Archive Completed</button>
         </div>
         <br />
         <form>

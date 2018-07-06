@@ -3,7 +3,7 @@ import React from 'react';
 import {dispatchFilter, dispatchMap} from 'redux-easy';
 
 function onDeleteTodo(todoId) {
-  dispatchFilter('todos', todo => todo.id !== todoId);
+  dispatchFilter('todos', t => t.id !== todoId);
 }
 
 function onToggleDone(todo) {
