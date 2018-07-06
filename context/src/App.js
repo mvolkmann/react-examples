@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import MyConsumer from './counter-consumer';
-import MyProvider from './counter-provider';
+import CounterConsumer from './counter-consumer';
+import CounterProvider from './counter-provider';
+import FontSizeProvider from './font-size-provider';
 
 class App extends Component {
   render() {
@@ -8,9 +9,11 @@ class App extends Component {
     // each can manage a separate part of the app state.
     return (
       <div className="App">
-        <MyProvider>
-          <MyConsumer label="My Label" />
-        </MyProvider>
+        <FontSizeProvider>
+          <CounterProvider>
+            <CounterConsumer label="My Label" />
+          </CounterProvider>
+        </FontSizeProvider>
       </div>
     );
   }

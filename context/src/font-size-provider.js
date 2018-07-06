@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
 
 // Context is an object with Provider and Consumer properties.
-const initialState = {counter: 0};
-//export const Context = React.createContext(initialState);
+const initialState = {fontSize: 10};
 export const Context = React.createContext();
 
-class CounterProvider extends Component {
+class FontSizeProvider extends Component {
   state = initialState;
   // Defining methods outside render method
   // so they aren't recreated on every render.
   methods = {
-    increment: (event, delta = 1) =>
-      this.setState(state => ({counter: state.counter + delta}))
+    increase: () => this.setState(state => ({fontSize: state.fontSize + 2}))
   };
 
   render() {
@@ -22,4 +20,4 @@ class CounterProvider extends Component {
   }
 }
 
-export default CounterProvider;
+export default FontSizeProvider;

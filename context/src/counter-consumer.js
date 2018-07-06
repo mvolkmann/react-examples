@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {Context} from './counter-provider';
+import {Context as CounterContext} from './counter-provider';
+import {Context as FontSizeContext} from './font-size-provider';
 import {string} from 'prop-types';
 
-class MyConsumer extends Component {
+class CounterConsumer extends Component {
   static propTypes = {
     label: string
   };
@@ -12,19 +13,26 @@ class MyConsumer extends Component {
 
   render() {
     return (
-      <Context.Consumer>
-        {context => (
-          <div>
-            <div>
-              {this.props.label}: {context.counter}
-            </div>
-            <button onClick={context.increment}>+</button>
-            <button onClick={e => context.increment(e, 3)}>+3</button>
-          </div>
+      <FontSizeContext.Consumer>
+        {fontSizeContext => (
+          <CounterContext.Consumer>
+            {counterContext => (
+              <div style={{fontSize: fontSizeContext.fontSize}}>
+                <div>
+                  {this.props.label}: {counterContext.counter}
+                </div>
+                <button onClick={counterContext.increment}>+1</button>
+                <button onClick={e => counterContext.increment(e, 3)}>
+                  +3
+                </button>
+                <button onClick={fontSizeContext.increase}>Font Up</button>
+              </div>
+            )}
+          </CounterContext.Consumer>
         )}
-      </Context.Consumer>
+      </FontSizeContext.Consumer>
     );
   }
 }
 
-export default MyConsumer;
+export default CounterConsumer;
